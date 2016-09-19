@@ -1,0 +1,67 @@
+### Eclipse Workspace Patch 1.0
+#P SystemBuildingControl
+diff --git Models/br/com/cco2anpi/IConjunto.java Models/br/com/cco2anpi/IConjunto.java
+deleted file mode 100644
+index 3c18781..0000000
+--- Models/br/com/cco2anpi/IConjunto.java
++++ /dev/null
+@@ -1,15 +0,0 @@
+-/**
+- * 
+- */
+-package br.com.cco2anpi;
+-
+-/**
+- * @author 201407067
+- *
+- */
+-public interface IConjunto {
+-	void setId(int id);
+-	void setNumero(int numero);
+-	int getId();
+-	int getNumero();
+-}
+diff --git Models/br/com/cco2anpi/IEmpresa.java Models/br/com/cco2anpi/IEmpresa.java
+deleted file mode 100644
+index 3f1cee9..0000000
+--- Models/br/com/cco2anpi/IEmpresa.java
++++ /dev/null
+@@ -1,21 +0,0 @@
+-/**
+- * 
+- */
+-
+-package br.com.cco2anpi;
+-/**
+- * @author 201407067
+- *
+- */
+-public interface IEmpresa {
+-	void setId(int id);
+-	void setCnpj(String cnpj);
+-	void setRazaoSocial(String RazaoSocial);
+-	void setHorarioDeFuncionamento(int HorarioDeFuncionamento);
+-	void setTemperturaMaxima(int temperaturaMaxima);
+-	int getId();
+-	String getCnpj();
+-	String getRazaoSocial();
+-	int getHorarioDeFuncionamento();
+-	int getTemperturaMaxima();
+-}
+diff --git Models/br/com/cco2anpi/IUsuario.java Models/br/com/cco2anpi/IUsuario.java
+deleted file mode 100644
+index 5dbcfeb..0000000
+--- Models/br/com/cco2anpi/IUsuario.java
++++ /dev/null
+@@ -1,11 +0,0 @@
+-/**
+- * 
+- */
+-package br.com.cco2anpi;
+-/**
+- * @author 201407067
+- *
+- */
+-public interface IUsuario {
+-
+-}
