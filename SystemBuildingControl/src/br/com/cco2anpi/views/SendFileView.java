@@ -5,140 +5,237 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
-/**
-*@author pitagoras
-*/
+import org.bouncycastle.crypto.DataLengthException;
+import org.bouncycastle.crypto.InvalidCipherTextException;
+
+import br.com.cco2anpi.tools.Crypto;
+import br.com.cco2anpi.tools.FileHandler;
+
 public class SendFileView extends JPanel {
-	private JPanel header;
-	private JPanel dataListPanel;
-	private JPanel selectedDataPanel;// To show the values that are out
+	private JPanel leftPanel;
+	private JPanel rightPanel;
+	private JPanel buttonRightPanel;
+	private JPanel buttonLeftPanel;
+	private JPanel joinButtonsPanel;
+	private JPanel joinListsPanel;
+	private JPanel joinAllPanel;
 
-	private JList dataList;
-	private JList selectedDataList; // Selected values
+	private JList leftList;
+	private JList rightList;
+	private String[] sendList;
 
-	private JScrollPane scrollPane;
-	private JScrollPane scrollPaneOut; // Scroll pane - Selected values
-	//To test
-	private String[] data = { "Funcionario 1 Empresa X Predio Y", "Funcionario 2 Empresa X Predio Y",
-            "Funcionario 3 Empresa X Predio Y", "Funcionario 4 Empresa X Predio Y", 
-            "Funcionario 5 Empresa X Predio Y", "Funcionario 6 Empresa X Predio Y",
-            "Funcionario 7 Empresa X Predio Y","Funcionario 8 Empresa X Predio Y", 
-            "Funcionario 9 Empresa X Predio Y","Funcionario 10 Empresa X Predio Y",
-            "Funcionario 11 Empresa X Predio Y", "Funcionario 12 Empresa X Predio Y" };
-	
+	private JScrollPane leftScrollPane;
+	private JScrollPane rightScrollPane;
+
+	private String[] data;
+
 	private JButton sendButton;
-	
-	public SendFileView(){
-		  header = new JPanel();
-		  dataListPanel = new JPanel();
+	private JButton toLeftButton;
+	private JButton toRightButton;
+	private JButton allToLeftButton;
+	private JButton allToRightButton;
+	private JButton confirmButton;
+	private String accessTxt = "Access";
+	private String confirmTxt = "Confirm";
+	private String allToRightTxt = ">>";
+	private String allToLeftTxt = "<<";
+	private String toLeftTxt = "<";
+	private String toRightTxt = ">";
 
-		  dataList = new JList();
-		  selectedDataList = new JList(); 
+	/**
+	 * Set All variables
+	 */
+	public SendFileView() {
+		leftPanel = new JPanel();
+		rightPanel = new JPanel();
+		buttonRightPanel = new JPanel();
+		buttonLeftPanel = new JPanel();
+		joinButtonsPanel = new JPanel();
+		joinListsPanel = new JPanel();
+		joinAllPanel = new JPanel();
 
-		  scrollPane = new JScrollPane();
-		  scrollPaneOut = new JScrollPane(); 
+		leftList = new JList();
+		rightList = new JList();
 
-		  sendButton = new JButton();
+		leftScrollPane = new JScrollPane();
+		rightScrollPane = new JScrollPane();
 
+		toLeftButton = new JButton(toLeftTxt);
+		toLeftButton.addActionListener(new ButtonListener());
+		allToLeftButton = new JButton(allToLeftTxt);
+		allToLeftButton.addActionListener(new ButtonListener());
+		toRightButton = new JButton(toRightTxt);
+		toRightButton.addActionListener(new ButtonListener());
+		allToRightButton = new JButton(allToRightTxt);
+		allToRightButton.addActionListener(new ButtonListener());
+		confirmButton = new JButton(confirmTxt);
+		confirmButton.addActionListener(new ButtonListener());
 
-	      setLayout(new BorderLayout(2,2));
+		buildButtonLeftPanel();
+		buildButtonRightPanel();
+		buildButtonsPanel();
+		buildLeftPanel();
+		buildRightPanel();
+		buildListsPanel();
+		joinAllPanel();
 
+		setBackground(new Color(255, 255, 255));
+		setLayout(new BorderLayout(5, 2));
+		JLabel lbl = new JLabel("Acesso a Usuarios", SwingConstants.CENTER);
+		add(lbl, BorderLayout.NORTH);
+		add(joinAllPanel, BorderLayout.CENTER);
 
-	      buildItensPanel();
-	      buildSelectedMonthsPanel();
-	      buildHeaderPanel();
-	      add(header, BorderLayout.NORTH);
-	      add(dataListPanel, BorderLayout.CENTER);
-	      setBackground(new Color(255,255,255));
-		
 	}
-	 /**
-    The buildHeaderPanel method adds a title and main
-    button to a panel.
- */
 
- private void buildHeaderPanel()
- {
-    // Create a panel to hold the list.
-    header = new JPanel(new BorderLayout(3,3));
-    
-    JLabel l = new JLabel("Enviar Arquivo",SwingConstants.CENTER);
-
-    // Create the button.
-    sendButton = new JButton("Send");
-
-    // Add an action listener to the button.
-    
-    sendButton.addActionListener(new ButtonListener());
-
-    header.add(l, BorderLayout.NORTH);
-
-    // Add the button to the panel.
-    header.add(sendButton, BorderLayout.CENTER);
- }
+	private void joinAllPanel() {
+		joinAllPanel.setLayout(new BorderLayout(2, 2));
+		joinAllPanel.add(joinButtonsPanel, BorderLayout.NORTH);
+		joinAllPanel.add(joinListsPanel, BorderLayout.CENTER);
+		joinAllPanel.add(confirmButton, BorderLayout.SOUTH);
+	}
 
 	/**
-    The buildItensPanel method adds a list containing the
-    names of the employees to a panel.
- */
+	 * Create a grid with the buttons to send data of leftList to the rightList
+	 */
+	private void buildButtonLeftPanel() {
 
- private void buildItensPanel()
- {
-	   dataListPanel = new JPanel();
-	   dataList = new JList(data);
-
-	   dataList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-	   dataList.setVisibleRowCount(6);
-
-    scrollPane = new JScrollPane(dataList);
-
-    dataListPanel.add(scrollPane);
- }
+		buttonLeftPanel.setLayout(new GridLayout(1, 3));
+		buttonLeftPanel.add(new JLabel(""));
+		buttonLeftPanel.add(allToRightButton);
+		buttonLeftPanel.add(toRightButton);
+		buttonLeftPanel.setBackground(new Color(255, 255, 255));
+	}
 
 	/**
-	 * <b>Description</b>
-	 * This method make a panel to show elected items
-	 * */
-	   private void buildSelectedMonthsPanel()
-	   {
-		   selectedDataPanel = new JPanel(new BorderLayout(5,5));
+	 * Create a grid with the buttons to send data of rightList to the leftList
+	 */
+	private void buildButtonRightPanel() {
 
-		   selectedDataList = new JList();
+		buttonRightPanel.setLayout(new GridLayout(1, 3));
+		buttonRightPanel.add(toLeftButton);
+		buttonRightPanel.add(allToLeftButton);
+		buttonRightPanel.add(new JLabel(""));
+		buttonRightPanel.setBackground(new Color(255, 255, 255));
+	}
 
-		   selectedDataList.setVisibleRowCount(6);
+	/**
+	 * Join buttons of the leftPanel and rightPanel
+	 */
+	private void buildButtonsPanel() {
 
-	      scrollPaneOut = new JScrollPane(selectedDataList);
+		joinButtonsPanel.setLayout(new GridLayout(1, 2));
+		joinButtonsPanel.add(buttonLeftPanel);
+		joinButtonsPanel.add(buttonRightPanel);
+		joinButtonsPanel.setBackground(new Color(255, 255, 255));
+	}
 
-	      // Add the scroll pane to the panel.
-	      selectedDataPanel.add(scrollPaneOut);
-	   }
-	   /**
-	    * <b>Description</b>
-	    * To add event in sendButton
-	    * */
-	   private class ButtonListener implements ActionListener
-	   {
-	      public void actionPerformed(ActionEvent e)
-	      {
-	         // Get the selected values.
-	         Object[] selections =
-	                        dataList.getSelectedValues();
+	/**
+	 * The buildLeftPanel method list all user of system in a JList.
+	 */
+	private void buildLeftPanel() {
+		leftPanel = new JPanel(new BorderLayout());
+		data = new String[12];
+		for (int i = 0; i < data.length; i++) {
+			String salt = "";
+			try {
+				salt = Crypto.generateRandomSalt();
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			String password = "";
+			try {
+				password = Crypto.encrypt("password", salt);
+			} catch (DataLengthException | IllegalStateException | InvalidCipherTextException e) {
+				e.printStackTrace();
+			}
+			data[i] = "username" + i + " " + salt + " " + password + "\n";
+		}
+		leftList = new JList<String>(data);
+		leftList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		leftList.setVisibleRowCount(6);
+		leftScrollPane = new JScrollPane(leftList);
+		leftPanel.add(leftScrollPane);
+	}
 
-	         // Store the selected items in selectedMonthList.
-	         selectedDataList.setListData(selections);
-	         JOptionPane.showMessageDialog(null, selectedDataList);
-	      }
-	   }
+	/**
+	 * This method make a panel to show all users that has access to building
+	 */
+	private void buildRightPanel() {
+		rightPanel = new JPanel(new BorderLayout(5, 5));
+		rightList = new JList();
+		rightList.setVisibleRowCount(6);
+		rightScrollPane = new JScrollPane(rightList);
+		rightPanel.add(rightScrollPane);
+	}
+
+	/**
+	 * Join lists in one new panel
+	 */
+	private void buildListsPanel() {
+		joinListsPanel.setLayout(new GridLayout(1, 2));
+		joinListsPanel.add(leftPanel);
+		joinListsPanel.add(rightPanel);
+	}
+
+	/**
+	 * <b>Description</b> To add event in sendButton
+	 */
+	private class ButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+
+			if (e.getSource() == allToLeftButton) {
+				ListModel model = leftList.getModel();
+				sendList = new String[model.getSize()];
+				for (int i = 0; i < model.getSize() - 1; i++) {
+					sendList[i] = ((String) model.getElementAt(i));
+				}
+				System.out.println(Arrays.toString(sendList));
+
+			}
+			if (e.getSource() == allToRightButton) {
+				ListModel model = rightList.getModel();
+				sendList = new String[model.getSize()];
+				for (int i = 0; i < model.getSize() - 1; i++) {
+					sendList[i] = ((String) model.getElementAt(i));
+				}
+				System.out.println(Arrays.toString(sendList));
+			}
+			if (e.getSource() == toLeftButton) {
+
+			}
+			if (e.getSource() == toRightButton) {
+
+			}
+			if (e.getSource() == confirmButton) {
+				String content = "";
+				Path currentRelativePath = Paths.get("");
+				String s = currentRelativePath.toAbsolutePath().toString();
+				for (String line : sendList) {
+					content += line;
+				}
+				try {
+					FileHandler.write(s, "login.txt", content);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}
+	}
 }

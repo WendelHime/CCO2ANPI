@@ -79,7 +79,7 @@ public class LoginView extends JFrame {
 	}
 	/*
 	 * =================================================================
-	 * 						 	   Botão Login
+	 * 						 	   Botï¿½o Login
 	 * =================================================================
 	 */
 	public JComponent buttonLogin() {
@@ -104,6 +104,7 @@ public class LoginView extends JFrame {
 				new Color(221, 221, 221), new Color(221, 221, 221))));
 		return tLogin;
 	}
+	
 	/*
 	 * =================================================================
 	 * 						  Campo de texto Senha
