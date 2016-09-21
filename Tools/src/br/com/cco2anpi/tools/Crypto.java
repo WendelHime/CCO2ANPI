@@ -3,6 +3,7 @@
  */
 package br.com.cco2anpi.tools;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -118,12 +119,13 @@ public class Crypto {
 	 * Método utilizado para gerar salt para a senha encriptar
 	 * 
 	 * @return salt
+	 * @throws UnsupportedEncodingException 
 	 */
-	public static String generateRandomSalt() {
+	public static String generateRandomSalt() throws UnsupportedEncodingException {
 		Random random = new SecureRandom();
-		byte[] salt = new byte[32];
+		byte[] salt = new byte[8];
 		random.nextBytes(salt);
-		return new String(salt);
+		return Base64.toBase64String(salt);
 	}
 
 }
