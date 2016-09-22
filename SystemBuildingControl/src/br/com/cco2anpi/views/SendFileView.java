@@ -9,12 +9,12 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListModel;
@@ -150,7 +150,7 @@ public class SendFileView extends JPanel {
 	 */
 	private void buildLeftPanel() {
 		leftPanel = new JPanel(new BorderLayout());
-		data = new String[12];
+		data = new String[11];
 		for (int i = 0; i < data.length; i++) {
 			String salt = "";
 			try {
@@ -203,7 +203,7 @@ public class SendFileView extends JPanel {
 			if (e.getSource() == allToLeftButton) {
 				ListModel model = leftList.getModel();
 				sendList = new String[model.getSize()];
-				for (int i = 0; i < model.getSize() - 1; i++) {
+				for (int i = 0; i < model.getSize(); i++) {
 					sendList[i] = ((String) model.getElementAt(i));
 				}
 				System.out.println(Arrays.toString(sendList));
@@ -212,9 +212,10 @@ public class SendFileView extends JPanel {
 			if (e.getSource() == allToRightButton) {
 				ListModel model = rightList.getModel();
 				sendList = new String[model.getSize()];
-				for (int i = 0; i < model.getSize() - 1; i++) {
+				for (int i = 0; i < model.getSize(); i++) {
 					sendList[i] = ((String) model.getElementAt(i));
 				}
+				JOptionPane.showMessageDialog(null, "Valores selecionados: \n" + Arrays.toString(sendList));
 				System.out.println(Arrays.toString(sendList));
 			}
 			if (e.getSource() == toLeftButton) {
@@ -228,10 +229,13 @@ public class SendFileView extends JPanel {
 				Path currentRelativePath = Paths.get("");
 				String s = currentRelativePath.toAbsolutePath().toString();
 				for (String line : sendList) {
-					content += line;
+					if (line != null) {
+						content += line;
+					}
 				}
 				try {
 					FileHandler.write(s, "login.txt", content);
+					JOptionPane.showMessageDialog(null, "Arquivo login.txt criado com sucesso!");
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

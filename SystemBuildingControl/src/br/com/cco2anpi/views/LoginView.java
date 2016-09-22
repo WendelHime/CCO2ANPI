@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
@@ -25,20 +26,24 @@ import br.com.cco2anpi.views.shared.ImgUtils;
 
 public class LoginView extends JFrame {
 	// Para teste
-//	public ApplicationView a;
-//	public static ApplicationView a;
-//	public static ApplicationView simulaController(){
-//		return a;
-//	}
+	// public ApplicationView a;
+	// public static ApplicationView a;
+	// public static ApplicationView simulaController(){
+	// return a;
+	// }
 	JButton bLogin;
+	public CustomTextField tLogin;
+	public JPasswordField tSenha;
+
 	/*
 	 * =================================================================
-	 * 							  Construtor
+	 * Construtor
 	 * =================================================================
 	 */
-	public JButton getLoginButton(){
+	public JButton getLoginButton() {
 		return bLogin;
 	}
+
 	public LoginView() {
 		super("Efetuar Login");
 		Container container = getContentPane();
@@ -53,8 +58,8 @@ public class LoginView extends JFrame {
 	}
 
 	/*
-	 * =================================================================
-	 * 						  Agrupa Componentes
+	 * ================================================================= Agrupa
+	 * Componentes
 	 * =================================================================
 	 */
 	public JComponent joinFrame() {
@@ -68,19 +73,19 @@ public class LoginView extends JFrame {
 		panel.add(buttonLogin());
 		// Logo
 		JPanel pane = new JPanel();
-		pane.setLayout(new BorderLayout(0,100));
+		pane.setLayout(new BorderLayout(0, 100));
 		pane.setBorder(new EmptyBorder(100, 0, 0, 0));
 		pane.setBackground(new Color(255, 255, 255));
-		
+
 		// Panel Completed
-		pane.add(logo(),BorderLayout.NORTH);
+		pane.add(logo(), BorderLayout.NORTH);
 		pane.add(panel, BorderLayout.CENTER);
 		return pane;
 	}
+
 	/*
-	 * =================================================================
-	 * 						 	   Bot�o Login
-	 * =================================================================
+	 * ================================================================= Bot�o
+	 * Login =================================================================
 	 */
 	public JComponent buttonLogin() {
 		bLogin = new JButton("Login");
@@ -89,42 +94,53 @@ public class LoginView extends JFrame {
 		bLogin.setBackground(new Color(86, 136, 163));
 		bLogin.setFont(bLogin.getFont().deriveFont(Font.BOLD));
 		bLogin.setForeground(Color.WHITE);
-		
+		bLogin.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == bLogin) {
+					System.out.println(tLogin.getText());
+					System.out.println(tSenha.getPassword());
+				}
+			}
+		});
 		return bLogin;
 	}
+
 	/*
-	 * =================================================================
-	 * 						  Campo de texto Login
+	 * ================================================================= Campo
+	 * de texto Login
 	 * =================================================================
 	 */
 	public JComponent textLogin() {
-		CustomTextField tLogin = new CustomTextField(20);
+		tLogin = new CustomTextField(20);
 		tLogin.setPlaceholder(" Login");
 		tLogin.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED,
 				new Color(221, 221, 221), new Color(221, 221, 221))));
 		return tLogin;
 	}
-	
+
 	/*
-	 * =================================================================
-	 * 						  Campo de texto Senha
+	 * ================================================================= Campo
+	 * de texto Senha
 	 * =================================================================
 	 */
 	public JComponent textSenha() {
-		CustomTextField tSenha = new CustomTextField(20);
-		tSenha.setPlaceholder(" Password");
+		tSenha = new JPasswordField(20);
+		// tSenha.setPlaceholder(" Password");
 		tSenha.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED,
 				new Color(221, 221, 221), new Color(221, 221, 221))));
 		return tSenha;
 	}
+
 	/*
-	 * =================================================================
-	 * 						  		Logo
+	 * ================================================================= Logo
 	 * =================================================================
 	 */
-	public JComponent logo(){
-		BufferedImage img=new ImgUtils().scaleImage(240,180,"C:\\Users\\pitagoras\\workspace\\MeuCaraleo\\imagens\\logo.png");
+	public JComponent logo() {
+		BufferedImage img = new ImgUtils().scaleImage(240, 180, "C:\\Users\\201407067\\Downloads\\logo.png");
 		JLabel picLabel = new JLabel(new ImageIcon(img));
 		return picLabel;
 	}
+
 }
