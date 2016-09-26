@@ -3,31 +3,67 @@
  */
 package br.com.cco2anpi.database;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.cco2anpi.models.IAccess;
+import br.com.cco2anpi.models.IUser;
 
 /**
  * @author wotan
  *
  */
+
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "USER")
-public class User implements java.io.Serializable {
+@Table(name = "USERS")
+public class User implements Serializable, IUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	private String username;
-	private String senha;
+	private String password;
+	private String salt;
 	private String name;
 	private String cpf;
 	@Column(name = "office_hours")
-	private int officeHours;
+	private Integer officeHours;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<Access> access = new HashSet<>(0);
+
+	public User()
+	{
+		
+	}
+	
+	/**
+	 * Constructor of the class User
+	 * 
+	 * @param sourceObject
+	 *            Object to be used
+	 */
+	public User(IUser sourceObject) {
+		id = sourceObject.getId();
+		username = sourceObject.getUsername();
+		password = sourceObject.getPassword();
+		salt = sourceObject.getSalt();
+		name = sourceObject.getName();
+		cpf = sourceObject.getCpf();
+		officeHours = sourceObject.getOfficeHours();
+		setAccess(sourceObject.getAccess());
+	}
 
 	/**
 	 * @return the id
@@ -60,18 +96,33 @@ public class User implements java.io.Serializable {
 	}
 
 	/**
-	 * @return the senha
+	 * @return the password
 	 */
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
 	/**
-	 * @param senha
-	 *            the senha to set
+	 * @param password
+	 *            the password to set
 	 */
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the salt
+	 */
+	public String getSalt() {
+		return salt;
+	}
+
+	/**
+	 * @param salt
+	 *            the salt to set
+	 */
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	/**
@@ -107,7 +158,7 @@ public class User implements java.io.Serializable {
 	/**
 	 * @return the officeHours
 	 */
-	public int getOfficeHours() {
+	public Integer getOfficeHours() {
 		return officeHours;
 	}
 
@@ -115,8 +166,26 @@ public class User implements java.io.Serializable {
 	 * @param officeHours
 	 *            the officeHours to set
 	 */
-	public void setOfficeHours(int officeHours) {
+	public void setOfficeHours(Integer officeHours) {
 		this.officeHours = officeHours;
+	}
+
+	/**
+	 * @return the access
+	 */
+	public Set<IAccess> getAccess() {
+		return new HashSet<IAccess>(access);
+	}
+
+	/**
+	 * @param access
+	 *            the access to set
+	 */
+	public void setAccess(Set<IAccess> access) {
+		Iterator<IAccess> iterator = access.iterator();
+		while (iterator.hasNext()) {
+			this.access.add((Access) iterator.next());
+		}
 	}
 
 }
