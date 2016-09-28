@@ -8,10 +8,12 @@ package br.com.cco2anpi.models;
  * Interface related of access
  */
 public interface IAccess {
-	void setId(int id);
-	void setDateIn(int date);
-	void setDateOut(int date);
-	int getId();
-	int getDateIn();
-	int getDateOut();
+	void setId(Integer id);
+	void setDateIn(Long date);
+	void setDateOut(Long date);
+	void setUser(IUser user);
+	Integer getId();
+	Long getDateIn();
+	Long getDateOut();
+	IUser getUser();
 }

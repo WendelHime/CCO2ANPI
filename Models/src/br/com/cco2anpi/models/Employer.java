@@ -3,65 +3,70 @@
  */
 package br.com.cco2anpi.models;
 
+import java.util.Set;
+
 /**
  * @author wotan
  *
  */
 public class Employer extends User implements IEmployer {
-	private int accessHour;
-	private boolean permissionTemperature;
-	private Company[] companys;
-	
-	public Employer()
-	{
-		
+	private Integer accessHour;
+	private Boolean permissionTemperature;
+	private Set<ICompany> companies;
+
+	public Employer() {
+
 	}
-	
-	public Employer(IEmployer sourceObject)
-	{
+
+	public Employer(IEmployer sourceObject) {
 		accessHour = sourceObject.getAccessHour();
 		permissionTemperature = sourceObject.getPermissionTemperature();
-		companys = (Company[]) sourceObject.getCompanys();
+		companies = sourceObject.getCompanies();
 	}
-	
+
 	/**
 	 * @return the accessHour
 	 */
-	public int getAccessHour() {
+	public Integer getAccessHour() {
 		return accessHour;
 	}
+
 	/**
-	 * @param accessHour the accessHour to set
+	 * @param accessHour
+	 *            the accessHour to set
 	 */
-	public void setAccessHour(int accessHour) {
+	public void setAccessHour(Integer accessHour) {
 		this.accessHour = accessHour;
 	}
+
 	/**
 	 * @return the permissionTemperature
 	 */
-	public boolean getPermissionTemperature() {
+	public Boolean getPermissionTemperature() {
 		return permissionTemperature;
 	}
+
 	/**
-	 * @param permissionTemperature the permissionTemperature to set
+	 * @param permissionTemperature
+	 *            the permissionTemperature to set
 	 */
-	public void setPermissionTemperature(boolean permissionTemperature) {
+	public void setPermissionTemperature(Boolean permissionTemperature) {
 		this.permissionTemperature = permissionTemperature;
 	}
 
 	/**
 	 * @return the companys
 	 */
-	public ICompany[] getCompanys() {
-		return (ICompany[]) companys;
+	public Set<ICompany> getCompanies() {
+		return this.companies;
 	}
 
 	/**
-	 * @param companys the companys to set
+	 * @param companys
+	 *            the companies to set
 	 */
-	public void setCompanys(ICompany[] companys) {
-		this.companys = (Company[]) companys;
+	public void setCompanies(Set<ICompany> companies) {
+		this.companies = companies;
 	}
-	
-	
+
 }

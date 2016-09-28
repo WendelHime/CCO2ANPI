@@ -56,6 +56,12 @@
 			<artifactId>hibernate-ehcache</artifactId>
 			<version>5.2.2.Final</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>Models</groupId>
+			<artifactId>Models</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 	</dependencies>
 

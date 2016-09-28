@@ -3,20 +3,22 @@
  */
 package br.com.cco2anpi.models;
 
+import java.util.Set;
+
 /**
  * @author wotan
  * Class used to represent User
  */
 public class User implements IUser {
 
-	protected int id;
+	protected Integer id;
 	protected String username;
 	protected String password;
 	protected String salt;
 	protected String name;
 	protected String cpf;
-	protected int officeHours;
-	protected Access[] access;
+	protected Integer officeHours;
+	protected Set<IAccess> access;
 	
 	
 	public User()
@@ -37,20 +39,20 @@ public class User implements IUser {
 		name = sourceObject.getName();
 		cpf = sourceObject.getCpf();
 		officeHours = sourceObject.getOfficeHours();
-		access = (Access[]) sourceObject.getAccess();
+		access = sourceObject.getAccess();
 	}
 
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -127,29 +129,29 @@ public class User implements IUser {
 	/**
 	 * @return the officeHours
 	 */
-	public int getOfficeHours() {
+	public Integer getOfficeHours() {
 		return officeHours;
 	}
 
 	/**
 	 * @param officeHours the officeHours to set
 	 */
-	public void setOfficeHours(int officeHours) {
+	public void setOfficeHours(Integer officeHours) {
 		this.officeHours = officeHours;
 	}
 	
 	/**
 	 * @return the access
 	 */
-	public Access[] getAccess() {
-		return access;
+	public Set<IAccess> getAccess() {
+		return this.access;
 	}
 
 	/**
 	 * @param access the access to set
 	 */
-	public void setAccess(IAccess[] access) {
-		this.access = (Access[]) access;
+	public void setAccess(Set<IAccess> access) {
+		this.access = access;
 	}
 	
 

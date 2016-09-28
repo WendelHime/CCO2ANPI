@@ -1,31 +1,43 @@
 /**
  * 
  */
-package br.com.cco2anpi.models;
+package br.com.cco2anpi.database;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import br.com.cco2anpi.models.IAccess;
+import br.com.cco2anpi.models.IUser;
 
 /**
  * @author wotan
  *
  */
-public class Access implements IAccess {
+
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "ACCESS")
+public class Access implements Serializable, IAccess {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+	@Column(name = "date_in")
 	private Long dateIn;
+	@Column(name = "date_out")
 	private Long dateOut;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-	
-	public Access()
-	{
-		
-	}
-	
-	public Access(IAccess sourceObject)
-	{
-		id = sourceObject.getId();
-		dateIn = sourceObject.getDateIn();
-		dateOut = sourceObject.getDateOut();
-		user = (User) sourceObject.getUser();
-	}
-	
 	/**
 	 * @return the id
 	 */
@@ -62,19 +74,18 @@ public class Access implements IAccess {
 	public void setDateOut(Long dateOut) {
 		this.dateOut = dateOut;
 	}
-
 	/**
 	 * @return the user
 	 */
 	public IUser getUser() {
 		return user;
 	}
-
 	/**
 	 * @param user the user to set
 	 */
 	public void setUser(IUser user) {
 		this.user = (User) user;
 	}
+	
 	
 }
