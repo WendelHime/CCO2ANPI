@@ -6,153 +6,157 @@ package br.com.cco2anpi.models;
 import java.util.Set;
 
 /**
- * @author wotan
- * Class used to represent User
+ * @author wotan Class used to represent User
  */
 public class User implements IUser {
 
-	protected Integer id;
-	protected String username;
-	protected String password;
-	protected String salt;
-	protected String name;
-	protected String cpf;
-	protected Integer officeHours;
-	protected Set<IAccess> access;
-	
-	
-	public User()
-	{
-		
-	}
-	
-	/**
-	 * Constructor method class
-	 * @param sourceObject
-	 */
-	public User(IUser sourceObject)
-	{
-		id = sourceObject.getId();
-		username = sourceObject.getUsername();
-		password = sourceObject.getPassword();
-		salt = sourceObject.getSalt();
-		name = sourceObject.getName();
-		cpf = sourceObject.getCpf();
-		officeHours = sourceObject.getOfficeHours();
-		access = sourceObject.getAccess();
-	}
+    protected Integer id;
+    protected String username;
+    protected String password;
+    protected String salt;
+    protected String name;
+    protected String cpf;
+    protected Integer officeHours;
+    protected Set<IAccess> access;
 
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
+    public User() {
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    }
 
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * Constructor method class
+     * 
+     * @param sourceObject
+     */
+    public User(IUser sourceObject) {
+	id = sourceObject.getId();
+	username = sourceObject.getUsername();
+	password = sourceObject.getPassword();
+	salt = sourceObject.getSalt();
+	name = sourceObject.getName();
+	cpf = sourceObject.getCpf();
+	officeHours = sourceObject.getOfficeHours();
+	access = sourceObject.getAccess();
+    }
 
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+	return id;
+    }
 
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * @param id
+     *            the id to set
+     */
+    public void setId(Integer id) {
+	this.id = id;
+    }
 
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+	return username;
+    }
 
-	/**
-	 * @return the salt
-	 */
-	public String getSalt() {
-		return salt;
-	}
+    /**
+     * @param username
+     *            the username to set
+     */
+    public void setUsername(String username) {
+	this.username = username;
+    }
 
-	/**
-	 * @param salt the salt to set
-	 */
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
+    /**
+     * @return the password
+     */
+    public String getPassword() {
+	return password;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param password
+     *            the password to set
+     */
+    public void setPassword(String password) {
+	this.password = password;
+    }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the salt
+     */
+    public String getSalt() {
+	return salt;
+    }
 
-	/**
-	 * @return the cpf
-	 */
-	public String getCpf() {
-		return cpf;
-	}
+    /**
+     * @param salt
+     *            the salt to set
+     */
+    public void setSalt(String salt) {
+	this.salt = salt;
+    }
 
-	/**
-	 * @param cpf the cpf to set
-	 */
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+	return name;
+    }
 
-	/**
-	 * @return the officeHours
-	 */
-	public Integer getOfficeHours() {
-		return officeHours;
-	}
+    /**
+     * @param name
+     *            the name to set
+     */
+    public void setName(String name) {
+	this.name = name;
+    }
 
-	/**
-	 * @param officeHours the officeHours to set
-	 */
-	public void setOfficeHours(Integer officeHours) {
-		this.officeHours = officeHours;
-	}
-	
-	/**
-	 * @return the access
-	 */
-	public Set<IAccess> getAccess() {
-		return this.access;
-	}
+    /**
+     * @return the cpf
+     */
+    public String getCpf() {
+	return cpf;
+    }
 
-	/**
-	 * @param access the access to set
-	 */
-	public void setAccess(Set<IAccess> access) {
-		this.access = access;
-	}
-	
+    /**
+     * @param cpf
+     *            the cpf to set
+     */
+    public void setCpf(String cpf) {
+	this.cpf = cpf;
+    }
+
+    /**
+     * @return the officeHours
+     */
+    public Integer getOfficeHours() {
+	return officeHours;
+    }
+
+    /**
+     * @param officeHours
+     *            the officeHours to set
+     */
+    public void setOfficeHours(Integer officeHours) {
+	this.officeHours = officeHours;
+    }
+
+    /**
+     * @return the access
+     */
+    public Set<IAccess> getAccess() {
+	return this.access;
+    }
+
+    /**
+     * @param access
+     *            the access to set
+     */
+    public void setAccess(Set<IAccess> access) {
+	this.access = access;
+    }
 
 }
