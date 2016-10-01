@@ -3,13 +3,18 @@
 <hibernate-configuration>
 	<session-factory>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost/SystemBuildingControl</property>
-		<property name="hibernate.connection.username">username</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/SystemBuildingControl?serverTimezone=UTC</property>
+		<property name="hibernate.connection.username">alunos</property>
+		<property name="hibernate.connection.password">alunos</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="connection.password">senhadefault</property>
 		<property name="show_sql">true</property>
 
-		<mapping class="br/com/cco2anpi/database/User"/>
+		<mapping class="br.com.cco2anpi.database.Access"/>
+		<mapping class="br.com.cco2anpi.database.User"/>
+		<mapping class="br.com.cco2anpi.database.ComplexBuilding"/>
+		<mapping class="br.com.cco2anpi.database.Company"/>
+		<mapping class="br.com.cco2anpi.database.Employer"/>
+		
 
 	</session-factory>
 </hibernate-configuration>

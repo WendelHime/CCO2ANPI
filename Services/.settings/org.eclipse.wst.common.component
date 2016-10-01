@@ -12,6 +12,9 @@
         <dependent-module archiveName="Database-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Database/Database">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="Tools-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Tools/Tools">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Services"/>
         <property name="java-output-path" value="/Services/build/classes"/>
     </wb-module>

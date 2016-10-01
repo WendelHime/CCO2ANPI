@@ -3,6 +3,8 @@
  */
 package br.com.cco2anpi.models;
 
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -17,7 +19,7 @@ public class User implements IUser {
     protected String name;
     protected String cpf;
     protected Integer officeHours;
-    protected Set<IAccess> access;
+    protected Set<Access> access = new HashSet<>(0);
 
     public User() {
 
@@ -36,7 +38,7 @@ public class User implements IUser {
 	name = sourceObject.getName();
 	cpf = sourceObject.getCpf();
 	officeHours = sourceObject.getOfficeHours();
-	access = sourceObject.getAccess();
+	setAccess(sourceObject.getAccess());
     }
 
     /**
@@ -148,7 +150,7 @@ public class User implements IUser {
      * @return the access
      */
     public Set<IAccess> getAccess() {
-	return this.access;
+	return new HashSet<IAccess>(access);
     }
 
     /**
@@ -156,7 +158,10 @@ public class User implements IUser {
      *            the access to set
      */
     public void setAccess(Set<IAccess> access) {
-	this.access = access;
+	Iterator<IAccess> iterator = access.iterator();
+	while (iterator.hasNext()) {
+	    this.access.add((Access) iterator.next());
+	}
     }
 
 }
