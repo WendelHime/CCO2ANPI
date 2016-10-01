@@ -3,6 +3,10 @@ package br.com.cco2anpi.views.shared;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -20,17 +24,34 @@ import br.com.cco2anpi.views.EmployeeView;
 import br.com.cco2anpi.views.LoginView;
 
 public class Menu extends JFrame {
-	public static String employee = "Funcionario";
+	public JMenu arquivoMenu;
+	public JMenuItem sobreMenuItem;
+	public JMenu idiomaMenuItem;
+	public JMenuItem portugueseItem;
+	public JMenuItem englishItem;
+	public JMenuItem espanishItem;
+	public JMenuItem sairMenuItem;
 	public static String employeeKey = "ecadastro/econsulta";
-	public static String company = "Empresa";
 	public static String companyKey = "ccadastro/cconsulta";
-	public static String airConditioner = "Ar-Condicionado";
-	public static String airConditionerKey = "Temperatura";
-	public static String access = "Acesso";
+	public static String airConditionerKey = "Ar-Condicionado";
 	public static String accessKey = "Consultar Acessos";
-	public static String accessSend = "Enviar Arquivo";
-
+	public static String sendKey = "Enviar Arquivo";
+	public static String blanckKey = "inicio";
+	private ResourceBundle bn = null;
+	JMenu funcionarioMenu;
+	JMenuItem cadastrarMenu;
+	JMenu empresaMenu;
+	JMenuItem cadastrarMenuc;
+	JMenuBar bar;
+	JMenu arCondicionadoMenu;
+	JMenuItem arCondicionadoMenuAlt;
+	JMenu acessoMenu;
+	JMenuItem consultarMenu;
+	JMenuItem enviaraMenu;
 	public Menu() {
+//		File currentDirFile = new File("");
+//		String helper = currentDirFile.getAbsolutePath();
+		bn = ResourceBundle.getBundle("language", new Locale("pt", "BR"));
 		barraMenu();
 	}
 	
@@ -40,11 +61,11 @@ public class Menu extends JFrame {
 		 * 	----------------------------- Menu Arquivo -----------------------------				
 		 * =========================================================================
 		 */
-		JMenu arquivoMenu = new JMenu("Arquivo");
+		arquivoMenu = new JMenu(bn.getString("arquivo"));
 		arquivoMenu.setMnemonic('a');
 
 		// ======================== Sobre ========================
-		JMenuItem sobreMenuItem = new JMenuItem("Sobre");
+		sobreMenuItem = new JMenuItem(bn.getString("sobre"));
 		arquivoMenu.add(sobreMenuItem);
 		sobreMenuItem.setMnemonic('o');
 
@@ -60,17 +81,117 @@ public class Menu extends JFrame {
 
 		});
 		// ======================== Idioma ========================
-		JMenuItem idiomaMenuItem = new JMenuItem("Idioma");
-		arquivoMenu.add(idiomaMenuItem);
+		idiomaMenuItem = new JMenu("Idioma");
 		idiomaMenuItem.setMnemonic('i');
-		idiomaMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				// TODO 
-			}
+		
+		portugueseItem = new JMenuItem(bn.getString("portugues"));
+		portugueseItem.setMnemonic('p'); 											
+		idiomaMenuItem.add(portugueseItem);
+	
+		englishItem = new JMenuItem(bn.getString("ingles"));														
+		englishItem.setMnemonic('n'); 
+		idiomaMenuItem.add(englishItem); 
 
-		});
+		espanishItem = new JMenuItem(bn.getString("espanhol"));
+		espanishItem.setMnemonic('s'); 
+		idiomaMenuItem.add(espanishItem); 
+		
+		arquivoMenu.add(idiomaMenuItem);
+		espanishItem.addActionListener( 
+		         new ActionListener() // classe interna anonima 
+		         { 
+		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
+		            public void actionPerformed( ActionEvent event ) 
+		            { 
+		               bn = ResourceBundle.getBundle("language", new Locale("es", "ESP"));
+		               
+//		               displayJLabel.setText( bn.getString("mensagem"));
+//		               setTitle(bn.getString("titulo"));
+		               arquivoMenu.setText(bn.getString("arquivo"));
+//		               fileMenu.setMnemonic(bn.getString("arquivo.mnemonico").charAt(0)); 
+		               sobreMenuItem.setText(bn.getString("sobre"));
+//		               aboutItem.setMnemonic(bn.getString("sobre.mnemonico").charAt(0));
+		               idiomaMenuItem.setText(bn.getString("idioma"));
+		               portugueseItem.setText(bn.getString("portugues"));
+		               englishItem.setText(bn.getString("ingles"));
+		               espanishItem.setText(bn.getString("espanhol"));
+		               sairMenuItem.setText(bn.getString("sair"));
+//		               exitItem.setMnemonic(bn.getString("sair.mnemonico").charAt(0));
+		               funcionarioMenu.setText(bn.getString("funcionario"));
+		               empresaMenu.setText(bn.getString("empresa"));
+		               arCondicionadoMenu.setText(bn.getString("ar_condicionado"));
+		               arCondicionadoMenuAlt.setText(bn.getString("temperatura"));
+		               acessoMenu.setText(bn.getString("acesso"));
+		               consultarMenu.setText(bn.getString("consulta_acesso"));
+		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
+
+		            } 
+		         }  
+		      ); 
+		englishItem.addActionListener( 
+		         new ActionListener() // classe interna anonima 
+		         { 
+		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
+		            public void actionPerformed( ActionEvent event ) 
+		            { 
+		               bn = ResourceBundle.getBundle("language", new Locale("es", "ESP"));
+		               
+//		               displayJLabel.setText( bn.getString("mensagem"));
+//		               setTitle(bn.getString("titulo"));
+		               arquivoMenu.setText(bn.getString("arquivo"));
+//		               fileMenu.setMnemonic(bn.getString("arquivo.mnemonico").charAt(0)); 
+		               sobreMenuItem.setText(bn.getString("sobre"));
+//		               aboutItem.setMnemonic(bn.getString("sobre.mnemonico").charAt(0));
+		               idiomaMenuItem.setText(bn.getString("idioma"));
+		               portugueseItem.setText(bn.getString("portugues"));
+		               englishItem.setText(bn.getString("ingles"));
+		               espanishItem.setText(bn.getString("espanhol"));
+		               sairMenuItem.setText(bn.getString("sair"));
+//		               exitItem.setMnemonic(bn.getString("sair.mnemonico").charAt(0));
+		               funcionarioMenu.setText(bn.getString("funcionario"));
+		               empresaMenu.setText(bn.getString("empresa"));
+		               arCondicionadoMenu.setText(bn.getString("ar_condicionado"));
+		               arCondicionadoMenuAlt.setText(bn.getString("temperatura"));
+		               acessoMenu.setText(bn.getString("acesso"));
+		               consultarMenu.setText(bn.getString("consulta_acesso"));
+		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
+
+		            } 
+		         }  
+		      ); 
+		portugueseItem.addActionListener( 
+		         new ActionListener() // classe interna anonima 
+		         { 
+		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
+		            public void actionPerformed( ActionEvent event ) 
+		            { 
+		               bn = ResourceBundle.getBundle("language", new Locale("es", "ESP"));
+		               
+//		               displayJLabel.setText( bn.getString("mensagem"));
+//		               setTitle(bn.getString("titulo"));
+		               arquivoMenu.setText(bn.getString("arquivo"));
+//		               fileMenu.setMnemonic(bn.getString("arquivo.mnemonico").charAt(0)); 
+		               sobreMenuItem.setText(bn.getString("sobre"));
+//		               aboutItem.setMnemonic(bn.getString("sobre.mnemonico").charAt(0));
+		               idiomaMenuItem.setText(bn.getString("idioma"));
+		               portugueseItem.setText(bn.getString("portugues"));
+		               englishItem.setText(bn.getString("ingles"));
+		               espanishItem.setText(bn.getString("espanhol"));
+		               sairMenuItem.setText(bn.getString("sair"));
+//		               exitItem.setMnemonic(bn.getString("sair.mnemonico").charAt(0));
+		               funcionarioMenu.setText(bn.getString("funcionario"));
+		               empresaMenu.setText(bn.getString("empresa"));
+		               arCondicionadoMenu.setText(bn.getString("ar_condicionado"));
+		               arCondicionadoMenuAlt.setText(bn.getString("temperatura"));
+		               acessoMenu.setText(bn.getString("acesso"));
+		               consultarMenu.setText(bn.getString("consulta_acesso"));
+		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
+
+		            } 
+		         }  
+		      ); 
 		// ======================== Sair ========================
-		JMenuItem sairMenuItem = new JMenuItem("Sair");
+		sairMenuItem = new JMenuItem("Sair");
 		arquivoMenu.add(sairMenuItem);
 		sairMenuItem.setMnemonic('s');
 		sairMenuItem.addActionListener(new ActionListener() {
@@ -88,12 +209,12 @@ public class Menu extends JFrame {
 	 * =========================================================================
 	 */
 	public JComponent menuFuncionario(){
-		JMenu funcionarioMenu = new JMenu(employee);
+		funcionarioMenu = new JMenu(bn.getString("funcionario"));
 		funcionarioMenu.setMnemonic('o');
 
 		
 		// ======================== Consultar ========================
-		JMenuItem cadastrarMenu = new JMenuItem(employeeKey);
+		cadastrarMenu = new JMenuItem(employeeKey);
 		funcionarioMenu.add(cadastrarMenu);
 		cadastrarMenu.setMnemonic('e');
 		cadastrarMenu.addActionListener(new ActionListener() {
@@ -124,15 +245,15 @@ public class Menu extends JFrame {
 	 * =========================================================================
 	 */
 	public JComponent menuEmpresa(){
-		JMenu empresaMenu = new JMenu(company);
+		empresaMenu = new JMenu(bn.getString("empresa"));
 		empresaMenu.setMnemonic('o');
 
 		
 		// ======================== Consultar ========================
-		JMenuItem cadastrarMenu = new JMenuItem(companyKey);
-		empresaMenu.add(cadastrarMenu);
-		cadastrarMenu.setMnemonic('e');
-		cadastrarMenu.addActionListener(new ActionListener() {
+		cadastrarMenuc = new JMenuItem(companyKey);
+		empresaMenu.add(cadastrarMenuc);
+		cadastrarMenuc.setMnemonic('e');
+		cadastrarMenuc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				// TODO 
 				System.out.println("cheguei no Menu");
@@ -159,7 +280,7 @@ public class Menu extends JFrame {
 	 * =========================================================================
 	 */
 	public JComponent barraMenu(){
-		JMenuBar bar = new JMenuBar(); 
+		bar = new JMenuBar(); 
 		setJMenuBar(bar); 
 		bar.add(menuArquivo()); 
 		bar.add(menuFuncionario());
@@ -174,16 +295,16 @@ public class Menu extends JFrame {
 	 * =========================================================================
 	 */
 	public JComponent menuArCondicionado(){
-		JMenu arCondicionadoMenu = new JMenu(airConditioner);
+		arCondicionadoMenu = new JMenu(bn.getString("ar_condicionado"));
 		arCondicionadoMenu.setMnemonic('r');
 		
-		JMenuItem arCondicionadoMenuAlt = new JMenuItem(airConditionerKey);
+		arCondicionadoMenuAlt = new JMenuItem(airConditionerKey);
 		arCondicionadoMenu.add(arCondicionadoMenuAlt);
 		arCondicionadoMenuAlt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				// TODO 
 				System.out.println("cheguei no Menu");
-				ApplicationViewController.redrawContentPanel(airConditioner); 
+				ApplicationViewController.redrawContentPanel(airConditionerKey); 
 			}
 
 		});
@@ -195,11 +316,11 @@ public class Menu extends JFrame {
 	 * =========================================================================
 	 */
 	public JComponent menuAcesso(){
-		JMenu acessoMenu = new JMenu(access);
+		acessoMenu = new JMenu(bn.getString("acesso"));
 		acessoMenu.setMnemonic('s');
 		
 		// ======================== Consultar ========================
-		JMenuItem consultarMenu = new JMenuItem(accessKey);
+		consultarMenu = new JMenuItem(bn.getString("consulta_acesso"));
 		acessoMenu.add(consultarMenu);
 		consultarMenu.setMnemonic('e');
 		consultarMenu.addActionListener(new ActionListener() {
@@ -212,14 +333,14 @@ public class Menu extends JFrame {
 		});
 	 		
 		// ====================== Enviar =======================
-		JMenuItem enviaraMenu = new JMenuItem(accessSend);
+		enviaraMenu = new JMenuItem(bn.getString("enviar_arquivo"));
 		acessoMenu.add(enviaraMenu); 
 		enviaraMenu.setMnemonic('f');
 		enviaraMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				// TODO 
 				System.out.println("cheguei no Menu");
-				ApplicationViewController.redrawContentPanel(accessSend);
+				ApplicationViewController.redrawContentPanel(sendKey);
 			}
 
 		});

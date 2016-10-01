@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -33,8 +34,14 @@ public class ApplicationView extends JFrame {
 	private String nomeTxt = "nome";
 	private String funcaoTxt = "funcao";
 	private String empresaTxt = "empresa";
-	private String imgLocation = "C:\\Users\\pitagoras\\workspace\\CCO2ANPILocal\\Views\\br\\com\\cco2anpi\\componentes\\image-placeholder.png";
-
+	
+	File currentDirFile = new File("");
+	String helper = currentDirFile.getAbsolutePath();
+	
+	
+	private String imgLocation = helper+"\\src\\main\\resources\\images\\image-placeholder.png";
+	
+	
 	public static String employeeKey = "ecadastro/econsulta";
 	public static String companyKey = "ccadastro/cconsulta";
 	public static String airConditionerKey = "Ar-Condicionado";
