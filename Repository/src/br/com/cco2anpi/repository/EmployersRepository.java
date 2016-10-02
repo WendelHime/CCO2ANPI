@@ -106,7 +106,7 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
     public IEmployer[] getAllEmployers() {
 	Session session = sessionFactory.openSession();
 	List<br.com.cco2anpi.database.Employer> list = session
-		.createQuery("from Access", br.com.cco2anpi.database.Employer.class).getResultList();
+		.createQuery("from Employer", br.com.cco2anpi.database.Employer.class).getResultList();
 	List<Employer> tempList = new ArrayList<>();
 	for (br.com.cco2anpi.database.Employer employer : list) {
 	    tempList.add(new Employer(employer));

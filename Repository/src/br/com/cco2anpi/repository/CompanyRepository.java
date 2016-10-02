@@ -106,7 +106,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
     public ICompany[] getAllCompanies() {
 	Session session = sessionFactory.openSession();
 	List<br.com.cco2anpi.database.Company> companyList = session
-		.createQuery("from Access", br.com.cco2anpi.database.Company.class).getResultList();
+		.createQuery("from Company", br.com.cco2anpi.database.Company.class).getResultList();
 	List<Company> companiesTemp = new ArrayList<>();
 	for (br.com.cco2anpi.database.Company company : companyList) {
 	    companiesTemp.add(new Company(company));
