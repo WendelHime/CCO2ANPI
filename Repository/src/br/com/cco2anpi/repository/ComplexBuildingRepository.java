@@ -1,0 +1,121 @@
+/**
+ * 
+ */
+package br.com.cco2anpi.repository;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import br.com.cco2anpi.models.ComplexBuilding;
+import br.com.cco2anpi.models.IComplexBuilding;
+
+/**
+ * @author wotan repository of the complex building
+ */
+public class ComplexBuildingRepository extends BaseRepository implements IComplexBuildingRepository {
+
+    /**
+     * Constructor of the repository
+     * 
+     * @param context
+     */
+    public ComplexBuildingRepository(String context) {
+	super(context);
+    }
+
+    /**
+     * Method used to insert complex building
+     * 
+     * @param complexBuilding
+     *            object to be inserted
+     * @return object inserted
+     */
+    public IComplexBuilding insert(IComplexBuilding complexBuilding) {
+	Session session = sessionFactory.openSession();
+	Serializable id = session.save(new br.com.cco2anpi.database.ComplexBuilding(complexBuilding));
+	IComplexBuilding temp = session.get(br.com.cco2anpi.database.ComplexBuilding.class, id);
+	session.close();
+	return new ComplexBuilding(temp);
+    }
+
+    /**
+     * Method used to update complex building
+     * 
+     * @param complexBuilding
+     *            to be updated
+     * @return object updated
+     */
+    public IComplexBuilding update(IComplexBuilding complexBuilding) {
+	Session session = sessionFactory.openSession();
+	Transaction transaction = session.beginTransaction();
+	try {
+	    session.update(new br.com.cco2anpi.database.ComplexBuilding(complexBuilding));
+	    transaction.commit();
+	} catch (Exception ex) {
+	    transaction.rollback();
+	}
+	session.close();
+	return complexBuilding;
+    }
+
+    /**
+     * Method used to delete complex building
+     * 
+     * @param complexBuilding
+     *            to be deleted
+     * @return status;
+     */
+    public boolean delete(IComplexBuilding complexBuilding) {
+	Session session = sessionFactory.openSession();
+	Transaction transaction = session.beginTransaction();
+	boolean status = false;
+	try {
+	    session.delete(new br.com.cco2anpi.database.ComplexBuilding(complexBuilding));
+	    transaction.commit();
+	    status = true;
+	} catch (Exception ex) {
+	    transaction.rollback();
+	}
+	session.close();
+	return status;
+    }
+
+    /**
+     * Method used to search complex building by id
+     * 
+     * @param id
+     *            id to be used
+     * @return complex building if exists
+     */
+    public IComplexBuilding getComplexBuilding(Integer id) {
+	Session session = sessionFactory.openSession();
+	ComplexBuilding complexBuilding = new ComplexBuilding(
+		session.find(br.com.cco2anpi.database.ComplexBuilding.class, id));
+	session.close();
+	return complexBuilding;
+    }
+
+    /**
+     * Method used to get all building sets
+     * 
+     * @return all complex building array
+     */
+    public IComplexBuilding[] getAllBuildingSets() {
+	Session session = sessionFactory.openSession();
+	List<br.com.cco2anpi.database.ComplexBuilding> complexBuildingList = session
+		.createQuery("from ComplexBuilding", br.com.cco2anpi.database.ComplexBuilding.class).getResultList();
+	List<ComplexBuilding> complexBuildingTemp = new ArrayList<>();
+	for (br.com.cco2anpi.database.ComplexBuilding user : complexBuildingList) {
+	    complexBuildingTemp.add(new ComplexBuilding(user));
+	}
+	session.close();
+	IComplexBuilding[] buildingSetsArray = new ComplexBuilding[complexBuildingTemp.size()];
+	complexBuildingTemp.toArray(buildingSetsArray);
+	return buildingSetsArray;
+    }
+
+}
