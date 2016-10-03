@@ -17,5 +17,6 @@ TODO list
 
 To run mvn exec:java -Dexec.mainClass="br.com.cco2anpi.Main"
 
-####GUI Layered application
+####GUI Layers of application
+with use JCardLayout
 ![myimage-alt-tag](https://github.com/BiondiVini/CCO2ANPI/blob/master/SystemBuildingControl/src/main/resources/images/layout.png)
