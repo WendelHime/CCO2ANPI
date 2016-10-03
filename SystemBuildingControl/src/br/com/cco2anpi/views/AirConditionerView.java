@@ -3,6 +3,7 @@ package br.com.cco2anpi.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,35 +27,30 @@ public class AirConditionerView extends JPanel {
 	private JTextField txtHourStart;
 	private JTextField txtHourEnd;
 	private JTextField txtTemperature;
+	CustomButton sendButton;
 
-	private String temperatureText = "Temperatura";
-	private String descriptionText = "Nova Configuracao";
-	private String maxTemperatureText = "Temp. Maxima";
-	private String workingHoursText = "Horário de funcionamento";
-	private String buttomName = "Enviar";
-	private String txtHourStartText = "De";
-	private String txtHourEndText = "Ate";
-
+	ResourceBundle bn;
 	/**
 	 * Constructor set all variables
 	 */
-	public AirConditionerView() {
+	public AirConditionerView(ResourceBundle bn) {
+		this.bn=bn;
 		headPanel = new JPanel(new GridLayout(3, 1, 1, 10));
 		labelsPanel = new JPanel(new GridLayout(1, 2, 1, 1));
 		fieldsPanel = new JPanel(new BorderLayout(2, 2));
 		buttonsPanel = new JPanel(new BorderLayout(2, 2));
 		joinPanels = new JPanel(new BorderLayout(1, 1));
 
-		lblTitle = new JLabel(temperatureText, JLabel.CENTER);
-		lblDescription = new JLabel(descriptionText, JLabel.CENTER);
+		lblTitle = new JLabel(bn.getString("temperatura"), JLabel.CENTER);
+		lblDescription = new JLabel(bn.getString("nova_configuracao"), JLabel.CENTER);
 
-		lblTemperature = new JLabel(maxTemperatureText);
+		lblTemperature = new JLabel(bn.getString("temperatura_maxima"));
 		txtTemperature = new JTextField(10);
 
-		lblWorkingHours = new JLabel(workingHoursText);
+		lblWorkingHours = new JLabel(bn.getString("horario_de_funcionamento"));
 		txtHourEnd = new JTextField(5);
 		txtHourStart = new JTextField(5);
-
+		sendButton = new CustomButton(bn.getString("enviar"));
 		setArCondicionadoView();
 		setBackground(new Color(255, 255, 255));
 	}
@@ -112,9 +108,9 @@ public class AirConditionerView extends JPanel {
 		temperatureInterPanel.add(temperatureSubInterPanel);
 
 		// set subIntern panels of workingHoursInternPanel
-		hour1SubInternPanel.setBorder(new TitledBorder(txtHourStartText));
+		hour1SubInternPanel.setBorder(new TitledBorder(bn.getString("de")));
 		hour1SubInternPanel.add(txtHourStart);
-		hour2SubInternPanel.setBorder(new TitledBorder(txtHourEndText));
+		hour2SubInternPanel.setBorder(new TitledBorder(bn.getString("ate")));
 		hour2SubInternPanel.add(txtHourEnd);
 
 		// add subIntern panels to intern pane workingHoursInternPanel
@@ -139,7 +135,7 @@ public class AirConditionerView extends JPanel {
 		buttonsInterpanelPanel.add(new JLabel(""));
 		buttonsInterpanelPanel.add(new JLabel(""));
 		buttonsInterpanelPanel.add(new JLabel(""));
-		buttonsInterpanelPanel.add(new CustomButton(buttomName));
+		buttonsInterpanelPanel.add(sendButton);
 
 		// add intern panel to buttonsPanel
 		buttonsPanel.add(buttonsInterpanelPanel);
@@ -166,5 +162,17 @@ public class AirConditionerView extends JPanel {
 		joinAllPanels();
 		this.add(headPanel, BorderLayout.NORTH);
 		this.add(joinPanels);
+	}
+
+	public void updateLanguage(ResourceBundle bn) {
+		
+		lblTitle.setText(bn.getString("temperatura"));
+		lblDescription.setText(bn.getString("nova_configuracao"));
+
+		lblTemperature.setText(bn.getString("temperatura_maxima"));
+
+		lblWorkingHours.setText(bn.getString("horario_de_funcionamento"));
+
+		sendButton.setText(bn.getString("enviar"));
 	}
 }

@@ -3,6 +3,7 @@ package br.com.cco2anpi.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ResourceBundle;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import br.com.cco2anpi.views.shared.ConsultPanel;
+import br.com.cco2anpi.views.shared.CustomButton;
 
 public class CompanyView extends JPanel {
 //	private JPanel oPanel;
@@ -24,12 +26,9 @@ public class CompanyView extends JPanel {
 	private JPanel fieldsPanel;
 	private JPanel buttonsPanel;
 	
-	private JButton cadButton;
-	private JButton cleanButton;
+	private CustomButton cadButton;
+	private CustomButton cleanButton;
 	
-	private String registerButtonTxt = "Cadastrar";
-	private String cleanButtonTxt = "Limpar";
-	private String consultButtonTxt = "Consultar";
 	private String workingHoursTxt = "Horário de Funcionamento";
 	private String workingHoursAirTxt = "Horário de Funcionamento";
 	private String nameTxt = "Razao Social";
@@ -40,14 +39,15 @@ public class CompanyView extends JPanel {
 	private String temperatureTxt = "Temperatura Max";
 	private String airConditionerTxt = "Ar-Condicionado";
 	
+	ResourceBundle bn;
 
 
 	/**
 	 * Constructor
 	 * set all variables
 	 * */
-	public CompanyView() {
-		
+	public CompanyView(ResourceBundle bn) {
+		this.bn=bn;
 //		employeePanel = new JPanel();
 		tabbedPane = new JTabbedPane();
 		join = new JPanel(new BorderLayout(1, 1));
@@ -56,8 +56,8 @@ public class CompanyView extends JPanel {
 		fieldsPanel = new JPanel(new BorderLayout(2, 2));
 		buttonsPanel = new JPanel();
 		
-		cadButton = new JButton(registerButtonTxt);
-		cleanButton = new JButton(cleanButtonTxt);
+		cadButton = new CustomButton(bn.getString("cadastrar"));
+		cleanButton = new CustomButton(bn.getString("limpar"));
 		
 		setButtonsPanel();
 		setFildsPanel();
@@ -74,8 +74,8 @@ public class CompanyView extends JPanel {
 	 * there are the tab of register and consult    
 	 * */
 	private void setTabbedPane() {
-		tabbedPane.add(registerButtonTxt, registerPanel());
-		tabbedPane.add(consultButtonTxt, new ConsultPanel().getConsultPanel());
+		tabbedPane.add(bn.getString("cadastrar"), registerPanel());
+		tabbedPane.add(bn.getString("limpar"), new ConsultPanel().getConsultPanel());
 	}
 	/**
 	 * <b>registerPanel</b>
@@ -189,5 +189,13 @@ public class CompanyView extends JPanel {
 	 * */
 	private void joinAllPanels() {
 		join.add(buttonsPanel, BorderLayout.EAST);
+	}
+
+	public void updateLanguage(ResourceBundle bn2) {
+		cadButton.setText(bn2.getString("cadastrar"));
+		cleanButton.setText(bn2.getString("limpar"));
+		tabbedPane.setTitleAt(0, bn2.getString("cadastrar"));
+		tabbedPane.setTitleAt(1, bn2.getString("consultar"));
+	
 	}
 }

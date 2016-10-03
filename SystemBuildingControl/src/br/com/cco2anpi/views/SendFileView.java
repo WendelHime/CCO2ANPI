@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ import org.bouncycastle.crypto.InvalidCipherTextException;
 
 import br.com.cco2anpi.tools.Crypto;
 import br.com.cco2anpi.tools.FileHandler;
+import br.com.cco2anpi.views.shared.CustomButton;
 
 public class SendFileView extends JPanel {
 	private JPanel leftPanel;
@@ -45,23 +47,22 @@ public class SendFileView extends JPanel {
 
 	private String[] data;
 
-	private JButton sendButton;
-	private JButton toLeftButton;
-	private JButton toRightButton;
-	private JButton allToLeftButton;
-	private JButton allToRightButton;
-	private JButton confirmButton;
-	private String accessTxt = "Access";
-	private String confirmTxt = "Confirm";
+	private CustomButton toLeftButton;
+	private CustomButton toRightButton;
+	private CustomButton allToLeftButton;
+	private CustomButton allToRightButton;
+	private CustomButton confirmButton;
+
 	private String allToRightTxt = ">>";
 	private String allToLeftTxt = "<<";
 	private String toLeftTxt = "<";
 	private String toRightTxt = ">";
-
+	ResourceBundle bn;
 	/**
 	 * Set All variables
 	 */
-	public SendFileView() {
+	public SendFileView(ResourceBundle bn) {
+		this.bn = bn;
 		leftPanel = new JPanel();
 		rightPanel = new JPanel();
 		buttonRightPanel = new JPanel();
@@ -76,15 +77,15 @@ public class SendFileView extends JPanel {
 		leftScrollPane = new JScrollPane();
 		rightScrollPane = new JScrollPane();
 
-		toLeftButton = new JButton(toLeftTxt);
+		toLeftButton = new CustomButton(bn.getString("mever_selecionados"));
 		toLeftButton.addActionListener(new ButtonListener());
-		allToLeftButton = new JButton(allToLeftTxt);
+		allToLeftButton = new CustomButton(bn.getString("mover_todos"));
 		allToLeftButton.addActionListener(new ButtonListener());
-		toRightButton = new JButton(toRightTxt);
+		toRightButton = new CustomButton(bn.getString("mever_selecionados"));
 		toRightButton.addActionListener(new ButtonListener());
-		allToRightButton = new JButton(allToRightTxt);
+		allToRightButton = new CustomButton(bn.getString("mover_todos"));
 		allToRightButton.addActionListener(new ButtonListener());
-		confirmButton = new JButton(confirmTxt);
+		confirmButton = new CustomButton(bn.getString("confirmar"));
 		confirmButton.addActionListener(new ButtonListener());
 
 		buildButtonLeftPanel();
@@ -97,7 +98,7 @@ public class SendFileView extends JPanel {
 
 		setBackground(new Color(255, 255, 255));
 		setLayout(new BorderLayout(5, 2));
-		JLabel lbl = new JLabel("Acesso a Usuarios", SwingConstants.CENTER);
+		JLabel lbl = new JLabel(bn.getString("acesso_a_usuarios"), SwingConstants.CENTER);
 		add(lbl, BorderLayout.NORTH);
 		add(joinAllPanel, BorderLayout.CENTER);
 
@@ -241,5 +242,17 @@ public class SendFileView extends JPanel {
 				}
 			}
 		}
+	}
+
+	public void updateLanguage(ResourceBundle bn) {
+		toLeftButton.setText(bn.getString("mever_selecionados"));
+		
+		allToLeftButton.setText(bn.getString("mover_todos"));
+		
+		toRightButton.setText(bn.getString("mever_selecionados"));
+		
+		allToRightButton.setText(bn.getString("mover_todos"));
+		
+		confirmButton.setText(bn.getString("confirmar"));		
 	}
 }
