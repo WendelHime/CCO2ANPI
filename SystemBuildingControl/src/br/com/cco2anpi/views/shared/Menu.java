@@ -1,10 +1,7 @@
 package br.com.cco2anpi.views.shared;
 
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -16,12 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import br.com.cco2anpi.controllers.ApplicationViewController;
-import br.com.cco2anpi.views.AirConditionerView;
-import br.com.cco2anpi.views.ApplicationView;
-import br.com.cco2anpi.views.CompanyView;
-import br.com.cco2anpi.views.ConsultAccessBuildingView;
-import br.com.cco2anpi.views.EmployeeView;
-import br.com.cco2anpi.views.LoginView;
 
 public class Menu extends JFrame {
 	public JMenu arquivoMenu;
@@ -104,7 +95,8 @@ public class Menu extends JFrame {
 		            public void actionPerformed( ActionEvent event ) 
 		            { 
 		               bn = ResourceBundle.getBundle("language", new Locale("es", "ESP"));
-		               
+		       			System.out.println("es");
+
 //		               displayJLabel.setText( bn.getString("mensagem"));
 //		               setTitle(bn.getString("titulo"));
 		               arquivoMenu.setText(bn.getString("arquivo"));
@@ -124,7 +116,8 @@ public class Menu extends JFrame {
 		               acessoMenu.setText(bn.getString("acesso"));
 		               consultarMenu.setText(bn.getString("consulta_acesso"));
 		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
-
+		               ApplicationViewController.applicationViewController(bn);
+		               
 		            } 
 		         }  
 		      ); 
@@ -134,8 +127,9 @@ public class Menu extends JFrame {
 		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
 		            public void actionPerformed( ActionEvent event ) 
 		            { 
-		               bn = ResourceBundle.getBundle("language", new Locale("es", "ESP"));
-		               
+		               bn = ResourceBundle.getBundle("language", new Locale("en", "US"));
+		       			System.out.println("es");
+
 //		               displayJLabel.setText( bn.getString("mensagem"));
 //		               setTitle(bn.getString("titulo"));
 		               arquivoMenu.setText(bn.getString("arquivo"));
@@ -155,7 +149,7 @@ public class Menu extends JFrame {
 		               acessoMenu.setText(bn.getString("acesso"));
 		               consultarMenu.setText(bn.getString("consulta_acesso"));
 		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
-
+		               ApplicationViewController.applicationViewController(bn);
 		            } 
 		         }  
 		      ); 
@@ -165,7 +159,7 @@ public class Menu extends JFrame {
 		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
 		            public void actionPerformed( ActionEvent event ) 
 		            { 
-		               bn = ResourceBundle.getBundle("language", new Locale("es", "ESP"));
+		               bn = ResourceBundle.getBundle("language", new Locale("pt", "BR"));
 		               
 //		               displayJLabel.setText( bn.getString("mensagem"));
 //		               setTitle(bn.getString("titulo"));
@@ -186,6 +180,7 @@ public class Menu extends JFrame {
 		               acessoMenu.setText(bn.getString("acesso"));
 		               consultarMenu.setText(bn.getString("consulta_acesso"));
 		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
+		               ApplicationViewController.applicationViewController(bn);
 
 		            } 
 		         }  

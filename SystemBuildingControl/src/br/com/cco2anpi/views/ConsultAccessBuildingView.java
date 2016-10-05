@@ -3,6 +3,7 @@ package br.com.cco2anpi.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.ResourceBundle;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -29,18 +30,23 @@ public class ConsultAccessBuildingView extends JPanel{
 	private String cleanButtonName = "Clean";
 	private String txtDateStart = "De";
 	private String txtDateEnd = "Ate";
-
+	ResourceBundle bn;
+	private CustomButton consultButton;
+	private CustomButton cleanButton;
 	/**
 	 * Constructor set all variables and panels
 	 */
-	public ConsultAccessBuildingView() {
-		
+	public ConsultAccessBuildingView(ResourceBundle bn) {
+		this.bn = bn;
 		contentPanel = new JPanel();
 		searchPanel = new JPanel(new BorderLayout(2, 2));
 		fieldPanel = new JPanel(new GridLayout(1, 3));
 		resultPanel = new JPanel(new BorderLayout(2, 2));
 		chooseDatePanel = new JPanel();
 		joinPanels = new JPanel(new BorderLayout(1, 1));
+		consultButton = new CustomButton(bn.getString("consultar"));
+		cleanButton = new CustomButton(bn.getString("limpar"));
+		
 		setconsultAccessBuildingPanel();
 		setBackground(new Color(255,255,255));
 
@@ -81,7 +87,7 @@ public class ConsultAccessBuildingView extends JPanel{
 		JPanel chooseDate = new JPanel(new BorderLayout(2, 2));
 		JPanel dates = new JPanel(new GridLayout(3, 1));
 
-		dates.add(panelJComboBoxes());
+		dates.add(panelJComboBoxes(bn));
 		chooseDate.add(dates);
 		chooseDatePanel.add(chooseDate);
 	}
@@ -107,8 +113,8 @@ public class ConsultAccessBuildingView extends JPanel{
 	 * <b>setFieldPanel</b> set fieldPanel, a component to search
 	 */
 	private void setFieldPanel() {
-		fieldPanel.add(new CustomButton(consultButtonName));
-		fieldPanel.add(new CustomButton(cleanButtonName));
+		fieldPanel.add(consultButton);
+		fieldPanel.add(cleanButton);
 		fieldPanel.add(new JLabel(""));// to space
 	}
 
@@ -123,14 +129,21 @@ public class ConsultAccessBuildingView extends JPanel{
 	/**
 	 * @return JPanel with JComboBoxes to chooseDatePanel
 	 */
-	public JPanel panelJComboBoxes() {
+	public JPanel panelJComboBoxes(ResourceBundle bn) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
-		JPanel panelDateStart = DatePick.datePick(txtDateStart);
-		JPanel panelDateEnd = DatePick.datePick(txtDateEnd);
+		JPanel panelDateStart = DatePick.datePick(txtDateStart,bn);
+		JPanel panelDateEnd = DatePick.datePick(txtDateEnd,bn);
 		panel.add(panelDateStart);
 		panel.add(panelDateEnd);
 		return panel;
+	}
+
+	public void updateLanguage(ResourceBundle bn) {
+		// TODOcleanButton Auto-generated method stub
+		consultButton.setText(bn.getString("consultar"));
+		cleanButton.setText(bn.getString("limpar"));
+		
 	}
 
 }

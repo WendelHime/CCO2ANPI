@@ -5,6 +5,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ResourceBundle;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -57,7 +58,7 @@ public class ApplicationView extends JFrame {
 	 * @param companyView
 	 * @param employeeView
 	 */
-	public ApplicationView(EmployeeView employeeView, CompanyView companyView, AirConditionerView airConditionerView,
+	public ApplicationView(JMenuBar bar, EmployeeView employeeView, CompanyView companyView, AirConditionerView airConditionerView,
 			ConsultAccessBuildingView consultAccessBuildingView,SendFileView sendFileView) {
 
 		super(frameTitle);
@@ -76,7 +77,6 @@ public class ApplicationView extends JFrame {
 		setApplicationPane();
 
 		setSize(1024, 720);
-		JMenuBar bar = new Menu().getJMenuBar();
 		bar.setBackground(new Color(255, 255, 255));
 		setJMenuBar(bar);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,6 +147,13 @@ public class ApplicationView extends JFrame {
 		CardLayout cl = (CardLayout) (contentPanel.getLayout());
 		System.out.println((String) namePanel);
 		cl.show(contentPanel, (String) namePanel);
+	}
+
+	public void updateLanguage(ResourceBundle bn, EmployeeView employeeView, CompanyView companyView,
+			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView,
+			SendFileView sendFileView) {
+		// TODO Auto-generated method stub
+		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView );
 	}
 
 }

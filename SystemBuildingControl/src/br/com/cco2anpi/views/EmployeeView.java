@@ -2,7 +2,9 @@ package br.com.cco2anpi.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
+import java.util.ResourceBundle;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import br.com.cco2anpi.views.shared.ConsultPanel;
+import br.com.cco2anpi.views.shared.CustomButton;
 
 public class EmployeeView extends JPanel{
 //	private JPanel employeePanel;
@@ -23,28 +26,35 @@ public class EmployeeView extends JPanel{
 	private JPanel registrePanel;
 	private JPanel fieldsPanel;
 	private JPanel buttonsPanel;
+	private JPanel nome;
+	private JPanel empresa;
 	
-	private JButton cadButton;
-	private JButton cleanButton;
+	private JPanel campos2;
 	
-	private String cadButtonTxt = "registrear";
-	private String cleanButtonTxt = "Limpar";
-	private String consultTxt = "Consultar";
-	private String workingHoursText = "Horário de Trabalho";
-	private String nameTxt = "Nome";
-	private String companyTxt = "Empresa";
-	private String txtHourStartText = "De";
-	private String txtHourEndText = "Ate";
-	private String authText = "Autorizacao para alterar temperatura";
-	private String yesText = "Sim";
-	private String noText = "Nao";
+	private CustomButton cadButton;
+	private CustomButton cleanButton;
+	private TitledBorder titleBorderName;
+	private TitledBorder titleBorderCompany;
+	private TitledBorder titleBorderHourStart;
+	private TitledBorder titleBorderHourEnd;
+	private JPanel de;
+	private JPanel ate;
+	
+	
+	private JLabel workingHoursLabel;
+	private JLabel authLabel;
+	private JRadioButton yesRadioButton;
+	private JRadioButton noRadioButton;
+	
 
+
+	ResourceBundle bn;
 	/**
 	 * Constructor
 	 * set all variables
 	 * */
-	public EmployeeView() {
-		
+	public EmployeeView(ResourceBundle bn) {
+		this.bn = bn;
 //		employeePanel = new JPanel();
 		tabbedPane = new JTabbedPane();
 		join = new JPanel(new BorderLayout(1, 1));
@@ -53,8 +63,16 @@ public class EmployeeView extends JPanel{
 		fieldsPanel = new JPanel(new BorderLayout(2, 2));
 		buttonsPanel = new JPanel();
 		
-		cadButton = new JButton(cadButtonTxt);
-		cleanButton = new JButton(cleanButtonTxt);
+		cadButton = new CustomButton(bn.getString("cadastrar"));
+		cleanButton = new CustomButton(bn.getString("limpar"));
+		titleBorderName = new TitledBorder(bn.getString("nome"));
+		titleBorderCompany = new TitledBorder(bn.getString("empresa"));
+		titleBorderHourStart = new TitledBorder(bn.getString("de"));
+		titleBorderHourEnd = new TitledBorder(bn.getString("ate"));
+		workingHoursLabel = new JLabel(bn.getString("horario_de_funcionamento"));
+		authLabel = new JLabel(bn.getString("autorizacao_para_alterar_temperatura"));
+		yesRadioButton = new JRadioButton(bn.getString("sim"));
+		noRadioButton = new JRadioButton(bn.getString("nao"));
 		
 		setButtonsPanel();
 		setFildsPanel();
@@ -78,8 +96,8 @@ public class EmployeeView extends JPanel{
 	 * there are the tab of register and consult    
 	 * */
 	private void setTabbedPane() {
-		tabbedPane.add(cadButtonTxt, registerPanel());
-		tabbedPane.add(consultTxt, new ConsultPanel().getConsultPanel());
+		tabbedPane.add(bn.getString("cadastrar"), registerPanel());
+		tabbedPane.add(bn.getString("consultar"), new ConsultPanel().getConsultPanel());
 	}
 	/**
 	 * <b>registerPanel</b>
@@ -98,34 +116,34 @@ public class EmployeeView extends JPanel{
 
 		JPanel campos = new JPanel(new GridLayout(2, 1, 5, 5));
 
-		JPanel nome = new JPanel(new BorderLayout(2, 2));
-		nome.setBorder(new TitledBorder(nameTxt));
+		nome = new JPanel(new BorderLayout(2, 2));
+		nome.setBorder(titleBorderName);
 		nome.add(new JTextField());
 
-		JPanel emresa = new JPanel(new BorderLayout(2, 2));
-		emresa.setBorder(new TitledBorder(companyTxt));
-		emresa.add(new JTextField());
+		empresa = new JPanel(new BorderLayout(2, 2));
+		empresa.setBorder(titleBorderCompany);
+		empresa.add(new JTextField());
 
 		campos.add(nome);
-		campos.add(emresa);
+		campos.add(empresa);
 
-		JPanel campos2 = new JPanel(new GridLayout(5, 2));
-		campos2.add(new JLabel(workingHoursText));
+		campos2 = new JPanel(new GridLayout(5, 2));
+		campos2.add(workingHoursLabel);
 		campos2.add(new JLabel(""));
-		JPanel de = new JPanel(new BorderLayout(2, 2));
-		de.setBorder(new TitledBorder(txtHourStartText));
+		de = new JPanel(new BorderLayout(2, 2));
+		de.setBorder(titleBorderHourStart);
 		de.add(new JTextField());
 
-		JPanel ate = new JPanel(new BorderLayout(2, 2));
-		ate.setBorder(new TitledBorder(txtHourEndText));
+		ate = new JPanel(new BorderLayout(2, 2));
+		ate.setBorder(titleBorderHourEnd);
 		ate.add(new JTextField());
 		campos2.add(de);
 		campos2.add(ate);
-		campos2.add(new JLabel(authText));
+		campos2.add(authLabel);
 		campos2.add(new JLabel(""));
-		campos2.add(new JRadioButton(yesText));
+		campos2.add(yesRadioButton);
 
-		campos2.add(new JRadioButton(noText));
+		campos2.add(noRadioButton);
 		campos2.add(new JLabel(""));
 		campos2.add(new JLabel(""));
 
@@ -165,4 +183,24 @@ public class EmployeeView extends JPanel{
 	private void joinAllPanels() {
 		join.add(buttonsPanel, BorderLayout.EAST);
 	}
+	public void updateLanguage(ResourceBundle bn2) {
+		
+		
+		cadButton.setText(bn2.getString("cadastrar"));
+		cleanButton.setText(bn2.getString("limpar"));
+		tabbedPane.setTitleAt(0, bn2.getString("cadastrar"));
+		tabbedPane.setTitleAt(1, bn2.getString("consultar"));
+		
+		
+		nome.setBorder(new TitledBorder(bn.getString("nome")));
+		empresa.setBorder(new TitledBorder(bn.getString("empresa")) );
+		workingHoursLabel.setText(bn.getString("horario_de_funcionamento"));
+		de.setBorder( new TitledBorder(bn.getString("de")));
+		ate.setBorder( new TitledBorder(bn.getString("ate")));
+		authLabel.setText(bn.getString("autorizacao_para_alterar_temperatura"));
+		yesRadioButton.setText(bn.getString("sim"));
+		noRadioButton.setText(bn.getString("nao"));
+
+	}
+
 }
