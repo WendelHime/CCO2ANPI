@@ -10,7 +10,7 @@ import br.com.cco2anpi.models.User;
 
 /**
  * @author wotan
- *
+ * class used to make connection with the user services
  */
 public class UserClient {
 
