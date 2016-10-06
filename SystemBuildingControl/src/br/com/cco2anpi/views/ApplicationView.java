@@ -49,6 +49,7 @@ public class ApplicationView extends JFrame {
 	public static String accessKey = "Consultar Acessos";
 	public static String sendKey = "Enviar Arquivo";
 	public static String blanckKey = "inicio";
+	public static String complexKey = "cxcadastro/cxconsulta";
 
 	/**
 	 * Constructor Set all variables and show the Frame ApplicationView
@@ -59,7 +60,7 @@ public class ApplicationView extends JFrame {
 	 * @param employeeView
 	 */
 	public ApplicationView(JMenuBar bar, EmployeeView employeeView, CompanyView companyView, AirConditionerView airConditionerView,
-			ConsultAccessBuildingView consultAccessBuildingView,SendFileView sendFileView) {
+			ConsultAccessBuildingView consultAccessBuildingView,SendFileView sendFileView,ComplexView complexView) {
 
 		super(frameTitle);
 		dashBoardPanel = new JPanel();
@@ -73,7 +74,7 @@ public class ApplicationView extends JFrame {
 		empresa = new JLabel(empresaTxt);
 
 		setdashBoardPanel();
-		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView );
+		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView ,complexView);
 		setApplicationPane();
 
 		setSize(1024, 720);
@@ -119,7 +120,7 @@ public class ApplicationView extends JFrame {
 	 * application
 	 */
 	private void setContentpanel(EmployeeView employeeView, CompanyView companyView,
-			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView, SendFileView sendFileView) {
+			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView, SendFileView sendFileView, ComplexView complexView) {
 
 		contentPanel.setLayout(new CardLayout());
 		blanckPane = new JPanel();
@@ -131,6 +132,7 @@ public class ApplicationView extends JFrame {
 		contentPanel.add(airConditionerView, airConditionerKey);
 		contentPanel.add(consultAccessBuildingView, accessKey);
 		contentPanel.add(sendFileView, sendKey);
+		contentPanel.add(complexView, complexKey);
 
 		contentPanel.setBackground(new Color(255, 255, 255));
 	}
@@ -151,9 +153,9 @@ public class ApplicationView extends JFrame {
 
 	public void updateLanguage(ResourceBundle bn, EmployeeView employeeView, CompanyView companyView,
 			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView,
-			SendFileView sendFileView) {
+			SendFileView sendFileView,ComplexView complexView) {
 		// TODO Auto-generated method stub
-		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView );
+		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView ,complexView);
 	}
 
 }

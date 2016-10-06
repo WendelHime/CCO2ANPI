@@ -9,6 +9,7 @@ import javax.swing.JMenuBar;
 import br.com.cco2anpi.views.AirConditionerView;
 import br.com.cco2anpi.views.ApplicationView;
 import br.com.cco2anpi.views.CompanyView;
+import br.com.cco2anpi.views.ComplexView;
 import br.com.cco2anpi.views.ConsultAccessBuildingView;
 import br.com.cco2anpi.views.EmployeeView;
 import br.com.cco2anpi.views.SendFileView;
@@ -24,6 +25,7 @@ public class ApplicationViewController {
 	private static EmployeeView employeeView;
 	private static ConsultAccessBuildingView consultAccessBuildingView;
 	private static SendFileView sendFileView;
+	private static ComplexView complexView;
 	private static ApplicationView applicationViewContentPanel;
 	private static JMenuBar bar;
 	static Menu menu;
@@ -41,10 +43,10 @@ public class ApplicationViewController {
 		this.companyView = new CompanyView(bn);
 		this.employeeView = new EmployeeView(bn);
 		this.sendFileView= new SendFileView(bn);
-		
+		this.complexView = new ComplexView(bn);
 		this.consultAccessBuildingView = new ConsultAccessBuildingView(bn);
 		applicationViewContentPanel = new ApplicationView(bar, employeeView, companyView, airConditionerView,
-				consultAccessBuildingView, sendFileView);
+				consultAccessBuildingView, sendFileView, complexView);
 
 	}
 	public static void applicationViewController(ResourceBundle bn) {
@@ -55,9 +57,10 @@ public class ApplicationViewController {
 		employeeView.updateLanguage(bn);
 		sendFileView.updateLanguage(bn);
 		consultAccessBuildingView.updateLanguage(bn);
+		complexView.updateLanguage(bn);
 		
 		applicationViewContentPanel.updateLanguage(bn, employeeView, companyView, airConditionerView,
-				consultAccessBuildingView, sendFileView);
+				consultAccessBuildingView, sendFileView, complexView);
 
 	}	
 

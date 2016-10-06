@@ -28,11 +28,14 @@ public class Menu extends JFrame {
 	public static String accessKey = "Consultar Acessos";
 	public static String sendKey = "Enviar Arquivo";
 	public static String blanckKey = "inicio";
+	public static String complexKey = "cxcadastro/cxconsulta";
 	private ResourceBundle bn = null;
 	JMenu funcionarioMenu;
 	JMenuItem cadastrarMenu;
 	JMenu empresaMenu;
 	JMenuItem cadastrarMenuc;
+	JMenu conjuntoMenu;
+	JMenuItem cadastrarMenucx;
 	JMenuBar bar;
 	JMenu arCondicionadoMenu;
 	JMenuItem arCondicionadoMenuAlt;
@@ -200,7 +203,7 @@ public class Menu extends JFrame {
 	}
 	/*
 	 * ========================================================================= 
-	 * 	----------------------------- Menu Funcionário -------------------------------				
+	 * 	----------------------------- Menu Funcionï¿½rio -------------------------------				
 	 * =========================================================================
 	 */
 	public JComponent menuFuncionario(){
@@ -271,6 +274,42 @@ public class Menu extends JFrame {
 	}
 	/*
 	 * ========================================================================= 
+	 * 	--------------------------- Menu Empresa ----------------------------				
+	 * =========================================================================
+	 */
+	public JComponent menuConjunto(){
+		conjuntoMenu = new JMenu(bn.getString("empresa"));
+		conjuntoMenu.setMnemonic('o');
+
+		
+		// ======================== Consultar ========================
+		cadastrarMenucx = new JMenuItem(companyKey);
+		conjuntoMenu.add(cadastrarMenucx);
+		cadastrarMenucx.setMnemonic('e');
+		cadastrarMenucx.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				// TODO 
+				System.out.println("cheguei no Menu");
+				ApplicationViewController.redrawContentPanel(complexKey); 
+			}
+
+		});
+//	 		
+//		// ====================== Cadastrar =======================
+//		JMenuItem consultaMenu = new JMenuItem("Consultar");
+//		empresaMenu.add(consultaMenu); 
+//		consultaMenu.setMnemonic('f');
+//		consultaMenu.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent event) {
+//				// TODO 
+//			}
+//
+//		});
+		return conjuntoMenu;
+	}
+
+	/*
+	 * ========================================================================= 
 	 * 	--------------------------- Barra de Menus ----------------------------				
 	 * =========================================================================
 	 */
@@ -282,6 +321,7 @@ public class Menu extends JFrame {
 		bar.add(menuEmpresa());
 		bar.add(menuAcesso());
 		bar.add(menuArCondicionado());
+		bar.add(menuConjunto());
 		return bar;
 	}
 	/*
