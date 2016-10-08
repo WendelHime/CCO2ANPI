@@ -44,6 +44,8 @@ public class Company implements Serializable, ICompany {
     private Integer businessHours;
     @Column(name = "maximum_temperature")
     private Double maximumTemperature;
+    @Column(name = "airconditioner_hours")
+    private Integer airconditionerHours;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_complex_id", nullable = false)
     private ComplexBuilding complexBuilding;
@@ -63,6 +65,7 @@ public class Company implements Serializable, ICompany {
 	socialReason = sourceObject.getSocialReason();
 	businessHours = sourceObject.getBusinessHours();
 	maximumTemperature = sourceObject.getMaximumTemperature();
+	airconditionerHours = sourceObject.getAirConditionerHours();
 	complexBuilding = (ComplexBuilding) sourceObject.getComplexBuilding();
 	setEmployers(sourceObject.getEmployers());
     }
@@ -142,6 +145,20 @@ public class Company implements Serializable, ICompany {
 	this.maximumTemperature = maximumTemperature;
     }
 
+    /**
+     * @return the businessHour
+     */
+    public Integer getAirConditionerHours() {
+	return airconditionerHours;
+    }
+
+    /**
+     * @param businessHour
+     *            the businessHour to set
+     */
+    public void setAirConditionerHours(Integer airconditionerHours) {
+	this.airconditionerHours = airconditionerHours;
+    }
     /**
      * @return the complexBuilding
      */

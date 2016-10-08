@@ -41,6 +41,7 @@ CREATE TABLE COMPANIES
 	social_reason VARCHAR(2000),
 	business_hours INTEGER,
 	maximum_temperature DECIMAL(2,2),
+	airconditioner_hours INTEGER,
 	horario_funcionamento_ar_condicionado INTEGER,
 	FOREIGN KEY (building_complex_id) REFERENCES BUILDING_SETS(id)
 );

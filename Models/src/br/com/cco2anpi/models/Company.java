@@ -17,6 +17,7 @@ public class Company implements ICompany {
     private String socialReason;
     private Integer businessHours;
     private Double maximumTemperature;
+    private Integer airconditionerHours;
     private ComplexBuilding complexBuilding;
     private Set<IEmployer> employers = new HashSet<>(0);
 
@@ -30,6 +31,7 @@ public class Company implements ICompany {
 	socialReason = sourceObject.getSocialReason();
 	businessHours = sourceObject.getBusinessHours();
 	maximumTemperature = sourceObject.getMaximumTemperature();
+	airconditionerHours = sourceObject.getAirConditionerHours();
 	complexBuilding = (ComplexBuilding) sourceObject.getComplexBuilding();
 	setEmployers(sourceObject.getEmployers());
     }
@@ -109,6 +111,21 @@ public class Company implements ICompany {
 	this.maximumTemperature = maximumTemperature;
     }
 
+    /**
+     * @return the businessHours
+     */
+    public Integer getAirConditionerHours() {
+	return airconditionerHours;
+    }
+
+    /**
+     * @param businessHours
+     *            the businessHours to set
+     */
+    public void setAirConditionerHours(Integer airconditionerHours) {
+	this.airconditionerHours = airconditionerHours;
+    }
+    
     /**
      * @return the complexBuilding
      */

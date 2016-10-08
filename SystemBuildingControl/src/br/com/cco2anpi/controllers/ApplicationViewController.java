@@ -57,7 +57,7 @@ public class ApplicationViewController {
 		employeeView.updateLanguage(bn);
 		sendFileView.updateLanguage(bn);
 		consultAccessBuildingView.updateLanguage(bn);
-		complexView.updateLanguage(bn);
+//		complexView.updateLanguage(bn);
 		
 		applicationViewContentPanel.updateLanguage(bn, employeeView, companyView, airConditionerView,
 				consultAccessBuildingView, sendFileView, complexView);

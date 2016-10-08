@@ -18,6 +18,8 @@ public interface ICompany {
     void setBusinessHours(Integer businessHours);
 
     void setMaximumTemperature(Double maximumTemperature);
+    
+    void setAirConditionerHours(Integer businessHours);
 
     void setComplexBuilding(IComplexBuilding complexBuilding);
 
@@ -32,7 +34,9 @@ public interface ICompany {
     Integer getBusinessHours();
 
     Double getMaximumTemperature();
-
+    
+    Integer getAirConditionerHours();
+    
     IComplexBuilding getComplexBuilding();
 
     Set<IEmployer> getEmployers();
