@@ -6,13 +6,17 @@ import java.util.ResourceBundle;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 
+import br.com.cco2anpi.views.AccessConsultPanel;
 import br.com.cco2anpi.views.AirConditionerView;
 import br.com.cco2anpi.views.ApplicationView;
+import br.com.cco2anpi.views.CompanyPanel;
 import br.com.cco2anpi.views.CompanyView;
 import br.com.cco2anpi.views.ComplexView;
 import br.com.cco2anpi.views.ConsultAccessBuildingView;
 import br.com.cco2anpi.views.EmployeeView;
+import br.com.cco2anpi.views.EmployerPanel;
 import br.com.cco2anpi.views.SendFileView;
+import br.com.cco2anpi.views.UserPanel;
 import br.com.cco2anpi.views.shared.Menu;
 
 /**
@@ -27,6 +31,13 @@ public class ApplicationViewController {
 	private static SendFileView sendFileView;
 	private static ComplexView complexView;
 	private static ApplicationView applicationViewContentPanel;
+	
+	// para teste
+	private static CompanyPanel companyPanel;
+	private static EmployerPanel employerPanel;
+	private static AccessConsultPanel accessConsultPanel;
+	private static UserPanel userPanel;
+	
 	private static JMenuBar bar;
 	static Menu menu;
 	ResourceBundle bn;
@@ -40,27 +51,35 @@ public class ApplicationViewController {
 		menu = new Menu();
 		this.bar = menu.getJMenuBar();
 		this.airConditionerView = new AirConditionerView(bn);
-		this.companyView = new CompanyView(bn);
-		this.employeeView = new EmployeeView(bn);
+//		this.companyView = new CompanyView(bn);
+//		this.employeeView = new EmployeeView(bn);
+		this.companyPanel = new CompanyPanel(bn);
+		this.employerPanel = new EmployerPanel(bn);
 		this.sendFileView= new SendFileView(bn);
 		this.complexView = new ComplexView(bn);
-		this.consultAccessBuildingView = new ConsultAccessBuildingView(bn);
-		applicationViewContentPanel = new ApplicationView(bar, employeeView, companyView, airConditionerView,
-				consultAccessBuildingView, sendFileView, complexView);
+		this.userPanel = new UserPanel(bn);
+		this.accessConsultPanel = new AccessConsultPanel(bn);
+//		applicationViewContentPanel = new ApplicationView(bar, employeeView, companyView, airConditionerView,
+//				consultAccessBuildingView, sendFileView, complexView);
+		applicationViewContentPanel = new ApplicationView(bar, employerPanel, companyPanel, airConditionerView,
+				accessConsultPanel, sendFileView, complexView,userPanel);
 
 	}
 	public static void applicationViewController(ResourceBundle bn) {
 		System.out.println("cheguei em ApplicationController!");
 		
 		airConditionerView.updateLanguage(bn);
-		companyView.updateLanguage(bn);
-		employeeView.updateLanguage(bn);
+//		companyView.updateLanguage(bn);
+//		employeeView.updateLanguage(bn);
+		companyPanel.updateLanguage(bn);
+		employerPanel.updateLanguage(bn);
 		sendFileView.updateLanguage(bn);
-		consultAccessBuildingView.updateLanguage(bn);
+//		consultAccessBuildingView.updateLanguage(bn);
+		accessConsultPanel.updateLanguage(bn);
+		userPanel.updateLanguage(bn);
 //		complexView.updateLanguage(bn);
 		
-		applicationViewContentPanel.updateLanguage(bn, employeeView, companyView, airConditionerView,
-				consultAccessBuildingView, sendFileView, complexView);
+		applicationViewContentPanel.updateLanguage(bn, employerPanel, companyPanel, airConditionerView, accessConsultPanel, sendFileView, complexView,userPanel);
 
 	}	
 

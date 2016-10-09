@@ -29,6 +29,7 @@ public class Menu extends JFrame {
 	public static String sendKey = "Enviar Arquivo";
 	public static String blanckKey = "inicio";
 	public static String complexKey = "cxcadastro/cxconsulta";
+	public static String userKey = "ucadastro/uconsulta";
 	private ResourceBundle bn = null;
 	JMenu funcionarioMenu;
 	JMenuItem cadastrarMenu;
@@ -36,6 +37,8 @@ public class Menu extends JFrame {
 	JMenuItem cadastrarMenuc;
 	JMenu conjuntoMenu;
 	JMenuItem cadastrarMenucx;
+	JMenu userMenu;
+	JMenuItem cadastrarMenuu;
 	JMenuBar bar;
 	JMenu arCondicionadoMenu;
 	JMenuItem arCondicionadoMenuAlt;
@@ -274,16 +277,16 @@ public class Menu extends JFrame {
 	}
 	/*
 	 * ========================================================================= 
-	 * 	--------------------------- Menu Empresa ----------------------------				
+	 * 	--------------------------- Menu Conjunto ----------------------------				
 	 * =========================================================================
 	 */
 	public JComponent menuConjunto(){
-		conjuntoMenu = new JMenu(bn.getString("empresa"));
+		conjuntoMenu = new JMenu("conjunto");
 		conjuntoMenu.setMnemonic('o');
 
 		
 		// ======================== Consultar ========================
-		cadastrarMenucx = new JMenuItem(companyKey);
+		cadastrarMenucx = new JMenuItem(complexKey);
 		conjuntoMenu.add(cadastrarMenucx);
 		cadastrarMenucx.setMnemonic('e');
 		cadastrarMenucx.addActionListener(new ActionListener() {
@@ -308,6 +311,43 @@ public class Menu extends JFrame {
 		return conjuntoMenu;
 	}
 
+
+	/*
+	 * ========================================================================= 
+	 * 	--------------------------- Menu Conjunto ----------------------------				
+	 * =========================================================================
+	 */
+	public JComponent menuUsuario(){
+		userMenu = new JMenu("usuario");
+		userMenu.setMnemonic('o');
+
+		
+		// ======================== Consultar ========================
+		cadastrarMenuu = new JMenuItem(userKey);
+		userMenu.add(cadastrarMenuu);
+		cadastrarMenuu.setMnemonic('u');
+		cadastrarMenuu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				// TODO 
+				System.out.println("cheguei no Menu");
+				ApplicationViewController.redrawContentPanel(userKey); 
+			}
+
+		});
+//	 		
+//		// ====================== Cadastrar =======================
+//		JMenuItem consultaMenu = new JMenuItem("Consultar");
+//		empresaMenu.add(consultaMenu); 
+//		consultaMenu.setMnemonic('f');
+//		consultaMenu.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent event) {
+//				// TODO 
+//			}
+//
+//		});
+		return userMenu;
+	}
+
 	/*
 	 * ========================================================================= 
 	 * 	--------------------------- Barra de Menus ----------------------------				
@@ -322,6 +362,7 @@ public class Menu extends JFrame {
 		bar.add(menuAcesso());
 		bar.add(menuArCondicionado());
 		bar.add(menuConjunto());
+		bar.add(menuUsuario());
 		return bar;
 	}
 	/*

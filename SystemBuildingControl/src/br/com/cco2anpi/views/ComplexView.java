@@ -1,6 +1,7 @@
 package br.com.cco2anpi.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -84,6 +85,8 @@ public class ComplexView extends JPanel {
 
 		// Listeners
 		setupListeners();
+		setBackground(new Color(255,255, 255));
+
 	}
 	/**
 	 * @return This panel

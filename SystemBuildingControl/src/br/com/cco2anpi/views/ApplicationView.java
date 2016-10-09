@@ -50,6 +50,7 @@ public class ApplicationView extends JFrame {
 	public static String sendKey = "Enviar Arquivo";
 	public static String blanckKey = "inicio";
 	public static String complexKey = "cxcadastro/cxconsulta";
+	public static String userKey = "ucadastro/uconsulta";
 
 	/**
 	 * Constructor Set all variables and show the Frame ApplicationView
@@ -58,10 +59,12 @@ public class ApplicationView extends JFrame {
 	 * @param airConditionerView
 	 * @param companyView
 	 * @param employeeView
+	 * @param userPanel 
 	 */
-	public ApplicationView(JMenuBar bar, EmployeeView employeeView, CompanyView companyView, AirConditionerView airConditionerView,
-			ConsultAccessBuildingView consultAccessBuildingView,SendFileView sendFileView,ComplexView complexView) {
-
+//	public ApplicationView(JMenuBar bar, EmployeeView employeeView, CompanyView companyView, AirConditionerView airConditionerView,
+//			ConsultAccessBuildingView consultAccessBuildingView,SendFileView sendFileView,ComplexView complexView) {
+	public ApplicationView(JMenuBar bar, EmployerPanel employeeView, CompanyPanel companyView, AirConditionerView airConditionerView,
+			AccessConsultPanel consultAccessBuildingView,SendFileView sendFileView,ComplexView complexView, UserPanel userPanel) {
 		super(frameTitle);
 		dashBoardPanel = new JPanel();
 		contentPanel = new JPanel();
@@ -74,7 +77,7 @@ public class ApplicationView extends JFrame {
 		empresa = new JLabel(empresaTxt);
 
 		setdashBoardPanel();
-		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView ,complexView);
+		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView ,complexView,userPanel);
 		setApplicationPane();
 
 		setSize(1024, 720);
@@ -119,9 +122,10 @@ public class ApplicationView extends JFrame {
 	 * <b>Description</b> Set contentPanel A JPanel CardLayout with all views of
 	 * application
 	 */
-	private void setContentpanel(EmployeeView employeeView, CompanyView companyView,
-			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView, SendFileView sendFileView, ComplexView complexView) {
-
+//	private void setContentpanel(EmployeeView employeeView, CompanyView companyView,
+//			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView, SendFileView sendFileView, ComplexView complexView) {
+	private void setContentpanel(EmployerPanel employeeView, CompanyPanel companyView,
+			AirConditionerView airConditionerView, AccessConsultPanel consultAccessBuildingView, SendFileView sendFileView, ComplexView complexView,UserPanel userPanel) {
 		contentPanel.setLayout(new CardLayout());
 		blanckPane = new JPanel();
 		blanckPane.setBackground(new Color(255, 255, 255));
@@ -133,6 +137,7 @@ public class ApplicationView extends JFrame {
 		contentPanel.add(consultAccessBuildingView, accessKey);
 		contentPanel.add(sendFileView, sendKey);
 		contentPanel.add(complexView, complexKey);
+		contentPanel.add(userPanel, userKey);
 
 		contentPanel.setBackground(new Color(255, 255, 255));
 	}
@@ -151,11 +156,13 @@ public class ApplicationView extends JFrame {
 		cl.show(contentPanel, (String) namePanel);
 	}
 
-	public void updateLanguage(ResourceBundle bn, EmployeeView employeeView, CompanyView companyView,
-			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView,
-			SendFileView sendFileView,ComplexView complexView) {
-		// TODO Auto-generated method stub
-		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView ,complexView);
+//	public void updateLanguage(ResourceBundle bn, EmployeeView employeeView, CompanyView companyView,
+//			AirConditionerView airConditionerView, ConsultAccessBuildingView consultAccessBuildingView,
+//			SendFileView sendFileView,ComplexView complexView) {
+	public void updateLanguage(ResourceBundle bn, EmployerPanel employeeView, CompanyPanel companyView,
+			AirConditionerView airConditionerView, AccessConsultPanel consultAccessBuildingView,
+			SendFileView sendFileView,ComplexView complexView,UserPanel userPanel) {
+		setContentpanel(employeeView, companyView, airConditionerView, consultAccessBuildingView, sendFileView ,complexView,userPanel);
 	}
 
 }
