@@ -114,7 +114,7 @@ public class Menu extends JFrame {
 	 *  @return JComponent menu to users (users and employee)
 	 */
 	public JComponent menuUser(){
-		userMenu = new JMenu("usuario");
+		userMenu = new JMenu(bn.getString("usuario"));
 		userMenu.setMnemonic('o');
 
 		cadastrarMenuu = new JMenuItem(userKey);
@@ -128,17 +128,6 @@ public class Menu extends JFrame {
 			}
 
 		});
-//	 		
-//		// ====================== Cadastrar =======================
-//		JMenuItem consultaMenu = new JMenuItem("Consultar");
-//		empresaMenu.add(consultaMenu); 
-//		consultaMenu.setMnemonic('f');
-//		consultaMenu.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent event) {
-//				// TODO 
-//			}
-//
-//		});
 		userMenu.add(menuFuncionario());
 		return userMenu;
 	}
@@ -150,8 +139,6 @@ public class Menu extends JFrame {
 		funcionarioMenu = new JMenu(bn.getString("funcionario"));
 		funcionarioMenu.setMnemonic('o');
 
-		
-		// ======================== Consultar ========================
 		cadastrarMenu = new JMenuItem(employeeKey);
 		funcionarioMenu.add(cadastrarMenu);
 		cadastrarMenu.setMnemonic('e');
@@ -162,19 +149,7 @@ public class Menu extends JFrame {
 					ApplicationViewController.redrawContentPanel(employeeKey); 
 				}
 		
-		});
-//	 		
-//		// ====================== Cadastrar =======================
-//		JMenuItem consultaMenu = new JMenuItem("Consultar");
-//		funcionarioMenu.add(consultaMenu); 
-//		consultaMenu.setMnemonic('f');
-//		consultaMenu.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent event) {
-//				// TODO 
-//			}
-//
-//		});
-	 		
+		});	
 		return funcionarioMenu;
 	}
 	/*
@@ -195,17 +170,6 @@ public class Menu extends JFrame {
 			}
 
 		});
-//	 		
-//		// ====================== Cadastrar =======================
-//		JMenuItem consultaMenu = new JMenuItem("Consultar");
-//		empresaMenu.add(consultaMenu); 
-//		consultaMenu.setMnemonic('f');
-//		consultaMenu.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent event) {
-//				// TODO 
-//			}
-//
-//		});
 		return empresaMenu;
 	}
 	/*
@@ -226,17 +190,6 @@ public class Menu extends JFrame {
 			}
 
 		});
-//	 		
-//		// ====================== Cadastrar =======================
-//		JMenuItem consultaMenu = new JMenuItem("Consultar");
-//		empresaMenu.add(consultaMenu); 
-//		consultaMenu.setMnemonic('f');
-//		consultaMenu.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent event) {
-//				// TODO 
-//			}
-//
-//		});
 		return conjuntoMenu;
 	}
 
