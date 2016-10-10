@@ -3,13 +3,13 @@ Application project
 
 TODO list
 
-	Adjustments in views to fit the contentPane
+	Adjustments views
 	
 	Implement internationalization
 		
-	Implement custom components (CustomTextField and CustomButton)
-		
 	Implement layout management to level User
+	
+	Implement CRUD
 
 To run mvn exec:java -Dexec.mainClass="br.com.cco2anpi.Main"
 
