@@ -138,15 +138,6 @@ public class ComplexView extends JPanel {
 	}
 	
     }
-    private void updateRow() {
-	tableModel = (DefaultTableModel) this.dataTable.getModel();
-	
-	tableModel.setNumRows(0);
-	for (ComplexBuilding complexBuilding : ComplexBuildingClient.getAllBuildingSets().getBody()) {
-	    tableModel.addRow(new String[] { complexBuilding.getId().toString(), complexBuilding.getNumber() });
-	}
-	
-    }    
     
 
     // /**
@@ -253,13 +244,26 @@ public class ComplexView extends JPanel {
 
 	this.update.addActionListener(new ActionListener() {
 
-	    @Override
+	 
+
+		@Override
 
 	    public void actionPerformed(ActionEvent click) {
 
 		// JOptionPane.showMessageDialog(baseController.getAppFrame(),
 		// "OK");
-		
+			ComplexBuilding[] complex =ComplexBuildingClient.getAllBuildingSets().getBody();
+			tableModel = (DefaultTableModel) dataTable.getModel();
+			complex[dataTable.getSelectedRow()].setNumber(numberField.getText());
+			
+	    		
+	    		
+			 ComplexBuildingClient.update(complex[dataTable.getSelectedRow()]);
+	    		
+	    		tableModel.setNumRows(0);
+	    		for (ComplexBuilding complexBuilding : ComplexBuildingClient.getAllBuildingSets().getBody()) {
+	    		    tableModel.addRow(new String[] { complexBuilding.getId().toString(), complexBuilding.getNumber() });
+	    		}
 
 	    }
 	});
@@ -271,6 +275,18 @@ public class ComplexView extends JPanel {
 
 		// JOptionPane.showMessageDialog(baseController.getAppFrame(),
 		// "OK");
+	    	ComplexBuilding[] complex =ComplexBuildingClient.getAllBuildingSets().getBody();
+			tableModel = (DefaultTableModel) dataTable.getModel();
+			
+			
+	    		
+	    		
+			 ComplexBuildingClient.delete(complex[dataTable.getSelectedRow()]);
+	    		
+	    		tableModel.setNumRows(0);
+	    		for (ComplexBuilding complexBuilding : ComplexBuildingClient.getAllBuildingSets().getBody()) {
+	    		    tableModel.addRow(new String[] { complexBuilding.getId().toString(), complexBuilding.getNumber() });
+	    		}
 
 	    }
 	});
