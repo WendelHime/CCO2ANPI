@@ -18,9 +18,15 @@
     <resources>
      <resource>
        <directory>src/main/resources/languages</directory>
+		<includes>
+			<include>**/*.properties</include>
+		</includes>
      </resource>
      <resource>
        <directory>src/main/resources/images</directory>
+       <includes>
+			<include>**/*.png</include>
+		</includes>
      </resource>
    </resources>
   </build>

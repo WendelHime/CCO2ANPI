@@ -45,7 +45,7 @@ public class ApplicationViewController {
      * Constructor Set Components to ApplicationController
      */
     public ApplicationViewController() {
-    	System.out.println(""+ResourceBundle.getBundle("language", new Locale("en", "US")));
+    	System.out.println(""+ResourceBundle.getBundle("main.resources.languages.language", new Locale("en", "US")));
 	bn = ResourceBundle.getBundle("language", new Locale("en", "US"));
 
 	System.out.println("cheguei em ApplicationController!");

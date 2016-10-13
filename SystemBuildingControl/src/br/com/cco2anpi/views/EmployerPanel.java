@@ -99,7 +99,7 @@ public class EmployerPanel extends JPanel {
 		this.startHourField = new JTextField(10);
 		this.endHourLabel = new JLabel(bn.getString("ate"));
 		this.endHourField = new JTextField(10);
-		this.airLabel = new JLabel(bn.getString("altera_temperatura"));
+		this.airLabel = new JLabel(bn.getString("autorizacao_para_alterar_temperatura"));
 		this.yesLabel = new JLabel(bn.getString("sim"));
 		this.yesField = new JRadioButton();
 		this.noLabel = new JLabel(bn.getString("nao"));
@@ -463,7 +463,7 @@ public class EmployerPanel extends JPanel {
 		this.workHoursLabel.setText(bn.getString("horario_de_trabalho"));
 		this.startHourLabel.setText(bn.getString("de"));		
 		this.endHourLabel.setText(bn.getString("ate"));
-		this.airLabel.setText(bn.getString("altera_temperatura"));
+		this.airLabel.setText(bn.getString("autorizacao_para_alterar_temperatura"));
 		this.userNameLabel.setText(bn.getString("nome_usuario"));
 		this.passwordLabel.setText(bn.getString("senha"));
 		this.yesLabel.setText(bn.getString("sim"));

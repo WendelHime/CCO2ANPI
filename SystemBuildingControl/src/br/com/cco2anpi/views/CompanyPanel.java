@@ -100,7 +100,7 @@ public class CompanyPanel extends JPanel {
 		this.endHourLabel = new JLabel(bn.getString("ate"));
 		this.endHourField = new JTextField(10);
 		this.airLabel = new JLabel(bn.getString("ar_condicionado"));
-		this.temperatureLabel = new JLabel(bn.getString("temperatura_max"));
+		this.temperatureLabel = new JLabel(bn.getString("temperatura_maxima"));
 		this.temperatureField = new JTextField(10);
 		this.airHoursLabel = new JLabel(bn.getString("horario_de_funcionamento"));
 		this.startAirLabel = new JLabel(bn.getString("de"));
@@ -512,7 +512,7 @@ public class CompanyPanel extends JPanel {
 		this.startHourLabel.setText(bn.getString("de"));		
 		this.endHourLabel.setText(bn.getString("ate"));
 		this.airLabel.setText(bn.getString("ar_condicionado"));
-		this.temperatureLabel.setText(bn.getString("temperatura_max"));		
+		this.temperatureLabel.setText(bn.getString("temperatura_maxima"));		
 		this.airHoursLabel.setText(bn.getString("horario_de_funcionamento"));
 		this.startAirLabel.setText(bn.getString("de"));
 		this.endAirLabel.setText(bn.getString("ate"));

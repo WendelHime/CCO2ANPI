@@ -51,7 +51,7 @@ public class Menu extends JFrame {
 	public Menu() {
 //		File currentDirFile = new File("");
 //		String helper = currentDirFile.getAbsolutePath();
-		bn = ResourceBundle.getBundle("language", new Locale("pt", "BR"));
+		bn = ResourceBundle.getBundle("main.resources.languages.language", new Locale("en", "US"));
 		barraMenu();
 	}
 	
@@ -266,14 +266,14 @@ public class Menu extends JFrame {
 
 	public void updateLanguage(ResourceBundle bn2) {
 		// TODO para tratar eventos dos menus de idiomas
-		/* 
+		
 		espanishItem.addActionListener( 
 		         new ActionListener() // classe interna anonima 
 		         { 
 		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
 		            public void actionPerformed( ActionEvent event ) 
 		            { 
-		               bn = ResourceBundle.getBundle("language", new Locale("es", "ESP"));
+		               bn = ResourceBundle.getBundle("main.resources.languages.language", new Locale("es", "ESP"));
 		       			System.out.println("es");
 
 //		               displayJLabel.setText( bn.getString("mensagem"));
@@ -299,6 +299,72 @@ public class Menu extends JFrame {
 		               
 		            } 
 		         }  
-		      ); */
+		      );
+		espanishItem.addActionListener( 
+		         new ActionListener() // classe interna anonima 
+		         { 
+		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
+		            public void actionPerformed( ActionEvent event ) 
+		            { 
+		               bn = ResourceBundle.getBundle("main.resources.languages.language", new Locale("en", "USA"));
+		       			System.out.println("en");
+
+//		               displayJLabel.setText( bn.getString("mensagem"));
+//		               setTitle(bn.getString("titulo"));
+		               arquivoMenu.setText(bn.getString("arquivo"));
+//		               fileMenu.setMnemonic(bn.getString("arquivo.mnemonico").charAt(0)); 
+		               sobreMenuItem.setText(bn.getString("sobre"));
+//		               aboutItem.setMnemonic(bn.getString("sobre.mnemonico").charAt(0));
+		               idiomaMenuItem.setText(bn.getString("idioma"));
+		               portugueseItem.setText(bn.getString("portugues"));
+		               englishItem.setText(bn.getString("ingles"));
+		               espanishItem.setText(bn.getString("espanhol"));
+		               sairMenuItem.setText(bn.getString("sair"));
+//		               exitItem.setMnemonic(bn.getString("sair.mnemonico").charAt(0));
+		               funcionarioMenu.setText(bn.getString("funcionario"));
+		               empresaMenu.setText(bn.getString("empresa"));
+		               arCondicionadoMenu.setText(bn.getString("ar_condicionado"));
+		               arCondicionadoMenuAlt.setText(bn.getString("temperatura"));
+		               acessoMenu.setText(bn.getString("acesso"));
+		               consultarMenu.setText(bn.getString("consulta_acesso"));
+		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
+		               ApplicationViewController.applicationViewController(bn);
+		               
+		            } 
+		         }  
+		      );
+		portugueseItem.addActionListener( 
+		         new ActionListener() // classe interna anonima 
+		         { 
+		            // exibe um dialogo de mensagem quando o usuario seleciona Portuguese 
+		            public void actionPerformed( ActionEvent event ) 
+		            { 
+		               bn = ResourceBundle.getBundle("main.resources.languages.language", new Locale("pt", "BR"));
+		       			System.out.println("br");
+
+//		               displayJLabel.setText( bn.getString("mensagem"));
+//		               setTitle(bn.getString("titulo"));
+		               arquivoMenu.setText(bn.getString("arquivo"));
+//		               fileMenu.setMnemonic(bn.getString("arquivo.mnemonico").charAt(0)); 
+		               sobreMenuItem.setText(bn.getString("sobre"));
+//		               aboutItem.setMnemonic(bn.getString("sobre.mnemonico").charAt(0));
+		               idiomaMenuItem.setText(bn.getString("idioma"));
+		               portugueseItem.setText(bn.getString("portugues"));
+		               englishItem.setText(bn.getString("ingles"));
+		               espanishItem.setText(bn.getString("espanhol"));
+		               sairMenuItem.setText(bn.getString("sair"));
+//		               exitItem.setMnemonic(bn.getString("sair.mnemonico").charAt(0));
+		               funcionarioMenu.setText(bn.getString("funcionario"));
+		               empresaMenu.setText(bn.getString("empresa"));
+		               arCondicionadoMenu.setText(bn.getString("ar_condicionado"));
+		               arCondicionadoMenuAlt.setText(bn.getString("temperatura"));
+		               acessoMenu.setText(bn.getString("acesso"));
+		               consultarMenu.setText(bn.getString("consulta_acesso"));
+		               enviaraMenu.setText(bn.getString("enviar_arquivo"));
+		               ApplicationViewController.applicationViewController(bn);
+		               
+		            } 
+		         }  
+		      );
 	}
 }

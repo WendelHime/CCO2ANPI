@@ -164,8 +164,8 @@ public class UserPanel extends JPanel {
 
 		scrollTablePanel = new JPanel(new BorderLayout());
 		scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
-		scrollTablePanel.setPreferredSize(new Dimension(600, 150));
-		scrollTablePanel.setSize(new Dimension(600, 100));
+//		scrollTablePanel.setPreferredSize(new Dimension(600, 150));
+//		scrollTablePanel.setSize(new Dimension(600, 100));
 	}
 
 	private void fillTable() {
