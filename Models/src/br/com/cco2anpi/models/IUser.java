@@ -16,7 +16,7 @@ public interface IUser {
 	void setSalt(String salt);
 	void setName(String name);
 	void setCpf(String cpf);
-	void setOfficeHours(Integer officeHours);
+	void setOfficeHours(String officeHours);
 	void setAccess(Set<IAccess> access);
 	Integer getId();
 	String getUsername();
@@ -24,6 +24,6 @@ public interface IUser {
 	String getSalt();
 	String getName();
 	String getCpf();
-	Integer getOfficeHours();
+	String getOfficeHours();
 	Set<IAccess> getAccess();
 }

@@ -39,7 +39,7 @@ public class ComplexView extends JPanel {
     private GridBagConstraints gbc = new GridBagConstraints();
     private DefaultTableModel tableModel;
     // private AppController baseController;
-
+    
     /**
      * Constructor of panel to ComplexBuilding's CRUD
      * 
@@ -49,11 +49,11 @@ public class ComplexView extends JPanel {
 
 	setLayout(new GridBagLayout());
 	// this.baseController = baseController;
-	this.create = new JButton("criar");
-	this.update = new JButton("atualizar");
-	this.delete = new JButton("excluir");
-	this.clear = new JButton("limpar");
-	this.numberLabel = new JLabel("numero do conjunto");
+	this.create = new JButton(bn.getString("cadastrar"));
+	this.update = new JButton(bn.getString("alterar"));
+	this.delete = new JButton(bn.getString("excluir"));
+	this.clear = new JButton(bn.getString("limpar"));
+	this.numberLabel = new JLabel(bn.getString("numero_conjunto"));
 	this.numberField = new JTextField(20);
 
 	setDataTable();
@@ -108,26 +108,23 @@ public class ComplexView extends JPanel {
      */
     @SuppressWarnings("serial")
     private void setDataTable() {
-	// this.dataModel = getDataModel();
+		// this.dataModel = getDataModel();
+		
+		this.dataTable = new JTable(new DefaultTableModel(new Object[][] {}, new String[] { "Id", "Numero" }) {
+			    boolean[] canEdit = new boolean[] { false, false };
+			    public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			    }
+			});
+		
+		fillTable();
 	
-	this.dataTable = new JTable(new DefaultTableModel(new Object[][] {
-
-	}, new String[] { "Id", "Numero" }) {
-	    boolean[] canEdit = new boolean[] { false, false };
-
-	    public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return canEdit[columnIndex];
-	    }
-	});
+		this.scrollpane = new JScrollPane(dataTable);
 	
-	fillTable();
-
-	this.scrollpane = new JScrollPane(dataTable);
-
-	scrollTablePanel = new JPanel(new BorderLayout());
-	scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
-	scrollTablePanel.setPreferredSize(new Dimension(600, 150));
-	scrollTablePanel.setSize(new Dimension(600, 100));
+		scrollTablePanel = new JPanel(new BorderLayout());
+		scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
+		scrollTablePanel.setPreferredSize(new Dimension(600, 150));
+		scrollTablePanel.setSize(new Dimension(600, 100));
     }
 
     private void fillTable() {
@@ -244,8 +241,6 @@ public class ComplexView extends JPanel {
 
 	this.update.addActionListener(new ActionListener() {
 
-	 
-
 		@Override
 
 	    public void actionPerformed(ActionEvent click) {
@@ -302,4 +297,12 @@ public class ComplexView extends JPanel {
 	    }
 	});
     }
+    public void updateLanguage(ResourceBundle bn) {
+		// TODO Auto-generated method stub
+		this.create.setText(bn.getString("cadastrar"));
+		this.update.setText(bn.getString("alterar"));
+		this.delete.setText(bn.getString("excluir"));
+		this.clear.setText(bn.getString("limpar"));
+		this.numberLabel.setText(bn.getString("numero_conjunto"));		
+	}
 }

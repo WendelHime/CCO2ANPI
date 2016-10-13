@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -20,8 +21,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import br.com.cco2anpi.clients.AccessClient;
+import br.com.cco2anpi.clients.ComplexBuildingClient;
+import br.com.cco2anpi.models.Access;
+import br.com.cco2anpi.models.ComplexBuilding;
 import br.com.cco2anpi.views.shared.DatePick;
 
 //import controll.AppController;
@@ -32,16 +38,20 @@ import br.com.cco2anpi.views.shared.DatePick;
  */
 public class AccessConsultPanel extends JPanel {
 	private JLabel nameLabel;
+	private JLabel startLabel;
+	private JLabel endLabel;
 	private JTextField nameField;
 	private TableModel dataModel;
 	private JTable dataTable;
 	private JScrollPane scrollpane;
+    private DefaultTableModel tableModel;
+
 	private JButton read;
 	private JButton clear;
 	
 	private JComboBox type;
-	private String types[]=	 { "empresa", "atendente", "sindico" };
-	
+	private String types[]=	 new String[3];
+	private String coluns[] = new String[5];
 	private JPanel buttonsPanel;
 	private JPanel fieldsPanel;
 	private JPanel scrollTablePanel;
@@ -57,11 +67,22 @@ public class AccessConsultPanel extends JPanel {
 		this.bn = bn;
 		setLayout(new GridBagLayout());
 //		this.baseController = baseController;
-		this.read = new JButton("consultar");
-		this.clear = new JButton("limpar");
-		this.nameLabel = new JLabel("nome");
+		this.read = new JButton(bn.getString("consultar"));
+		this.clear = new JButton(bn.getString("limpar"));
+		this.nameLabel = new JLabel(bn.getString("nome"));
+		this.startLabel = new JLabel(bn.getString("de"));
+		this.endLabel = new JLabel(bn.getString("ate"));
 		this.nameField = new JTextField(30);
 		
+		this.types[0] = "empresa";
+		this.types[1] = "atendente";
+		this.types[2] = "sindico";
+		
+		this.coluns[0] = "id";
+		this.coluns[1] = "date_in";
+		this.coluns[2] = "date_out";
+		this.coluns[3] = "date_out";
+		this.coluns[4] = "user_id";
 		
 		this.type = new JComboBox();
 		
@@ -72,8 +93,6 @@ public class AccessConsultPanel extends JPanel {
 		setDataTable();
 		setFieldsPanel();
 		setButtonsPanel();
-
-	
 
 		// JFields
 		gbc.gridx = 0;
@@ -116,40 +135,39 @@ public class AccessConsultPanel extends JPanel {
 		return scrollTablePanel;
 	}
 
-	/**
-	 * @param dataTable
-	 *            the dataTable to set
-	 */
-	private void setDataTable() {
-		this.dataModel = getDataModel();
-		this.dataTable = new JTable(dataModel);
+	 /**
+     * @param dataTable
+     *            the dataTable to set
+     */
+    @SuppressWarnings("serial")
+    private void setDataTable() {
+		// this.dataModel = getDataModel();
+		
+		this.dataTable = new JTable(new DefaultTableModel(new Object[][] {}, new String[] { coluns[0], coluns[1], coluns[2], coluns[3],coluns[4] }) {
+			    boolean[] canEdit = new boolean[] { false, false,false, false,false };
+			    public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			    }
+			});
+		
+		fillTable();
+	
 		this.scrollpane = new JScrollPane(dataTable);
-
+	
 		scrollTablePanel = new JPanel(new BorderLayout());
 		scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
 		scrollTablePanel.setPreferredSize(new Dimension(600, 150));
 		scrollTablePanel.setSize(new Dimension(600, 100));
+    }
+
+    private void fillTable() {
+	tableModel = (DefaultTableModel) this.dataTable.getModel();
+	tableModel.setNumRows(0);
+	for (Access access : AccessClient.getAllAccess().getBody()) {
+	    tableModel.addRow(new String[] { access.getId().toString(), access.getDateIn().toString(), access.getDateOut().toString(),access.getUser().getId().toString() });
 	}
-
-	/**
-	 * 
-	 * @return the dataModel
-	 */
-	private TableModel getDataModel() {
-		return new AbstractTableModel() {
-			public int getColumnCount() {
-				return 10;
-			}
-
-			public int getRowCount() {
-				return 10;
-			}
-
-			public Object getValueAt(int row, int col) {
-				return new Integer(row * col);
-			}
-		};
-	}
+	
+    }
 
 	/**
 	 * @return the buttonsLayout
@@ -217,36 +235,39 @@ public class AccessConsultPanel extends JPanel {
 		
 	}
 
-	/**
-	 * setup Listeners to all buttons
-	 */
-	public void setupListeners() {
-		
-		this.read.addActionListener(new ActionListener() {
+    /**
+     * setup Listeners to all buttons
+     */
+    public void setupListeners() {
 
-			@Override
+	this.read.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent click) {
+		@Override
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
+	    public void actionPerformed(ActionEvent click) {
 
-			}
-		});
-		
-		this.clear.addActionListener(new ActionListener() {
+		// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+		// "OK");
+			//TODO
+	}});
+	this.clear.addActionListener(new ActionListener() {
 
-			@Override
+	    @Override
 
-			public void actionPerformed(ActionEvent click) {
+	    public void actionPerformed(ActionEvent click) {
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
-
-			}
-		});
-	}
-
+		// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+		// "OK");
+		tableModel.setNumRows(0);
+	    }
+	});
+    }
 	public void updateLanguage(ResourceBundle bn2) {
 		// TODO Auto-generated method stub
-		
+		this.nameLabel.setText(bn.getString("nome"));
+		this.startLabel.setText(bn.getString("de"));
+		this.endLabel.setText(bn.getString("ate"));
+		this.read.setText(bn.getString("consultar"));
+		this.clear.setText(bn.getString("limpar"));
 	}
 }

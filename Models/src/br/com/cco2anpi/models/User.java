@@ -18,7 +18,7 @@ public class User implements IUser {
     protected String salt;
     protected String name;
     protected String cpf;
-    protected Integer officeHours;
+    protected String officeHours;
     protected Set<Access> access = new HashSet<>(0);
 
     public User() {
@@ -134,7 +134,7 @@ public class User implements IUser {
     /**
      * @return the officeHours
      */
-    public Integer getOfficeHours() {
+    public String getOfficeHours() {
 	return officeHours;
     }
 
@@ -142,7 +142,7 @@ public class User implements IUser {
      * @param officeHours
      *            the officeHours to set
      */
-    public void setOfficeHours(Integer officeHours) {
+    public void setOfficeHours(String officeHours) {
 	this.officeHours = officeHours;
     }
 
@@ -163,5 +163,6 @@ public class User implements IUser {
 	    this.access.add((Access) iterator.next());
 	}
     }
+
 
 }

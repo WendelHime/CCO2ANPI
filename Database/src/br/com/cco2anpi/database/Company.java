@@ -41,11 +41,11 @@ public class Company implements Serializable, ICompany {
     @Column(name = "social_reason")
     private String socialReason;
     @Column(name = "business_hours")
-    private Integer businessHours;
+    private String businessHours;
     @Column(name = "maximum_temperature")
     private Double maximumTemperature;
     @Column(name = "airconditioner_hours")
-    private Integer airconditionerHours;
+    private String airconditionerHours;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_complex_id", nullable = false)
     private ComplexBuilding complexBuilding;
@@ -118,7 +118,7 @@ public class Company implements Serializable, ICompany {
     /**
      * @return the businessHour
      */
-    public Integer getBusinessHours() {
+    public String getBusinessHours() {
 	return businessHours;
     }
 
@@ -126,7 +126,7 @@ public class Company implements Serializable, ICompany {
      * @param businessHour
      *            the businessHour to set
      */
-    public void setBusinessHours(Integer businessHours) {
+    public void setBusinessHours(String businessHours) {
 	this.businessHours = businessHours;
     }
 
@@ -148,7 +148,7 @@ public class Company implements Serializable, ICompany {
     /**
      * @return the businessHour
      */
-    public Integer getAirConditionerHours() {
+    public String getAirConditionerHours() {
 	return airconditionerHours;
     }
 
@@ -156,7 +156,7 @@ public class Company implements Serializable, ICompany {
      * @param businessHour
      *            the businessHour to set
      */
-    public void setAirConditionerHours(Integer airconditionerHours) {
+    public void setAirConditionerHours(String airconditionerHours) {
 	this.airconditionerHours = airconditionerHours;
     }
     /**

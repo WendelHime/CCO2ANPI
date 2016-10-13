@@ -60,4 +60,13 @@ public class ComplexBuildingClient {
 	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/ComplexBuilding/getAllBuildingSets.json",
 		ComplexBuilding[].class);
     }
+    /**
+     * Method used to get one building set
+     * 
+     * @return return one building set
+     */
+    public static ResponseEntity<ComplexBuilding> getComplexBuilding(ComplexBuilding complexBuilding) {
+	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/ComplexBuilding/getComplexBuilding.json",
+		ComplexBuilding.class);
+    }
 }

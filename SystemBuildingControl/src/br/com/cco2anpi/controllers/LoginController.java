@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
@@ -40,7 +42,10 @@ public class LoginController implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == this.loginView.getLoginButton()) {
+		if (e.getSource() == this.loginView.getLoginButton())
+		{
+	    	System.out.println(""+ResourceBundle.getBundle("main.resources.languages.language", new Locale("en", "US")));
+
 			System.out.println("cheguei em LoginController");
 			Path currentRelativePath = Paths.get("");
 			String s = currentRelativePath.toAbsolutePath().toString();

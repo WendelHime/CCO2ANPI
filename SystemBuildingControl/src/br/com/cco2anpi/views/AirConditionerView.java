@@ -165,14 +165,11 @@ public class AirConditionerView extends JPanel {
 	}
 
 	public void updateLanguage(ResourceBundle bn) {
-		
+	
 		lblTitle.setText(bn.getString("temperatura"));
 		lblDescription.setText(bn.getString("nova_configuracao"));
-
 		lblTemperature.setText(bn.getString("temperatura_maxima"));
-
 		lblWorkingHours.setText(bn.getString("horario_de_funcionamento"));
-
 		sendButton.setText(bn.getString("enviar"));
 	}
 }

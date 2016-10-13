@@ -38,7 +38,7 @@ public class ApplicationView extends JFrame {
     File currentDirFile = new File("");
     String helper = currentDirFile.getAbsolutePath();
 
-    private String imgLocation = helper + "\\src\\main\\resources\\images\\image-placeholder.png";
+    private String imgLocation = helper + "main\\resources\\images\\image-placeholder.png";
 
     public static String employeeKey = "ecadastro/econsulta";
     public static String companyKey = "ccadastro/cconsulta";

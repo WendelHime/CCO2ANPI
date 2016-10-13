@@ -15,11 +15,11 @@ public interface ICompany {
 
     void setSocialReason(String socialReason);
 
-    void setBusinessHours(Integer businessHours);
+    void setBusinessHours(String businessHours);
 
     void setMaximumTemperature(Double maximumTemperature);
     
-    void setAirConditionerHours(Integer businessHours);
+    void setAirConditionerHours(String businessHours);
 
     void setComplexBuilding(IComplexBuilding complexBuilding);
 
@@ -31,11 +31,11 @@ public interface ICompany {
 
     String getSocialReason();
 
-    Integer getBusinessHours();
+    String getBusinessHours();
 
     Double getMaximumTemperature();
     
-    Integer getAirConditionerHours();
+    String getAirConditionerHours();
     
     IComplexBuilding getComplexBuilding();
 

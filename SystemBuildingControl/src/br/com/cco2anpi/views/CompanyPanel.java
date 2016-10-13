@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -19,7 +20,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import br.com.cco2anpi.clients.CompanyClient;
+import br.com.cco2anpi.clients.ComplexBuildingClient;
+import br.com.cco2anpi.models.Company;
+import br.com.cco2anpi.models.ComplexBuilding;
+import br.com.cco2anpi.models.IComplexBuilding;
 
 //import controll.AppController;
 
@@ -47,22 +55,25 @@ public class CompanyPanel extends JPanel {
 	private JTextField startAirField;
 	private JLabel endAirLabel;
 	private JTextField endAirField;
-	
+
 	private TableModel dataModel;
 	private JTable dataTable;
 	private JScrollPane scrollpane;
-	
+	private DefaultTableModel tableModel;
+
 	private JButton create;
 	private JButton update;
 	private JButton delete;
 	private JButton clear;
 	
+	private String[] coluns = new String[7];
+
 	private JPanel scrollTablePanel;
 	private JPanel fieldsPanel;
 	private JPanel buttonsPanel;
-		
+	private	ResourceBundle bn;
 	private GridBagConstraints gbc = new GridBagConstraints();
-//	private AppController baseController;
+	// private AppController baseController;
 
 	/**
 	 * Constructor of panel to ComplexBuilding's CRUD
@@ -70,33 +81,42 @@ public class CompanyPanel extends JPanel {
 	 * @return
 	 */
 	public CompanyPanel(ResourceBundle bn) {
-
+		this.bn = bn;
 		setLayout(new GridBagLayout());
-//		this.baseController = baseController;
-		this.create = new JButton("criar");
-		this.update = new JButton("atualizar");
-		this.delete = new JButton("excluir");
-		this.clear = new JButton("limpar");
-		this.nameLabel = new JLabel("razao_social");
+		// this.baseController = baseController;
+		this.create = new JButton(bn.getString("cadastrar"));
+		this.update = new JButton(bn.getString("alterar"));
+		this.delete = new JButton(bn.getString("excluir"));
+		this.clear = new JButton(bn.getString("limpar"));
+		this.nameLabel = new JLabel(bn.getString("razao_social"));
 		this.nameField = new JTextField(20);
-		this.cnpjLabel = new JLabel("cnpj");
+		this.cnpjLabel = new JLabel(bn.getString("cnpj"));
 		this.cnpjField = new JTextField(20);
-		this.comlpexBuildingLabel = new JLabel("conjunto_sitiado");
+		this.comlpexBuildingLabel = new JLabel(bn.getString("conjunto_sitiado"));
 		this.comlpexBuildingField = new JTextField(20);
-		this.workHoursLabel = new JLabel("horario_de_funcionamento");
-		this.startHourLabel = new JLabel("de");
+		this.workHoursLabel = new JLabel(bn.getString("horario_de_funcionamento"));
+		this.startHourLabel = new JLabel(bn.getString("de"));
 		this.startHourField = new JTextField(10);
-		this.endHourLabel = new JLabel("ate");
+		this.endHourLabel = new JLabel(bn.getString("ate"));
 		this.endHourField = new JTextField(10);
-		this.airLabel = new JLabel("ar_condicionado");
-		this.temperatureLabel = new JLabel("temperatura_max");
+		this.airLabel = new JLabel(bn.getString("ar_condicionado"));
+		this.temperatureLabel = new JLabel(bn.getString("temperatura_max"));
 		this.temperatureField = new JTextField(10);
-		this.airHoursLabel = new JLabel("horario_de_funcionamento");
-		this.startAirLabel = new JLabel("de");
+		this.airHoursLabel = new JLabel(bn.getString("horario_de_funcionamento"));
+		this.startAirLabel = new JLabel(bn.getString("de"));
 		this.startAirField = new JTextField(10);
-		this.endAirLabel = new JLabel("ate");
+		this.endAirLabel = new JLabel(bn.getString("ate"));
 		this.endAirField = new JTextField(10);
-				
+
+		this.coluns[0]="Id";
+		this.coluns[1]="CNPJ";
+		this.coluns[2]="Social";
+		this.coluns[3]="Conjunto";
+		this.coluns[4]="horario_de_funcionamento";
+		this.coluns[5]="Temperatura";
+		this.coluns[6]="Horario_Ar-Cond";
+		
+		
 		setDataTable();
 		setFieldsPanel();
 		setButtonsPanel();
@@ -125,7 +145,7 @@ public class CompanyPanel extends JPanel {
 
 		// Listeners
 		setupListeners();
-		setBackground(new Color(255,255, 255));
+		setBackground(new Color(255, 255, 255));
 	}
 
 	/**
@@ -146,15 +166,38 @@ public class CompanyPanel extends JPanel {
 	 * @param dataTable
 	 *            the dataTable to set
 	 */
+	@SuppressWarnings("serial")
 	private void setDataTable() {
-		this.dataModel = getDataModel();
-		this.dataTable = new JTable(dataModel);
+		// this.dataModel = getDataModel();
+
+		this.dataTable = new JTable(new DefaultTableModel(new Object[][] {}, coluns) {
+			boolean[] canEdit = new boolean[] { false, false, false, false, false, false, false };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+
+		fillTable();
+
 		this.scrollpane = new JScrollPane(dataTable);
 
 		scrollTablePanel = new JPanel(new BorderLayout());
 		scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
 		scrollTablePanel.setPreferredSize(new Dimension(600, 150));
 		scrollTablePanel.setSize(new Dimension(600, 100));
+	}
+
+	private void fillTable() {
+		tableModel = (DefaultTableModel) this.dataTable.getModel();
+		tableModel.setNumRows(0);
+		for (Company company : CompanyClient.getAllCompanies().getBody()) {
+			tableModel.addRow(new String[] { company.getId().toString(), company.getCnpj().toString(),
+					company.getSocialReason().toString(), company.getComplexBuilding().toString(),
+					company.getBusinessHours().toString(), company.getMaximumTemperature().toString(),
+					company.getAirConditionerHours().toString() });
+		}
+
 	}
 
 	/**
@@ -210,37 +253,35 @@ public class CompanyPanel extends JPanel {
 	private void setFieldsPanel() {
 
 		this.fieldsPanel = new JPanel(new GridBagLayout());
-		
-		
-		
+
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(nameLabel, gbc);
-		
+
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(nameField, gbc);
-		
+
 		gbc.insets = new Insets(10, 0, 0, 0);
-		
+
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(cnpjLabel, gbc);
-		
+
 		gbc.insets = new Insets(0, 0, 0, 0);
-		
+
 		gbc.gridx = 0;
 		gbc.gridy = 3;
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(cnpjField, gbc);
-		
+
 		gbc.insets = new Insets(10, 0, 0, 0);
 
 		gbc.gridx = 0;
@@ -248,7 +289,7 @@ public class CompanyPanel extends JPanel {
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(comlpexBuildingLabel, gbc);
-		
+
 		gbc.insets = new Insets(0, 0, 0, 0);
 
 		gbc.gridx = 0;
@@ -258,22 +299,21 @@ public class CompanyPanel extends JPanel {
 		this.fieldsPanel.add(comlpexBuildingField, gbc);
 
 		gbc.insets = new Insets(10, 0, 0, 0);
-		
+
 		gbc.gridx = 1;
 		gbc.gridy = 6;
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(workHoursLabel, gbc);
 
-
 		gbc.gridx = 0;
 		gbc.gridy = 7;
 		gbc.gridwidth = 2;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(startHourLabel, gbc);
-		
+
 		gbc.insets = new Insets(0, 0, 0, 0);
-		
+
 		gbc.gridx = 0;
 		gbc.gridy = 8;
 		gbc.gridwidth = 2;
@@ -281,7 +321,7 @@ public class CompanyPanel extends JPanel {
 		this.fieldsPanel.add(startHourField, gbc);
 
 		gbc.insets = new Insets(10, 0, 0, 0);
-		
+
 		gbc.gridx = 2;
 		gbc.gridy = 7;
 		gbc.gridwidth = 3;
@@ -297,13 +337,13 @@ public class CompanyPanel extends JPanel {
 		this.fieldsPanel.add(endHourField, gbc);
 
 		gbc.insets = new Insets(0, 105, 0, 0);
-		
+
 		gbc.gridx = 4;
 		gbc.gridy = 0;
-		
+
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(airLabel, gbc);
-		
+
 		gbc.insets = new Insets(10, 40, 0, 0);
 
 		gbc.gridx = 4;
@@ -311,23 +351,23 @@ public class CompanyPanel extends JPanel {
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(temperatureLabel, gbc);
-		
+
 		gbc.insets = new Insets(0, 40, 0, 0);
-		
+
 		gbc.gridx = 4;
 		gbc.gridy = 3;
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(temperatureField, gbc);
-		
+
 		gbc.insets = new Insets(10, 40, 0, 0);
-		
+
 		gbc.gridx = 4;
 		gbc.gridy = 6;
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.fieldsPanel.add(airHoursLabel, gbc);	
-		
+		this.fieldsPanel.add(airHoursLabel, gbc);
+
 		gbc.gridx = 4;
 		gbc.gridy = 7;
 		gbc.gridwidth = 2;
@@ -335,30 +375,29 @@ public class CompanyPanel extends JPanel {
 		this.fieldsPanel.add(startAirLabel, gbc);
 
 		gbc.insets = new Insets(0, 40, 0, 0);
-		
+
 		gbc.gridx = 4;
 		gbc.gridy = 8;
 		gbc.gridwidth = 2;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(startAirField, gbc);
-		
+
 		gbc.insets = new Insets(10, 0, 0, 0);
-		
+
 		gbc.gridx = 6;
 		gbc.gridy = 7;
 		gbc.gridwidth = 2;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(endAirLabel, gbc);
-		
+
 		gbc.insets = new Insets(0, 0, 0, 0);
-		
+
 		gbc.gridx = 6;
 		gbc.gridy = 8;
 		gbc.gridwidth = 1;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(endAirField, gbc);
 
-		
 	}
 
 	/**
@@ -372,8 +411,21 @@ public class CompanyPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent click) {
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
-
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				Company company = new Company();
+				company.setCnpj(cnpjField.getText());
+				company.setSocialReason(nameField.getText());
+				ComplexBuilding complexBuilding = new ComplexBuilding();
+				complexBuilding.setNumber(comlpexBuildingField.getText());
+				company.setComplexBuilding(
+						(IComplexBuilding) ComplexBuildingClient.getComplexBuilding(complexBuilding));
+				company.setBusinessHours(startHourField.getText() + "-" + endHourField.getText());
+				company.setMaximumTemperature(Double.parseDouble(temperatureField.getText()));
+				company.setAirConditionerHours(startAirField.getText() + "-" + endAirField.getText());
+				company.setEmployers(new HashSet<>(0));
+				CompanyClient.insert(company);
+				fillTable();
 			}
 		});
 
@@ -383,7 +435,31 @@ public class CompanyPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent click) {
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				Company[] companies = CompanyClient.getAllCompanies().getBody();
+				tableModel = (DefaultTableModel) dataTable.getModel();
+				companies[dataTable.getSelectedRow()].setCnpj(cnpjField.getText());
+				companies[dataTable.getSelectedRow()].setSocialReason(nameField.getText());
+				ComplexBuilding complexBuilding = new ComplexBuilding();
+				complexBuilding.setNumber(comlpexBuildingField.getText());
+				companies[dataTable.getSelectedRow()].setComplexBuilding(
+						(IComplexBuilding) ComplexBuildingClient.getComplexBuilding(complexBuilding));
+				companies[dataTable.getSelectedRow()]
+						.setBusinessHours(startHourField.getText() + "-" + endHourField.getText());
+				companies[dataTable.getSelectedRow()]
+						.setMaximumTemperature(Double.parseDouble(temperatureField.getText()));
+				companies[dataTable.getSelectedRow()]
+						.setAirConditionerHours(startAirField.getText() + "-" + endAirField.getText());
+
+				CompanyClient.update(companies[dataTable.getSelectedRow()]);
+
+				tableModel.setNumRows(0);
+				for (Company company : CompanyClient.getAllCompanies().getBody()) {
+					tableModel.addRow(new String[] { company.getId().toString(), company.getCnpj(), company.getSocialReason(),
+													 company.getComplexBuilding().getNumber(),company.getBusinessHours(),
+													 company.getMaximumTemperature().toString(), company.getAirConditionerHours() });
+				}
 
 			}
 		});
@@ -393,7 +469,20 @@ public class CompanyPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent click) {
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				Company[] companies = CompanyClient.getAllCompanies().getBody();
+				tableModel = (DefaultTableModel) dataTable.getModel();
+
+				CompanyClient.delete(companies[dataTable.getSelectedRow()]);
+
+				tableModel.setNumRows(0);
+				for (Company company : CompanyClient.getAllCompanies().getBody()) {
+					tableModel.addRow(
+							new String[] { company.getId().toString(), company.getCnpj(), company.getSocialReason(),
+										   company.getComplexBuilding().getNumber(), company.getBusinessHours(),
+										   company.getMaximumTemperature().toString(), company.getAirConditionerHours() });
+				}
 
 			}
 		});
@@ -403,14 +492,30 @@ public class CompanyPanel extends JPanel {
 
 			public void actionPerformed(ActionEvent click) {
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
-
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				tableModel.setNumRows(0);
 			}
 		});
 	}
 
 	public void updateLanguage(ResourceBundle bn) {
 		// TODO Auto-generated method stub
+		this.create.setText(bn.getString("cadastrar"));
+		this.update.setText(bn.getString("alterar"));
+		this.delete.setText(bn.getString("excluir"));
+		this.clear.setText(bn.getString("limpar"));
+		this.nameLabel.setText(bn.getString("razao_social"));		
+		this.cnpjLabel.setText(bn.getString("cnpj"));		
+		this.comlpexBuildingLabel.setText(bn.getString("conjunto_sitiado"));
+		this.workHoursLabel.setText(bn.getString("horario_de_funcionamento"));
+		this.startHourLabel.setText(bn.getString("de"));		
+		this.endHourLabel.setText(bn.getString("ate"));
+		this.airLabel.setText(bn.getString("ar_condicionado"));
+		this.temperatureLabel.setText(bn.getString("temperatura_max"));		
+		this.airHoursLabel.setText(bn.getString("horario_de_funcionamento"));
+		this.startAirLabel.setText(bn.getString("de"));
+		this.endAirLabel.setText(bn.getString("ate"));
 		
 	}
 }

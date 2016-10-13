@@ -35,7 +35,7 @@ public class Employer extends User implements Serializable, IEmployer {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
     @Column(name = "access_hour")
-    private Integer accessHour;
+    private String accessHour;
     @Type(type = "org.hibernate.type.NumericBooleanType")
     @Column(name = "permission_temperature", columnDefinition = "TINYINT")
     private Boolean permissionTemperature;
@@ -71,7 +71,7 @@ public class Employer extends User implements Serializable, IEmployer {
     /**
      * @return the accessHour
      */
-    public Integer getAccessHour() {
+    public String getAccessHour() {
 	return accessHour;
     }
 
@@ -79,7 +79,7 @@ public class Employer extends User implements Serializable, IEmployer {
      * @param accessHour
      *            the accessHour to set
      */
-    public void setAccessHour(Integer accessHour) {
+    public void setAccessHour(String accessHour) {
 	this.accessHour = accessHour;
     }
 

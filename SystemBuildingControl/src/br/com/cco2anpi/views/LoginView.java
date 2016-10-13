@@ -141,7 +141,7 @@ public class LoginView extends JFrame {
 	public JComponent logo() {
 		File currentDirFile = new File("");
 		String helper = currentDirFile.getAbsolutePath();
-		BufferedImage img = new ImgUtils().scaleImage(240, 180, helper+"\\src\\main\\resources\\images\\logo .png");
+		BufferedImage img = new ImgUtils().scaleImage(240, 180, helper+"main\\resources\\images\\logo .png");
 		
 		JLabel picLabel = new JLabel(new ImageIcon(img));
 		return picLabel;

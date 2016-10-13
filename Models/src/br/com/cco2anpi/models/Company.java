@@ -9,15 +9,16 @@ import java.util.Set;
 
 /**
  * @author wotan
- *
+ * 
+ * Alteração dos atributos businessHours e airconditionerHours de Integer para String
  */
 public class Company implements ICompany {
     private Integer id;
     private String cnpj;
     private String socialReason;
-    private Integer businessHours;
+    private String businessHours;
     private Double maximumTemperature;
-    private Integer airconditionerHours;
+    private String airconditionerHours;
     private ComplexBuilding complexBuilding;
     private Set<IEmployer> employers = new HashSet<>(0);
 
@@ -84,16 +85,16 @@ public class Company implements ICompany {
     /**
      * @return the businessHours
      */
-    public Integer getBusinessHours() {
+    public String getBusinessHours() {
 	return businessHours;
     }
 
     /**
-     * @param businessHours
+     * @param string
      *            the businessHours to set
      */
-    public void setBusinessHours(Integer businessHours) {
-	this.businessHours = businessHours;
+    public void setBusinessHours(String string) {
+	this.businessHours = string;
     }
 
     /**
@@ -114,7 +115,7 @@ public class Company implements ICompany {
     /**
      * @return the businessHours
      */
-    public Integer getAirConditionerHours() {
+    public String getAirConditionerHours() {
 	return airconditionerHours;
     }
 
@@ -122,7 +123,7 @@ public class Company implements ICompany {
      * @param businessHours
      *            the businessHours to set
      */
-    public void setAirConditionerHours(Integer airconditionerHours) {
+    public void setAirConditionerHours(String airconditionerHours) {
 	this.airconditionerHours = airconditionerHours;
     }
     

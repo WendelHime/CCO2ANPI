@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -21,7 +22,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+
+import br.com.cco2anpi.clients.UserClient;
+import br.com.cco2anpi.models.User;
 
 //import controll.AppController;
 
@@ -49,7 +54,8 @@ public class UserPanel extends JPanel {
 	private TableModel dataModel;
 	private JTable dataTable;
 	private JScrollPane scrollpane;
-	
+	private DefaultTableModel tableModel;
+
 	private JButton create;
 	private JButton update;
 	private JButton delete;
@@ -71,22 +77,22 @@ public class UserPanel extends JPanel {
 
 		setLayout(new GridBagLayout());
 //		this.baseController = baseController;
-		this.create = new JButton("criar");
-		this.update = new JButton("atualizar");
-		this.delete = new JButton("excluir");
-		this.clear = new JButton("limpar");
-		this.nameLabel = new JLabel("nome");
+		this.create = new JButton(bn.getString("cadastrar"));
+		this.update = new JButton(bn.getString("alterar"));
+		this.delete = new JButton(bn.getString("excluir"));
+		this.clear = new JButton(bn.getString("limpar"));
+		this.nameLabel = new JLabel(bn.getString("nome"));
 		this.nameField = new JTextField(20);
-		this.cpfLabel = new JLabel("cpf");
+		this.cpfLabel = new JLabel(bn.getString("cpf"));
 		this.cpfField = new JTextField(20);
-		this.workHoursLabel = new JLabel("horario_de_acesso");
-		this.startHourLabel = new JLabel("de");
+		this.workHoursLabel = new JLabel(bn.getString("horario_de_trabalho"));
+		this.startHourLabel = new JLabel(bn.getString("de"));
 		this.startHourField = new JTextField(10);
-		this.endHourLabel = new JLabel("ate");
+		this.endHourLabel = new JLabel(bn.getString("ate"));
 		this.endHourField = new JTextField(10);
-		this.userNameLabel = new JLabel("username");
+		this.userNameLabel = new JLabel(bn.getString("nome_usuario"));
 		this.userNameField = new JTextField(20);
-		this.passwordLabel = new JLabel("password");
+		this.passwordLabel = new JLabel(bn.getString("senha"));
 		this.passwordField = new JPasswordField(20);
 		
 				
@@ -139,9 +145,21 @@ public class UserPanel extends JPanel {
 	 * @param dataTable
 	 *            the dataTable to set
 	 */
+	@SuppressWarnings("serial")
 	private void setDataTable() {
-		this.dataModel = getDataModel();
-		this.dataTable = new JTable(dataModel);
+		// this.dataModel = getDataModel();
+
+		this.dataTable = new JTable(new DefaultTableModel(new Object[][] {}, new String[] { "Id", "Nome", "cpf",
+			 "horario_de_acesso", "username", "senha" }) {
+			boolean[] canEdit = new boolean[] { false, false, false, false, false, false };
+
+			public boolean isCellEditable(int rowIndex, int columnIndex) {
+				return canEdit[columnIndex];
+			}
+		});
+
+		fillTable();
+
 		this.scrollpane = new JScrollPane(dataTable);
 
 		scrollTablePanel = new JPanel(new BorderLayout());
@@ -150,26 +168,15 @@ public class UserPanel extends JPanel {
 		scrollTablePanel.setSize(new Dimension(600, 100));
 	}
 
-	/**
-	 * 
-	 * @return the dataModel
-	 */
-	private TableModel getDataModel() {
-		return new AbstractTableModel() {
-			public int getColumnCount() {
-				return 10;
-			}
+	private void fillTable() {
+		tableModel = (DefaultTableModel) this.dataTable.getModel();
+		tableModel.setNumRows(0);
+		for (User user : UserClient.getAllUsers().getBody()) {
+			tableModel.addRow(new String[] { user.getId().toString(), user.getName(), user.getCpf(),
+					user.getOfficeHours(), user.getUsername(),user.getPassword() });
+		}
 
-			public int getRowCount() {
-				return 10;
-			}
-
-			public Object getValueAt(int row, int col) {
-				return new Integer(row * col);
-			}
-		};
 	}
-
 	/**
 	 * @return the buttonsLayout
 	 */
@@ -310,53 +317,76 @@ public class UserPanel extends JPanel {
 	 * setup Listeners to all buttons
 	 */
 	public void setupListeners() {
-
 		this.create.addActionListener(new ActionListener() {
-
 			@Override
-
 			public void actionPerformed(ActionEvent click) {
-
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
-
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				User user = new User();
+				user.setName(nameField.getText());
+				user.setCpf(cpfField.getText());
+				user.setOfficeHours(startHourField.getText()+"-"+endHourField.getText());
+				user.setUsername(userNameField.getText());
+				user.setPassword(passwordField.getText());
+				UserClient.insert(user);
+				fillTable();
 			}
 		});
-
 		this.update.addActionListener(new ActionListener() {
-
 			@Override
-
 			public void actionPerformed(ActionEvent click) {
-
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
-
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				User[] user = UserClient.getAllUsers().getBody();
+				tableModel = (DefaultTableModel) dataTable.getModel();
+				user[dataTable.getSelectedRow()].setName(nameField.getText());
+				user[dataTable.getSelectedRow()].setCpf(cpfField.getText());
+				user[dataTable.getSelectedRow()].setOfficeHours(startHourField.getText()+"-"+endHourField.getText());
+				user[dataTable.getSelectedRow()].setUsername(userNameField.getText());
+				user[dataTable.getSelectedRow()].setPassword(passwordField.getText());
+				UserClient.update(user[dataTable.getSelectedRow()]);
+				fillTable();
 			}
 		});
 		this.delete.addActionListener(new ActionListener() {
-
 			@Override
-
 			public void actionPerformed(ActionEvent click) {
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				User[] user = UserClient.getAllUsers().getBody();
+				tableModel = (DefaultTableModel) dataTable.getModel();
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
+				UserClient.delete(user[dataTable.getSelectedRow()]);
+
+				fillTable();
 
 			}
 		});
 		this.clear.addActionListener(new ActionListener() {
-
 			@Override
-
 			public void actionPerformed(ActionEvent click) {
 
-//				JOptionPane.showMessageDialog(baseController.getAppFrame(), "OK");
-
+				// JOptionPane.showMessageDialog(baseController.getAppFrame(),
+				// "OK");
+				tableModel.setNumRows(0);
 			}
 		});
 	}
 
 	public void updateLanguage(ResourceBundle bn) {
 		// TODO Auto-generated method stub
-		
+		this.create.setText(bn.getString("cadastrar"));
+		this.update.setText(bn.getString("alterar"));
+		this.delete.setText(bn.getString("excluir"));
+		this.clear.setText(bn.getString("limpar"));
+		this.nameLabel.setText(bn.getString("nome"));		
+		this.cpfLabel.setText(bn.getString("cpf"));		
+		this.workHoursLabel.setText(bn.getString("horario_de_trabalho"));
+		this.startHourLabel.setText(bn.getString("de"));		
+		this.endHourLabel.setText(bn.getString("ate"));
+		this.userNameLabel.setText(bn.getString("nome_usuario"));
+		this.passwordLabel.setText(bn.getString("senha"));
+
 	}
 
 

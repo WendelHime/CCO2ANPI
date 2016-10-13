@@ -42,7 +42,7 @@ public class User implements Serializable, IUser {
     private String name;
     private String cpf;
     @Column(name = "office_hours")
-    private Integer officeHours;
+    private String officeHours;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Access> access = new HashSet<>(0);
 
@@ -160,7 +160,7 @@ public class User implements Serializable, IUser {
     /**
      * @return the officeHours
      */
-    public Integer getOfficeHours() {
+    public String getOfficeHours() {
 	return officeHours;
     }
 
@@ -168,7 +168,7 @@ public class User implements Serializable, IUser {
      * @param officeHours
      *            the officeHours to set
      */
-    public void setOfficeHours(Integer officeHours) {
+    public void setOfficeHours(String officeHours) {
 	this.officeHours = officeHours;
     }
 
@@ -189,5 +189,6 @@ public class User implements Serializable, IUser {
 	    this.access.add((Access) iterator.next());
 	}
     }
+
 
 }

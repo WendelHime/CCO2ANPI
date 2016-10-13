@@ -10,7 +10,7 @@ import java.util.Set;
  *
  */
 public class Employer extends User implements IEmployer {
-	private Integer accessHour;
+	private String accessHour;
 	private Boolean permissionTemperature;
 	private Set<ICompany> companies;
 
@@ -27,7 +27,7 @@ public class Employer extends User implements IEmployer {
 	/**
 	 * @return the accessHour
 	 */
-	public Integer getAccessHour() {
+	public String getAccessHour() {
 		return accessHour;
 	}
 
@@ -35,7 +35,7 @@ public class Employer extends User implements IEmployer {
 	 * @param accessHour
 	 *            the accessHour to set
 	 */
-	public void setAccessHour(Integer accessHour) {
+	public void setAccessHour(String accessHour) {
 		this.accessHour = accessHour;
 	}
 

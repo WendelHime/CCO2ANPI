@@ -10,13 +10,13 @@ import java.util.Set;
  *
  */
 public interface IEmployer extends IUser {
-	void setAccessHour(Integer accessHour);
+	void setAccessHour(String accessHour);
 
 	void setPermissionTemperature(Boolean permission);
 
 	void setCompanies(Set<ICompany> companys);
 
-	Integer getAccessHour();
+	String getAccessHour();
 
 	Boolean getPermissionTemperature();
 

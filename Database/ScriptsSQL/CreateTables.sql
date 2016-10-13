@@ -6,7 +6,7 @@ CREATE TABLE USERS
 	salt VARCHAR(12),
 	name VARCHAR(2000),
 	cpf VARCHAR(14),
-	office_hours BIGINT
+	office_hours VARCHAR(200)
 );
 
 CREATE TABLE ACCESS
@@ -22,7 +22,7 @@ CREATE TABLE EMPLOYERS
 (
 	id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	user_id INTEGER NOT NULL,
-	access_hour INTEGER,
+	access_hour VARCHAR(200),
 	permission_temperature TINYINT(1),
 	FOREIGN KEY (user_id) REFERENCES USERS(id)
 );
@@ -39,9 +39,9 @@ CREATE TABLE COMPANIES
 	building_complex_id INTEGER NOT NULL,
 	cnpj VARCHAR(40),
 	social_reason VARCHAR(2000),
-	business_hours INTEGER,
+	business_hours VARCHAR(200),
 	maximum_temperature DECIMAL(2,2),
-	airconditioner_hours INTEGER,
+	airconditioner_hours VARCHAR(200),
 	horario_funcionamento_ar_condicionado INTEGER,
 	FOREIGN KEY (building_complex_id) REFERENCES BUILDING_SETS(id)
 );
