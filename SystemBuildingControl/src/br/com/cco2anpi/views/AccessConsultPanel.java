@@ -29,6 +29,7 @@ import br.com.cco2anpi.clients.ComplexBuildingClient;
 import br.com.cco2anpi.models.Access;
 import br.com.cco2anpi.models.ComplexBuilding;
 import br.com.cco2anpi.views.shared.DatePick;
+import br.com.cco2anpi.views.shared.DatePick2;
 
 //import controll.AppController;
 
@@ -48,6 +49,9 @@ public class AccessConsultPanel extends JPanel {
 
 	private JButton read;
 	private JButton clear;
+	
+	private DatePick datePickFrom;
+	private DatePick2 datePickTo;
 	
 	private JComboBox type;
 	private String types[]=	 new String[3];
@@ -73,7 +77,8 @@ public class AccessConsultPanel extends JPanel {
 		this.startLabel = new JLabel(bn.getString("de"));
 		this.endLabel = new JLabel(bn.getString("ate"));
 		this.nameField = new JTextField(30);
-		
+		this.datePickFrom = new DatePick(bn);
+		this.datePickTo = new DatePick2(bn);
 		this.types[0] = "empresa";
 		this.types[1] = "atendente";
 		this.types[2] = "sindico";
@@ -89,6 +94,7 @@ public class AccessConsultPanel extends JPanel {
 		for (int i = 0; i < types.length; i++) {
 			type.addItem(types[i]);
 		}
+		
 		
 		setDataTable();
 		setFieldsPanel();
@@ -219,23 +225,36 @@ public class AccessConsultPanel extends JPanel {
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(type, gbc);
+		setDatapick();
 		
-		gbc.gridx = 0;
-		gbc.gridy = 3;
-		gbc.gridwidth = 3;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.fieldsPanel.add(DatePick.datePick("de",bn), gbc);
-		
-		gbc.gridx = 4;
-		gbc.gridy = 3;
-		gbc.gridwidth = 1;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		this.fieldsPanel.add(DatePick.datePick("ate",bn), gbc);
 		
 		
 	}
 
-    /**
+    private void setDatapick() {
+    	gbc.gridx = 0;
+		gbc.gridy = 3;
+		gbc.gridwidth = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(startLabel, gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 3;
+		gbc.gridwidth = 3;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(datePickFrom.getDatePick(), gbc);
+		gbc.gridx = 0;
+		gbc.gridy = 4;
+		gbc.gridwidth = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(endLabel, gbc);
+		gbc.gridx = 1;
+		gbc.gridy = 4;
+		gbc.gridwidth = 3;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(datePickTo.getDatePick(), gbc);		
+	}
+
+	/**
      * setup Listeners to all buttons
      */
     public void setupListeners() {
@@ -263,11 +282,14 @@ public class AccessConsultPanel extends JPanel {
 	});
     }
 	public void updateLanguage(ResourceBundle bn2) {
-		// TODO Auto-generated method stub
-		this.nameLabel.setText(bn.getString("nome"));
-		this.startLabel.setText(bn.getString("de"));
-		this.endLabel.setText(bn.getString("ate"));
-		this.read.setText(bn.getString("consultar"));
-		this.clear.setText(bn.getString("limpar"));
+		this.nameLabel.setText(bn2.getString("nome"));
+		this.startLabel.setText(bn2.getString("de"));
+		this.endLabel.setText(bn2.getString("ate"));
+		this.read.setText(bn2.getString("consultar"));
+		this.clear.setText(bn2.getString("limpar"));
+		datePickTo.updateLanguageDatePick(bn2);
+		datePickFrom.updateLanguageDatePick(bn2);
+
+		setDatapick();
 	}
 }

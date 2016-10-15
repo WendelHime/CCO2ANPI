@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -47,6 +49,7 @@ public class LoginView extends JFrame {
 
 	public LoginView() {
 		super("Efetuar Login");
+
 		Container container = getContentPane();
 		container.setLayout(new BorderLayout(5, 5));
 		container.add(joinFrame(), BorderLayout.CENTER);
@@ -141,7 +144,7 @@ public class LoginView extends JFrame {
 	public JComponent logo() {
 		File currentDirFile = new File("");
 		String helper = currentDirFile.getAbsolutePath();
-		BufferedImage img = new ImgUtils().scaleImage(240, 180, helper+"main\\resources\\images\\logo .png");
+		BufferedImage img = new ImgUtils().scaleImage(240, 180, helper+"images.logo .png");
 		
 		JLabel picLabel = new JLabel(new ImageIcon(img));
 		return picLabel;

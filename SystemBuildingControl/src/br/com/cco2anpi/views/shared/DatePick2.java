@@ -13,7 +13,7 @@ import javax.swing.border.TitledBorder;
  * <b>DatePick</b>
  * Class to choose a date by JComboBoxes
  * */
-public class DatePick {
+public class DatePick2 {
 	static JPanel panel;
 	ResourceBundle bn;
 	static JComboBox month;
@@ -24,7 +24,7 @@ public class DatePick {
 	static final String weekdays[]=	 { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 	static final String months[]=new String[12] ;
 
-	public DatePick(ResourceBundle bn){
+	public DatePick2(ResourceBundle bn){
 		panel = new JPanel();
 		panel.setLayout(new FlowLayout());
 	
@@ -69,6 +69,7 @@ public class DatePick {
 	}
 
 
+	
 	public void updateLanguageDatePick(ResourceBundle bn) {
 		months[0]=bn.getString("janeiro");
 		months[1]=bn.getString("fevereiro");
