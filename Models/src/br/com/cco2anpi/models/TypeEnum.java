@@ -7,10 +7,10 @@ package br.com.cco2anpi.models;
  * @author wotan
  *
  */
-public enum TypeUser {
+public enum TypeEnum {
     SYNDIC(1), // síndico
     CLERK(2), // atendente
-    EMPLOYER(3);
+    COMPANY(3);
 
     private int value;
 
@@ -18,7 +18,7 @@ public enum TypeUser {
      * Set the value of the type
      * @param value value to be used
      */
-    private TypeUser(int value) {
+    private TypeEnum(int value) {
 	this.value = value;
     }
 
@@ -35,8 +35,8 @@ public enum TypeUser {
      * @param value value to be used
      * @return return type of the user by de value
      */
-    public TypeUser getValue(int value) {
-	for (TypeUser type : TypeUser.values()) {
+    public TypeEnum getValue(int value) {
+	for (TypeEnum type : TypeEnum.values()) {
 	    if (type.value == value) {
 		return type;
 	    }
