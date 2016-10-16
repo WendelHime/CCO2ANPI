@@ -9,11 +9,11 @@ package br.com.cco2anpi.models;
  */
 public interface IAccess {
 	void setId(Integer id);
-	void setDateIn(Long date);
-	void setDateOut(Long date);
+	void setDateIn(String date);
+	void setDateOut(String date);
 	void setUser(IUser user);
 	Integer getId();
-	Long getDateIn();
-	Long getDateOut();
+	String getDateIn();
+	String getDateOut();
 	IUser getUser();
 }

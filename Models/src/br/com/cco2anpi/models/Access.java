@@ -9,8 +9,8 @@ package br.com.cco2anpi.models;
  */
 public class Access implements IAccess {
 	private Integer id;
-	private Long dateIn;
-	private Long dateOut;
+	private String dateIn;
+	private String dateOut;
 	private User user;
 	
 	public Access()
@@ -41,25 +41,25 @@ public class Access implements IAccess {
 	/**
 	 * @return the dateIn
 	 */
-	public Long getDateIn() {
+	public String getDateIn() {
 		return dateIn;
 	}
 	/**
 	 * @param dateIn the dateIn to set
 	 */
-	public void setDateIn(Long dateIn) {
+	public void setDateIn(String dateIn) {
 		this.dateIn = dateIn;
 	}
 	/**
 	 * @return the dateOut
 	 */
-	public Long getDateOut() {
+	public String getDateOut() {
 		return dateOut;
 	}
 	/**
 	 * @param dateOut the dateOut to set
 	 */
-	public void setDateOut(Long dateOut) {
+	public void setDateOut(String dateOut) {
 		this.dateOut = dateOut;
 	}
 

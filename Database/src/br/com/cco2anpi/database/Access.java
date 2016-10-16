@@ -32,9 +32,9 @@ public class Access implements Serializable, IAccess {
     @Column(name = "id", unique = true, nullable = false)
     private Integer id;
     @Column(name = "date_in")
-    private Long dateIn;
+    private String dateIn;
     @Column(name = "date_out")
-    private Long dateOut;
+    private String dateOut;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -68,7 +68,7 @@ public class Access implements Serializable, IAccess {
     /**
      * @return the dateIn
      */
-    public Long getDateIn() {
+    public String getDateIn() {
 	return dateIn;
     }
 
@@ -76,14 +76,14 @@ public class Access implements Serializable, IAccess {
      * @param dateIn
      *            the dateIn to set
      */
-    public void setDateIn(Long dateIn) {
+    public void setDateIn(String dateIn) {
 	this.dateIn = dateIn;
     }
 
     /**
      * @return the dateOut
      */
-    public Long getDateOut() {
+    public String getDateOut() {
 	return dateOut;
     }
 
@@ -91,7 +91,7 @@ public class Access implements Serializable, IAccess {
      * @param dateOut
      *            the dateOut to set
      */
-    public void setDateOut(Long dateOut) {
+    public void setDateOut(String dateOut) {
 	this.dateOut = dateOut;
     }
 
