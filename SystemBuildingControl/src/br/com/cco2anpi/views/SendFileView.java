@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -48,7 +49,7 @@ public class SendFileView extends JPanel {
 
 	private JList leftList;
 	private JList rightList;
-	private String[] sendList;
+	private ArrayList<String> sendList;
 
 	private JScrollPane leftScrollPane;
 	private JScrollPane rightScrollPane;
@@ -81,20 +82,20 @@ public class SendFileView extends JPanel {
 		rightPanel = new JPanel(new BorderLayout(5, 5));
 		leftList = new JList();
 		rightList = new JList();
-
+		sendList = new ArrayList<String>();
 		leftScrollPane = new JScrollPane();
 		rightScrollPane = new JScrollPane();
 
 		removeSelectedButton = new CustomButton(bn.getString("remover_selecionados"));
-		removeSelectedButton.addActionListener(new ButtonListener());
+//		removeSelectedButton.addActionListener(new ButtonListener());
 		removeAllButton = new CustomButton(bn.getString("remover_todos"));
-		removeAllButton.addActionListener(new ButtonListener());
+//		removeAllButton.addActionListener(new ButtonListener());
 		toRightButton = new CustomButton(bn.getString("mever_selecionados"));
-		toRightButton.addActionListener(new ButtonListener());
+//		toRightButton.addActionListener(new ButtonListener());
 		allToRightButton = new CustomButton(bn.getString("mover_todos"));
-		allToRightButton.addActionListener(new ButtonListener());
+//		allToRightButton.addActionListener(new ButtonListener());
 		confirmButton = new CustomButton(bn.getString("confirmar"));
-		confirmButton.addActionListener(new ButtonListener());
+//		confirmButton.addActionListener(new ButtonListener());
 		buildButtonLeftPanel();
 		buildButtonRightPanel();
 		buildButtonsPanel();
@@ -192,8 +193,8 @@ public class SendFileView extends JPanel {
 		}
 
 		leftList = new JList<String>(data);
-		leftList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		leftList.setVisibleRowCount(6);
+		leftList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);       
 		leftScrollPane = new JScrollPane(leftList);
 		leftPanel.add(leftScrollPane);
 	}
@@ -202,9 +203,6 @@ public class SendFileView extends JPanel {
 	 * This method make a panel to show all users that has access to building
 	 */
 	private void buildRightPanel() {	
-		
-		System.out.println("chegei em buildRightPanel");
-
 		String content = "";
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
@@ -218,8 +216,13 @@ public class SendFileView extends JPanel {
 		String[] sub = content.split("\n");
 		
 		rightList = new JList<String>(sub);
-		rightList.setVisibleRowCount(6);
-		leftList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	    rightList.setVisibleRowCount(6);
+		rightList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+
+//		int[] select = { 19, 20, 22 };
+//		rightList.setSelectedIndices(select);
+//		JOptionPane.showMessageDialog(null, new JScrollPane(rightList));
 		rightScrollPane = new JScrollPane(rightList);
 		rightPanel.add(rightScrollPane);
 	}
@@ -234,57 +237,23 @@ public class SendFileView extends JPanel {
 		joinListsPanel.add(rightPanel);
 	}
 
-	/**
-	 * <b>Description</b> To add event in sendButton
-	 */
-	private class ButtonListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
+	public JButton getremoveAllButton() {
+		return removeAllButton;
+	}
 
-			if (e.getSource() == removeAllButton) {
-				ListModel model = leftList.getModel();
-				sendList = new String[model.getSize()];
-				for (int i = 0; i < model.getSize(); i++) {
-					sendList[i] = ((String) model.getElementAt(i));
-				}
-				System.out.println(Arrays.toString(sendList)+"\nDevem ser removidos");
+	public JButton getremoveSelectedButton() {
+		return removeSelectedButton;
+	}
 
-			}
-			if (e.getSource() == allToRightButton) {
-				ListModel model = rightList.getModel();
-				sendList = new String[model.getSize()];
-				for (int i = 0; i < model.getSize(); i++) {
-					sendList[i] = ((String) model.getElementAt(i));
-				}
-				JOptionPane.showMessageDialog(null, "Valores selecionados: \n" + Arrays.toString(sendList));
-				
-			}
-			if (e.getSource() == removeSelectedButton) {
-				int index=rightList.getSelectedIndex();
-				DefaultListModel listModel2 = new DefaultListModel();
-				listModel2.addElement(rightList.getSelectedValue());
-				rightList.remove(index);
-				System.out.println(Arrays.toString(listModel2.toArray())+"\nDevem ser removidos");
-			}
-			if (e.getSource() == toRightButton) {
-				System.out.println(Arrays.toString(sendList)+"\nDevem ser removidos");
-			}
-			if (e.getSource() == confirmButton) {
-				String content = "";
-				Path currentRelativePath = Paths.get("");
-				String s = currentRelativePath.toAbsolutePath().toString();
-				for (String line : sendList) {
-					if (line != null) {
-						content += line;
-					}
-				}
-				try {
-					FileHandler.write(s, "login.txt", content);
-					JOptionPane.showMessageDialog(null, "Arquivo login.txt criado com sucesso!");
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
+	public JButton getallToRightButton() {
+		return allToRightButton;
+	}
+
+	public JButton gettoRightButton() {
+		return toRightButton;
+	}
+	public JButton getconfirmButton() {
+		return confirmButton;
 	}
 
 	/**

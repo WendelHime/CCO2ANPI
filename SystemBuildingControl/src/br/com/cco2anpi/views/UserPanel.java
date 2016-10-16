@@ -11,10 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
+import javax.swing.JComboBox;
 //import javax.swing.CustomButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -45,8 +47,13 @@ public class UserPanel extends JPanel {
 	private JTextField userNameField;
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
-	
-	
+	private JComboBox type;
+	private JLabel typelbl;
+	private JLabel airLabel;
+	private JLabel yesLabel;
+	private JRadioButton yesField;
+	private JLabel noLabel;
+	private JRadioButton noField;
 	
 	private TableModel dataModel;
 	private JTable dataTable;
@@ -57,11 +64,12 @@ public class UserPanel extends JPanel {
 	private CustomButton update;
 	private CustomButton delete;
 	private CustomButton clear;
-	
+	private JLabel companyLabel;
+	private JTextField companyField;
 	private JPanel scrollTablePanel;
 	private JPanel fieldsPanel;
 	private JPanel buttonsPanel;
-		
+	private String types[]=	 new String[3];
 	private GridBagConstraints gbc = new GridBagConstraints();
 //	private AppController baseController;
 
@@ -83,6 +91,8 @@ public class UserPanel extends JPanel {
 		this.cpfLabel = new JLabel(bn.getString("cpf"));
 		this.cpfField = new JTextField(20);
 		this.workHoursLabel = new JLabel(bn.getString("horario_de_trabalho"));
+		this.companyLabel = new JLabel(bn.getString("empresa"));
+		this.companyField = new JTextField(20);
 		this.startHourLabel = new JLabel(bn.getString("de"));
 		this.startHourField = new JTextField(10);
 		this.endHourLabel = new JLabel(bn.getString("ate"));
@@ -91,8 +101,22 @@ public class UserPanel extends JPanel {
 		this.userNameField = new JTextField(20);
 		this.passwordLabel = new JLabel(bn.getString("senha"));
 		this.passwordField = new JPasswordField(20);
-		
-				
+		this.airLabel = new JLabel(bn.getString("autorizacao_para_alterar_temperatura"));
+		this.yesLabel = new JLabel(bn.getString("sim"));
+		this.yesField = new JRadioButton();
+		this.yesField.setBackground(new Color(255, 255, 255));
+		this.noLabel = new JLabel(bn.getString("nao"));
+		this.noField = new JRadioButton();
+		this.noField.setBackground(new Color(255, 255, 255));
+		this.types[0] = "atendente";
+		this.types[1] = "funcionario";
+		this.types[2] = "sindico";
+		this.type = new JComboBox();
+		this.type.setBackground(new Color(255, 255, 255));
+		this.typelbl = new JLabel("tipo");
+		for (int i = 0; i < types.length; i++) {
+			type.addItem(types[i]);
+		}
 		setDataTable();
 		setFieldsPanel();
 		setButtonsPanel();
@@ -101,7 +125,7 @@ public class UserPanel extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 3;
-		gbc.insets = new Insets(0, 0, 20, 0);
+		gbc.insets = new Insets(20, 0, 20, 0);
 		add(getDataTable(), gbc);
 
 		// JFields
@@ -116,7 +140,7 @@ public class UserPanel extends JPanel {
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridwidth = 3;
-		gbc.insets = new Insets(0, 100, 100, 100);
+		gbc.insets = new Insets(0, 100, 50, 100);
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		add(getButtonsPanel(), gbc);
 
@@ -177,7 +201,6 @@ public class UserPanel extends JPanel {
 			tableModel.addRow(new String[] { user.getId().toString(), user.getName(), user.getCpf(),
 					user.getOfficeHours(), user.getUsername(),user.getPassword() });
 		}
-
 	}
 	/**
 	 * @return the buttonsLayout
@@ -316,6 +339,78 @@ public class UserPanel extends JPanel {
 		gbc.gridwidth = 3;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		this.fieldsPanel.add(passwordField, gbc);
+		
+		
+	
+		gbc.insets = new Insets(10, 0, 0, 0);
+		
+		gbc.gridx = 0;
+		gbc.gridy = 7;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(typelbl, gbc);
+		gbc.insets = new Insets(0, 0, 0, 0);
+				
+		gbc.gridx = 0;
+		gbc.gridy = 8;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(type, gbc);
+		
+		gbc.insets = new Insets(10, 0, 0, 0);
+
+		gbc.gridx = 0;
+		gbc.gridy = 9;
+		gbc.gridwidth = 3;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(companyLabel, gbc);
+		gbc.insets = new Insets(0, 0, 0, 0);
+
+		gbc.gridx = 0;
+		gbc.gridy = 10;
+		gbc.gridwidth = 3;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(companyField, gbc);
+		
+		gbc.insets = new Insets(0, 40, 0, 0);
+		
+		gbc.gridx = 4;
+		gbc.gridy = 8;
+
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(airLabel, gbc);
+
+		gbc.insets = new Insets(10, 40, 0, 0);
+
+		gbc.gridx = 4;
+		gbc.gridy = 9;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(yesLabel, gbc);
+
+		gbc.insets = new Insets(0, 40, 0, 0);
+
+		gbc.gridx = 4;
+		gbc.gridy = 10;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(yesField, gbc);
+
+		gbc.insets = new Insets(10, 40, 0, 0);
+
+		gbc.gridx = 6;
+		gbc.gridy = 9;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(noLabel, gbc);
+
+		gbc.insets = new Insets(0, 40, 0, 0);
+
+		gbc.gridx = 6;
+		gbc.gridy =10;
+		gbc.gridwidth = 1;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		this.fieldsPanel.add(noField, gbc);
 	}
 
 	/**
