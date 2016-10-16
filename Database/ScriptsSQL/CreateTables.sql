@@ -6,7 +6,8 @@ CREATE TABLE USERS
 	salt VARCHAR(12),
 	name VARCHAR(2000),
 	cpf VARCHAR(14),
-	office_hours VARCHAR(200)
+	office_hours VARCHAR(200),
+	type INTEGER
 );
 
 CREATE TABLE ACCESS
