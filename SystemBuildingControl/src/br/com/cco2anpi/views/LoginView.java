@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -24,6 +27,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import br.com.cco2anpi.tools.FileHandler;
 import br.com.cco2anpi.views.shared.CustomTextField;
 import br.com.cco2anpi.views.shared.ImgUtils;
 
@@ -141,10 +145,12 @@ public class LoginView extends JFrame {
 	 * ================================================================= Logo
 	 * =================================================================
 	 */
-	public JComponent logo() {
-		File currentDirFile = new File("");
-		String helper = currentDirFile.getAbsolutePath();
-		BufferedImage img = new ImgUtils().scaleImage(240, 180, helper+"images.logo .png");
+	public JComponent logo() {		
+		Path currentRelativePath = Paths.get("");
+		String s = currentRelativePath.toAbsolutePath().toString();
+		
+//		bn = ResourceBundle.getBundle("languages.language", new Locale("en", "US"));
+		BufferedImage img = new ImgUtils().scaleImage(240, 180, s+"\\resources\\images\\logo .png");
 		
 		JLabel picLabel = new JLabel(new ImageIcon(img));
 		return picLabel;

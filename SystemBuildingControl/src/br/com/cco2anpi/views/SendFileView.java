@@ -2,7 +2,10 @@ package br.com.cco2anpi.views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -52,11 +55,8 @@ public class SendFileView extends JPanel {
 	private CustomButton allToLeftButton;
 	private CustomButton allToRightButton;
 	private CustomButton confirmButton;
+	private GridBagConstraints gbc = new GridBagConstraints();
 
-	private String allToRightTxt = ">>";
-	private String allToLeftTxt = "<<";
-	private String toLeftTxt = "<";
-	private String toRightTxt = ">";
 	ResourceBundle bn;
 	/**
 	 * Set All variables
@@ -87,29 +87,59 @@ public class SendFileView extends JPanel {
 		allToRightButton.addActionListener(new ButtonListener());
 		confirmButton = new CustomButton(bn.getString("confirmar"));
 		confirmButton.addActionListener(new ButtonListener());
-
 		buildButtonLeftPanel();
 		buildButtonRightPanel();
 		buildButtonsPanel();
 		buildLeftPanel();
 		buildRightPanel();
 		buildListsPanel();
-		joinAllPanel();
+//		joinAllPanel();
 
 		setBackground(new Color(255, 255, 255));
-		setLayout(new BorderLayout(5, 2));
+		setLayout(new GridBagLayout());
 		JLabel lbl = new JLabel(bn.getString("acesso_a_usuarios"), SwingConstants.CENTER);
-		add(lbl, BorderLayout.NORTH);
-		add(joinAllPanel, BorderLayout.CENTER);
+		// JFields
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+//		gbc.gridwidth = 3;
+//		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.insets = new Insets(0, 0, 50, 0);
+		add(lbl, gbc);
+
+		// CustomButtons
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+//		gbc.gridwidth = 3;
+		gbc.insets = new Insets(0, 0, 0, 0);
+		add(joinButtonsPanel, gbc);
+
+		// JTable
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+//		gbc.gridwidth = 3;
+		gbc.insets = new Insets(10, 0, 10, 0);
+		add(joinListsPanel, gbc);
+		
+		// JTable
+		gbc.gridx = 0;
+		gbc.gridy = 3;
+//		gbc.gridwidth = 3;
+		gbc.insets = new Insets(10, 0, 100, 0);
+		add(confirmButton, gbc);
+		
+				
+		
+//		add(lbl, BorderLayout.NORTH);
+//		add(joinAllPanel, BorderLayout.CENTER);
 
 	}
 
-	private void joinAllPanel() {
-		joinAllPanel.setLayout(new BorderLayout(2, 2));
-		joinAllPanel.add(joinButtonsPanel, BorderLayout.NORTH);
-		joinAllPanel.add(joinListsPanel, BorderLayout.CENTER);
-		joinAllPanel.add(confirmButton, BorderLayout.SOUTH);
-	}
+//	private void joinAllPanel() {
+//		joinAllPanel.setLayout(new BorderLayout(2, 2));
+//		joinAllPanel.add(joinButtonsPanel, BorderLayout.NORTH);
+//		joinAllPanel.add(joinListsPanel, BorderLayout.CENTER);
+//		joinAllPanel.add(confirmButton, BorderLayout.SOUTH);
+//	}
 
 	/**
 	 * Create a grid with the buttons to send data of leftList to the rightList

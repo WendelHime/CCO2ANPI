@@ -1,4 +1,5 @@
 package br.com.cco2anpi.views.shared;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +28,8 @@ public class DatePick {
 	public DatePick(ResourceBundle bn){
 		panel = new JPanel();
 		panel.setLayout(new FlowLayout());
-	
+		this.panel.setBackground(new Color(255, 255, 255));
+
 		months[0]=bn.getString("janeiro");
 		months[1]=bn.getString("fevereiro");
 		months[2]=bn.getString("marco");
@@ -109,6 +111,8 @@ public class DatePick {
 		for (int i = 1; i <= 31; i++) {
 			day.addItem(i);
 		}
+		day.setBackground(new Color(255, 255, 255));
+
 	}
 
 	/**
@@ -120,6 +124,8 @@ public class DatePick {
 		for (int i = 0; i < months.length; i++) {
 			month.addItem(months[i]);
 		}
+		month.setBackground(new Color(255, 255, 255));
+
 	}
 
 	/**
@@ -130,5 +136,7 @@ public class DatePick {
 		for (int i = 1980; i <= 2099; i++) {
 			year.addItem(i);
 		}
+		year.setBackground(new Color(255, 255, 255));
+
 	}
 }

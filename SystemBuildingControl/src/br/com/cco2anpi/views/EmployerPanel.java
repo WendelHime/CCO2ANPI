@@ -12,23 +12,20 @@ import java.awt.event.ActionListener;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
-import javax.swing.JButton;
+//import javax.swing.CustomButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import br.com.cco2anpi.clients.EmployerClient;
-import br.com.cco2anpi.clients.EmployerClient;
 import br.com.cco2anpi.models.Employer;
-import br.com.cco2anpi.models.Employer;
+import br.com.cco2anpi.views.shared.CustomButton;
 
 //import controll.AppController;
 
@@ -63,10 +60,10 @@ public class EmployerPanel extends JPanel {
 	private JScrollPane scrollpane;
 	private DefaultTableModel tableModel;
 
-	private JButton create;
-	private JButton update;
-	private JButton delete;
-	private JButton clear;
+	private CustomButton create;
+	private CustomButton update;
+	private CustomButton delete;
+	private CustomButton clear;
 
 	private JPanel scrollTablePanel;
 	private JPanel fieldsPanel;
@@ -84,10 +81,10 @@ public class EmployerPanel extends JPanel {
 
 		setLayout(new GridBagLayout());
 		// this.baseController = baseController;
-		this.create = new JButton(bn.getString("cadastrar"));
-		this.update = new JButton(bn.getString("alterar"));
-		this.delete = new JButton(bn.getString("excluir"));
-		this.clear = new JButton(bn.getString("limpar"));
+		this.create = new CustomButton(bn.getString("cadastrar"));
+		this.update = new CustomButton(bn.getString("alterar"));
+		this.delete = new CustomButton(bn.getString("excluir"));
+		this.clear = new CustomButton(bn.getString("limpar"));
 		this.nameLabel = new JLabel(bn.getString("nome"));
 		this.nameField = new JTextField(20);
 		this.cpfLabel = new JLabel(bn.getString("cpf"));
@@ -102,8 +99,10 @@ public class EmployerPanel extends JPanel {
 		this.airLabel = new JLabel(bn.getString("autorizacao_para_alterar_temperatura"));
 		this.yesLabel = new JLabel(bn.getString("sim"));
 		this.yesField = new JRadioButton();
+		this.yesField.setBackground(new Color(255, 255, 255));
 		this.noLabel = new JLabel(bn.getString("nao"));
 		this.noField = new JRadioButton();
+		this.noField.setBackground(new Color(255, 255, 255));
 		this.userNameLabel = new JLabel(bn.getString("nome_usuario"));
 		this.userNameField = new JTextField(20);
 		this.passwordLabel = new JLabel(bn.getString("senha"));
@@ -128,11 +127,12 @@ public class EmployerPanel extends JPanel {
 		gbc.insets = new Insets(0, 0, 150, 350);
 		add(getFieldsPanel(), gbc);
 
-		// JButtons
+		// CustomButtons
 		gbc.gridx = 0;
 		gbc.gridy = 2;
 		gbc.gridwidth = 3;
-		gbc.insets = new Insets(0, 10, 100, 0);
+		gbc.insets = new Insets(0, 100, 100, 100);
+		gbc.fill = GridBagConstraints.HORIZONTAL;
 		add(getButtonsPanel(), gbc);
 
 		// Listeners
@@ -170,15 +170,19 @@ public class EmployerPanel extends JPanel {
 				return canEdit[columnIndex];
 			}
 		});
-
+		this.dataTable.setBackground(new Color(255, 255, 255));
 		fillTable();
 
 		this.scrollpane = new JScrollPane(dataTable);
+		this.scrollpane.getViewport().setBackground(dataTable.getBackground());
 
 		scrollTablePanel = new JPanel(new BorderLayout());
 		scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
-		scrollTablePanel.setPreferredSize(new Dimension(600, 150));
-		scrollTablePanel.setSize(new Dimension(600, 100));
+		scrollTablePanel.setPreferredSize(new Dimension(600, 100));
+		scrollTablePanel.setMinimumSize(new Dimension(600, 100));
+		scrollTablePanel.setMaximumSize(new Dimension(600, 100));
+		this.scrollTablePanel.setBackground(new Color(255, 255, 255));
+
 	}
 
 	private void fillTable() {
@@ -209,6 +213,8 @@ public class EmployerPanel extends JPanel {
 		this.buttonsPanel.add(delete);
 		this.buttonsPanel.add(new JLabel(""));
 		this.buttonsPanel.add(clear);
+		this.buttonsPanel.setBackground(new Color(255, 255, 255));
+
 	}
 
 	/**
@@ -225,6 +231,7 @@ public class EmployerPanel extends JPanel {
 	private void setFieldsPanel() {
 
 		this.fieldsPanel = new JPanel(new GridBagLayout());
+		this.fieldsPanel.setBackground(new Color(255, 255, 255));
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;

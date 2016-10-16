@@ -9,25 +9,22 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
+import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import br.com.cco2anpi.clients.AccessClient;
-import br.com.cco2anpi.clients.ComplexBuildingClient;
 import br.com.cco2anpi.models.Access;
-import br.com.cco2anpi.models.ComplexBuilding;
+import br.com.cco2anpi.views.shared.CustomButton;
 import br.com.cco2anpi.views.shared.DatePick;
 import br.com.cco2anpi.views.shared.DatePick2;
 
@@ -47,8 +44,8 @@ public class AccessConsultPanel extends JPanel {
 	private JScrollPane scrollpane;
     private DefaultTableModel tableModel;
 
-	private JButton read;
-	private JButton clear;
+	private CustomButton read;
+	private CustomButton clear;
 	
 	private DatePick datePickFrom;
 	private DatePick2 datePickTo;
@@ -71,12 +68,13 @@ public class AccessConsultPanel extends JPanel {
 		this.bn = bn;
 		setLayout(new GridBagLayout());
 //		this.baseController = baseController;
-		this.read = new JButton(bn.getString("consultar"));
-		this.clear = new JButton(bn.getString("limpar"));
+		this.read = new CustomButton(bn.getString("consultar"));
+		this.clear = new CustomButton(bn.getString("limpar"));
 		this.nameLabel = new JLabel(bn.getString("nome"));
 		this.startLabel = new JLabel(bn.getString("de"));
 		this.endLabel = new JLabel(bn.getString("ate"));
 		this.nameField = new JTextField(30);
+		
 		this.datePickFrom = new DatePick(bn);
 		this.datePickTo = new DatePick2(bn);
 		this.types[0] = "empresa";
@@ -90,7 +88,8 @@ public class AccessConsultPanel extends JPanel {
 		this.coluns[4] = "user_id";
 		
 		this.type = new JComboBox();
-		
+		this.type.setBackground(new Color(255, 255, 255));
+
 		for (int i = 0; i < types.length; i++) {
 			type.addItem(types[i]);
 		}
@@ -108,7 +107,7 @@ public class AccessConsultPanel extends JPanel {
 		gbc.insets = new Insets(0, 0, 0, 350);
 		add(getFieldsPanel(), gbc);
 
-		// JButtons
+		// CustomButtons
 		gbc.gridx = 0;
 		gbc.gridy = 1;
 		gbc.gridwidth = 3;
@@ -155,15 +154,19 @@ public class AccessConsultPanel extends JPanel {
 				return canEdit[columnIndex];
 			    }
 			});
-		
+		this.dataTable.setBackground(new Color(255, 255, 255));
 		fillTable();
 	
 		this.scrollpane = new JScrollPane(dataTable);
-	
-		scrollTablePanel = new JPanel(new BorderLayout());
-		scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
-		scrollTablePanel.setPreferredSize(new Dimension(600, 150));
-		scrollTablePanel.setSize(new Dimension(600, 100));
+		this.scrollpane.getViewport().setBackground(dataTable.getBackground());
+
+		this.scrollTablePanel = new JPanel(new BorderLayout());
+		this.scrollTablePanel.add(scrollpane, BorderLayout.CENTER);
+		this.scrollTablePanel.setPreferredSize(new Dimension(600, 100));
+		this.scrollTablePanel.setMinimumSize(new Dimension(600, 100));
+		this.scrollTablePanel.setMaximumSize(new Dimension(600, 100));
+		this.scrollTablePanel.setBackground(new Color(255, 255, 255));
+
     }
 
     private void fillTable() {
@@ -189,6 +192,10 @@ public class AccessConsultPanel extends JPanel {
 		this.buttonsPanel = new JPanel(new GridLayout(1, 5, 10, 0));
 		this.buttonsPanel.add(read);
 		this.buttonsPanel.add(clear);
+		this.buttonsPanel.add(new JLabel(""));
+		this.buttonsPanel.add(new JLabel(""));
+		this.buttonsPanel.add(new JLabel(""));
+		this.buttonsPanel.setBackground(new Color(255, 255, 255));
 	}
 
 	/**
@@ -205,6 +212,7 @@ public class AccessConsultPanel extends JPanel {
 	private void setFieldsPanel() {
 
 		this.fieldsPanel = new JPanel(new GridBagLayout());
+		this.fieldsPanel.setBackground(new Color(255, 255, 255));
 
 		gbc.gridx = 0;
 		gbc.gridy = 0;
