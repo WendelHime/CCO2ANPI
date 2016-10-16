@@ -45,6 +45,7 @@ public class User implements Serializable, IUser {
     private String officeHours;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Access> access = new HashSet<>(0);
+    private Integer type;
 
     public User() {
 
@@ -65,6 +66,7 @@ public class User implements Serializable, IUser {
 	cpf = sourceObject.getCpf();
 	officeHours = sourceObject.getOfficeHours();
 	setAccess(sourceObject.getAccess());
+	type = sourceObject.getType();
     }
 
     /**
@@ -190,5 +192,20 @@ public class User implements Serializable, IUser {
 	}
     }
 
+    /**
+     * @return the type
+     */
+    public Integer getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    
 
 }

@@ -20,6 +20,7 @@ public class User implements IUser {
     protected String cpf;
     protected String officeHours;
     protected Set<Access> access = new HashSet<>(0);
+    protected Integer type;
 
     public User() {
 
@@ -39,6 +40,7 @@ public class User implements IUser {
 	cpf = sourceObject.getCpf();
 	officeHours = sourceObject.getOfficeHours();
 	setAccess(sourceObject.getAccess());
+	type = sourceObject.getType();
     }
 
     /**
@@ -164,5 +166,20 @@ public class User implements IUser {
 	}
     }
 
+    /**
+     * @return the type
+     */
+    public Integer getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    
 
 }

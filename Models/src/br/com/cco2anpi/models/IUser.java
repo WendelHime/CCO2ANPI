@@ -18,6 +18,7 @@ public interface IUser {
 	void setCpf(String cpf);
 	void setOfficeHours(String officeHours);
 	void setAccess(Set<IAccess> access);
+	void setType(Integer type);
 	Integer getId();
 	String getUsername();
 	String getPassword();
@@ -26,4 +27,5 @@ public interface IUser {
 	String getCpf();
 	String getOfficeHours();
 	Set<IAccess> getAccess();
+	Integer getType();
 }
