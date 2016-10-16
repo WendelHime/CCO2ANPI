@@ -212,7 +212,7 @@ public class AirConditionerView extends JPanel {
 	public void updateLanguage(ResourceBundle bn) {
 	
 		this.send = new CustomButton(bn.getString("enviar"));
-		this.temperatureLabel = new JLabel(bn.getString("temperature"));
+		this.temperatureLabel = new JLabel(bn.getString("temperatura"));
 		this.newConfigurationLabel = new JLabel(bn.getString("nova_configuracao"));
 		this.maximumTemperatureLabel = new JLabel(bn.getString("temperatura_maxima"));
 		this.startLabel = new JLabel(bn.getString("de"));
