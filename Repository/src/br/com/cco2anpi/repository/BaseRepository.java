@@ -11,13 +11,14 @@ import org.hibernate.cfg.Configuration;
  */
 public class BaseRepository {
     protected static SessionFactory sessionFactory;
-
+    protected String context;
     /**
      * Constructor of the class BaseRepository
      * 
      * @param context
      */
     public BaseRepository(String context) {
+	this.context = context;
 	sessionFactory = new Configuration().configure(context).buildSessionFactory();
     }
 
@@ -27,6 +28,17 @@ public class BaseRepository {
      * @return SessionFactory
      */
     public SessionFactory getSessionFactory() {
+	if(sessionFactory.isClosed())
+	{
+	    sessionFactory = new Configuration().configure(context).buildSessionFactory();
+	}
 	return sessionFactory;
+    }
+    
+    /**
+     * Method used to close factory connection
+     */
+    public static void close() {
+	sessionFactory.close();
     }
 }

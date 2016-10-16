@@ -17,4 +17,6 @@ public interface IAccessRepository {
     IAccess getAccess(Integer id);
 
     IAccess[] getAllAccess();
+    
+    IAccess[] getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd);
 }

@@ -3,6 +3,8 @@
  */
 package br.com.cco2anpi.services.controllers;
 
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,30 @@ public class AccessController extends BaseController {
     @RequestMapping(value = "getAllAccess", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<Access[]> getAllAccess() {
 	IAccess[] accessDB = accessRepository.getAllAccess();
+	Access[] access = new Access[accessDB.length];
+	for (int i = 0; i < access.length; i++) {
+	    access[i] = new Access(accessDB[i]);
+	}
+	return new ResponseEntity<Access[]>(access, HttpStatus.OK);
+    }
+
+    /**
+     * Method used to get access filtred
+     * 
+     * @param type
+     *            of the user
+     * @param dateInit
+     *            find access between date init and dateEnd
+     * @param dateEnd
+     *            find access between date init and dateEnd
+     * @return access array
+     */
+    @RequestMapping(value = "getAccessByTypeAndDate", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity<Access[]> getAccessByTypeAndDate(
+	    @RequestBody MultiValueMap<String, String> map) {
+	List<String> parameters = map.get("parameters");
+	IAccess[] accessDB = accessRepository.getAccessByTypeAndDate(Integer.parseInt(parameters.get(0)),
+		parameters.get(1), parameters.get(2));
 	Access[] access = new Access[accessDB.length];
 	for (int i = 0; i < access.length; i++) {
 	    access[i] = new Access(accessDB[i]);

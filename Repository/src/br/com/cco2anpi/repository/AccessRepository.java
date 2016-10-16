@@ -34,10 +34,11 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
      * @return return the object inserted
      */
     public IAccess insert(IAccess access) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Serializable id = session.save(new br.com.cco2anpi.database.Access(access));
 	IAccess temp = session.get(br.com.cco2anpi.database.Access.class, id);
 	session.close();
+	close();
 	return new Access(temp);
     }
 
@@ -49,7 +50,7 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
      * @return return the object updated
      */
     public IAccess update(IAccess access) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	try {
 	    session.update(new br.com.cco2anpi.database.Access(access));
@@ -58,6 +59,7 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return access;
     }
 
@@ -69,7 +71,7 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
      * @return return status
      */
     public boolean delete(IAccess access) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	boolean status = false;
 	try {
@@ -80,6 +82,7 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return status;
     }
 
@@ -91,9 +94,10 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
      * @return return the access if exists
      */
     public IAccess getAccess(Integer id) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Access access = new Access(session.find(br.com.cco2anpi.database.Access.class, id));
 	session.close();
+	close();
 	return access;
     }
 
@@ -103,7 +107,7 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
      * @return return all access in array;
      */
     public IAccess[] getAllAccess() {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	List<br.com.cco2anpi.database.Access> accessList = session
 		.createQuery("from Access", br.com.cco2anpi.database.Access.class).getResultList();
 	List<Access> accessTemp = new ArrayList<>();
@@ -111,9 +115,36 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
 	    accessTemp.add(new Access(access1));
 	}
 	session.close();
+	close();
 	IAccess[] accessArray = new Access[accessTemp.size()];
 	accessTemp.toArray(accessArray);
 	return accessArray;
+    }
+
+    /**
+     * Method used to get filtred access
+     * 
+     * @param type
+     *            is the type of the user
+     * @param dateInit
+     *            is the date to start the search
+     * 
+     */
+    public IAccess[] getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd) {
+	Session session = getSessionFactory().openSession();
+	List<br.com.cco2anpi.database.Access> accessList = session
+		.createQuery(
+			"from Access access where " + "access.user.type = :type and "
+				+ "STR_TO_DATE(access.dateIn, '%d/%m/%Y') " + "between "
+				+ "STR_TO_DATE(:dateInit, '%d/%m/%Y') and " + "STR_TO_DATE(:dateEnd, '%d/%m/%Y')",
+			br.com.cco2anpi.database.Access.class)
+		.setParameter("dateInit", dateInit).setParameter("dateEnd", dateEnd).setParameter("type", type)
+		.getResultList();
+	session.close();
+	close();
+	IAccess[] access = new Access[accessList.size()];
+	accessList.toArray(access);
+	return access;
     }
 
 }

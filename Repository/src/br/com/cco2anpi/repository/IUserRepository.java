@@ -17,7 +17,7 @@ public interface IUserRepository {
     boolean delete(IUser id);
 
     IUser getUser(Integer id);
-    
+
     IUser[] getAllUsers();
 
     boolean exists(IUser user);

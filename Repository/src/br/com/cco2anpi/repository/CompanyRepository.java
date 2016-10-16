@@ -35,10 +35,12 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
      * @return company inserted
      */
     public ICompany insert(ICompany company) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Serializable id = session.save(new br.com.cco2anpi.database.Company(company));
 	ICompany temp = session.get(br.com.cco2anpi.database.Company.class, id);
 	session.close();
+	close();
+	close();
 	return new Company(temp);
     }
 
@@ -50,7 +52,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
      * @return company updated
      */
     public ICompany update(ICompany company) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	try {
 	    session.update(new br.com.cco2anpi.database.Company(company));
@@ -59,6 +61,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return company;
     }
 
@@ -70,7 +73,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
      * @return status
      */
     public boolean delete(ICompany company) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	boolean status = false;
 	try {
@@ -81,6 +84,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return status;
     }
 
@@ -92,9 +96,10 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
      * @return company if exists
      */
     public ICompany getCompany(Integer id) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Company company = new Company(session.find(br.com.cco2anpi.database.Company.class, id));
 	session.close();
+	close();
 	return company;
     }
 
@@ -104,7 +109,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
      * @return array of the companies
      */
     public ICompany[] getAllCompanies() {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	List<br.com.cco2anpi.database.Company> companyList = session
 		.createQuery("from Company", br.com.cco2anpi.database.Company.class).getResultList();
 	List<Company> companiesTemp = new ArrayList<>();
@@ -112,6 +117,7 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
 	    companiesTemp.add(new Company(company));
 	}
 	session.close();
+	close();
 	ICompany[] companies = new Company[companiesTemp.size()];
 	companiesTemp.toArray(companies);
 	return companies;

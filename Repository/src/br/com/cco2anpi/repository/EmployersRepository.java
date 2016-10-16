@@ -35,10 +35,11 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
      * @return employer inserted
      */
     public IEmployer insert(IEmployer employer) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Serializable id = session.save(new br.com.cco2anpi.database.Employer(employer));
 	IEmployer temp = session.get(br.com.cco2anpi.database.Employer.class, id);
 	session.close();
+	close();
 	return new Employer(temp);
     }
 
@@ -50,7 +51,7 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
      * @return employer updated
      */
     public IEmployer update(IEmployer employer) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	try {
 	    session.update(new br.com.cco2anpi.database.Employer(employer));
@@ -59,6 +60,7 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return employer;
     }
 
@@ -70,7 +72,7 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
      * @return status
      */
     public boolean delete(IEmployer employer) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	boolean status = false;
 	try {
@@ -81,6 +83,7 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return status;
     }
 
@@ -92,9 +95,10 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
      * @return employer if exists
      */
     public IEmployer getEmployer(Integer id) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Employer employer = new Employer(session.find(br.com.cco2anpi.database.Employer.class, id));
 	session.close();
+	close();
 	return employer;
     }
 
@@ -104,7 +108,7 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
      * @return return all employers
      */
     public IEmployer[] getAllEmployers() {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	List<br.com.cco2anpi.database.Employer> list = session
 		.createQuery("from Employer", br.com.cco2anpi.database.Employer.class).getResultList();
 	List<Employer> tempList = new ArrayList<>();
@@ -112,6 +116,7 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
 	    tempList.add(new Employer(employer));
 	}
 	session.close();
+	close();
 	IEmployer[] employers = new Employer[tempList.size()];
 	tempList.toArray(employers);
 	return employers;

@@ -37,10 +37,11 @@ public class UserRepository extends BaseRepository implements IUserRepository {
      * @return return object user filled
      */
     public IUser insert(IUser user) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Serializable id = session.save(new br.com.cco2anpi.database.User(user));
 	IUser temp = session.get(br.com.cco2anpi.database.User.class, id);
 	session.close();
+	close();
 	return new User(temp);
     }
 
@@ -52,7 +53,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
      * @return return the object user filled
      */
     public IUser update(IUser user) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	try {
 	    session.update(new br.com.cco2anpi.database.User(user));
@@ -61,6 +62,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return user;
     }
 
@@ -72,7 +74,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
      * @return status of the delection
      */
     public boolean delete(IUser user) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	boolean status = false;
 	try {
@@ -83,6 +85,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return status;
     }
 
@@ -94,9 +97,10 @@ public class UserRepository extends BaseRepository implements IUserRepository {
      * @return object user by id
      */
     public IUser getUser(Integer id) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	User user = new User(session.find(br.com.cco2anpi.database.User.class, id));
 	session.close();
+	close();
 	return user;
     }
 
@@ -106,7 +110,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
      * @return array of the users
      */
     public IUser[] getAllUsers() {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	List<br.com.cco2anpi.database.User> users = session
 		.createQuery("from User", br.com.cco2anpi.database.User.class).getResultList();
 	List<User> usersTemp = new ArrayList<>();
@@ -114,6 +118,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 	    usersTemp.add(new User(user));
 	}
 	session.close();
+	close();
 	IUser[] usersArray = new User[usersTemp.size()];
 	usersTemp.toArray(usersArray);
 	return usersArray;
@@ -125,7 +130,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
      * @return true if exists, false if not
      */
     public boolean exists(IUser user) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	boolean status = false;
 	if (user.getId() != null) {
 	    status = true;
@@ -142,6 +147,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 	    }
 	}
 	session.close();
+	close();
 	return status;
     }
 

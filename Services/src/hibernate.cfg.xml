@@ -7,14 +7,15 @@
 		<property name="hibernate.connection.username">alunos</property>
 		<property name="hibernate.connection.password">alunos</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.pool_size">100</property>
 		<property name="show_sql">true</property>
 
-		<mapping class="br.com.cco2anpi.database.Access"/>
-		<mapping class="br.com.cco2anpi.database.User"/>
-		<mapping class="br.com.cco2anpi.database.ComplexBuilding"/>
-		<mapping class="br.com.cco2anpi.database.Company"/>
-		<mapping class="br.com.cco2anpi.database.Employer"/>
-		
+		<mapping class="br.com.cco2anpi.database.Access" />
+		<mapping class="br.com.cco2anpi.database.User" />
+		<mapping class="br.com.cco2anpi.database.ComplexBuilding" />
+		<mapping class="br.com.cco2anpi.database.Company" />
+		<mapping class="br.com.cco2anpi.database.Employer" />
+
 
 	</session-factory>
 </hibernate-configuration>

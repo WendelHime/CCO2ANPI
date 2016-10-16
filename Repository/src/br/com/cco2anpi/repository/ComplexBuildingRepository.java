@@ -35,10 +35,11 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
      * @return object inserted
      */
     public IComplexBuilding insert(IComplexBuilding complexBuilding) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Serializable id = session.save(new br.com.cco2anpi.database.ComplexBuilding(complexBuilding));
 	IComplexBuilding temp = session.get(br.com.cco2anpi.database.ComplexBuilding.class, id);
 	session.close();
+	close();
 	return new ComplexBuilding(temp);
     }
 
@@ -50,7 +51,7 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
      * @return object updated
      */
     public IComplexBuilding update(IComplexBuilding complexBuilding) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	try {
 	    session.update(new br.com.cco2anpi.database.ComplexBuilding(complexBuilding));
@@ -59,6 +60,7 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return complexBuilding;
     }
 
@@ -70,7 +72,7 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
      * @return status;
      */
     public boolean delete(IComplexBuilding complexBuilding) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	Transaction transaction = session.beginTransaction();
 	boolean status = false;
 	try {
@@ -81,6 +83,7 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
 	    transaction.rollback();
 	}
 	session.close();
+	close();
 	return status;
     }
 
@@ -92,10 +95,11 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
      * @return complex building if exists
      */
     public IComplexBuilding getComplexBuilding(Integer id) {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	ComplexBuilding complexBuilding = new ComplexBuilding(
 		session.find(br.com.cco2anpi.database.ComplexBuilding.class, id));
 	session.close();
+	close();
 	return complexBuilding;
     }
 
@@ -105,7 +109,7 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
      * @return all complex building array
      */
     public IComplexBuilding[] getAllBuildingSets() {
-	Session session = sessionFactory.openSession();
+	Session session = getSessionFactory().openSession();
 	List<br.com.cco2anpi.database.ComplexBuilding> complexBuildingList = session
 		.createQuery("from ComplexBuilding", br.com.cco2anpi.database.ComplexBuilding.class).getResultList();
 	List<ComplexBuilding> complexBuildingTemp = new ArrayList<>();
@@ -113,6 +117,7 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
 	    complexBuildingTemp.add(new ComplexBuilding(user));
 	}
 	session.close();
+	close();
 	IComplexBuilding[] buildingSetsArray = new ComplexBuilding[complexBuildingTemp.size()];
 	complexBuildingTemp.toArray(buildingSetsArray);
 	return buildingSetsArray;

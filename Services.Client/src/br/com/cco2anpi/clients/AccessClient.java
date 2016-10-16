@@ -4,9 +4,10 @@
 package br.com.cco2anpi.clients;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.cco2anpi.models.Access;
 import br.com.cco2anpi.models.Access;
 
 /**
@@ -24,8 +25,7 @@ public class AccessClient {
      * @return return access filled
      */
     public static ResponseEntity<Access> insert(Access access) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/insert.json", access,
-			Access.class);
+	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/insert.json", access, Access.class);
     }
 
     /**
@@ -36,8 +36,7 @@ public class AccessClient {
      * @return access updated
      */
     public static ResponseEntity<Access> update(Access access) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/update.json", access,
-		Access.class);
+	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/update.json", access, Access.class);
     }
 
     /**
@@ -48,26 +47,45 @@ public class AccessClient {
      * @return status
      */
     public static ResponseEntity<Boolean> delete(Access access) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/delete.json", access,
-		Boolean.class);
+	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/delete.json", access, Boolean.class);
     }
 
     /**
-     * Method used to get all all building sets
+     * Method used to get all access
      * 
-     * @return return all all building sets
+     * @return return all access
      */
     public static ResponseEntity<Access[]> getAllAccess() {
-	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Access/getAllAccess.json",
-		Access[].class);
+	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Access/getAllAccess.json", Access[].class);
     }
+
     /**
-     * Method used to get one building set
+     * Method used to get one access
      * 
-     * @return return one building set
+     * @return return one access
      */
     public static ResponseEntity<Access> getAccess(Access access) {
-	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Access/getAccess.json",
-		Access.class);
+	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Access/getAccess.json", Access.class);
+    }
+
+    /**
+     * Method used to get access filtred
+     * 
+     * @param type
+     *            of the user
+     * @param dateInit
+     *            date init
+     * @param dateEnd
+     *            date end
+     * @return access array
+     */
+    public static ResponseEntity<Access[]> getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd) {
+	MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
+	map.add("parameters", type.toString());
+	map.add("parameters", dateInit);
+	map.add("parameters", dateEnd);
+
+	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/getAccessByTypeAndDate.json", map,
+		Access[].class);
     }
 }
