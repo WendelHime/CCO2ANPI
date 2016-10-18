@@ -41,7 +41,7 @@ CREATE TABLE COMPANIES
 	cnpj VARCHAR(40),
 	social_reason VARCHAR(2000),
 	business_hours VARCHAR(200),
-	maximum_temperature DECIMAL(2,2),
+	maximum_temperature DECIMAL(4,2),
 	airconditioner_hours VARCHAR(200),
 	horario_funcionamento_ar_condicionado INTEGER,
 	FOREIGN KEY (building_complex_id) REFERENCES BUILDING_SETS(id)

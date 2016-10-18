@@ -16,7 +16,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.cco2anpi.models.IAccess;
-import br.com.cco2anpi.models.IUser;
 
 /**
  * @author wotan
@@ -98,16 +97,16 @@ public class Access implements Serializable, IAccess {
     /**
      * @return the user
      */
-    public IUser getUser() {
-	return user;
+    public br.com.cco2anpi.models.User getUser() {
+	return new br.com.cco2anpi.models.User(user);
     }
 
     /**
      * @param user
      *            the user to set
      */
-    public void setUser(IUser user) {
-	this.user = (User) user;
+    public void setUser(br.com.cco2anpi.models.User user) {
+	this.user = new User(user);
     }
 
 }

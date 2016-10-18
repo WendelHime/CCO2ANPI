@@ -94,13 +94,16 @@ public class ComplexBuildingRepository extends BaseRepository implements IComple
      *            id to be used
      * @return complex building if exists
      */
-    public IComplexBuilding getComplexBuilding(Integer id) {
+    public IComplexBuilding getComplexBuilding(IComplexBuilding complexBuilding) {
 	Session session = getSessionFactory().openSession();
-	ComplexBuilding complexBuilding = new ComplexBuilding(
-		session.find(br.com.cco2anpi.database.ComplexBuilding.class, id));
+	ComplexBuilding complexBuildingResult = new ComplexBuilding(session
+		.createQuery("from ComplexBuilding complex where complex.id = :id or complex.number = :number",
+			br.com.cco2anpi.database.ComplexBuilding.class)
+		.setParameter("id", complexBuilding.getId()).setParameter("number", complexBuilding.getNumber())
+		.getSingleResult());
 	session.close();
 	close();
-	return complexBuilding;
+	return complexBuildingResult;
     }
 
     /**
