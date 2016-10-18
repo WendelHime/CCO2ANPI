@@ -93,7 +93,10 @@ public class ApplicationViewController {
 	 */
 	public static void redrawContentPanel(String key) {
 		System.out.println("cheguei no redraw com " + key);
-
+		if(key.equals("Enviar Arquivo")){
+			System.out.println("executado" + key);
+			sendFileView.fillList();
+		}
 		applicationViewContentPanel.redrawContentPanel(key);
 	}
 

@@ -32,7 +32,9 @@ import javax.swing.table.DefaultTableModel;
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
 
+import br.com.cco2anpi.clients.EmployerClient;
 import br.com.cco2anpi.clients.UserClient;
+import br.com.cco2anpi.models.Employer;
 import br.com.cco2anpi.models.User;
 import br.com.cco2anpi.tools.Crypto;
 import br.com.cco2anpi.tools.FileHandler;
@@ -49,6 +51,7 @@ public class SendFileView extends JPanel {
 
 	private JList leftList;
 	private JList rightList;
+	private DefaultListModel listModel;
 	private ArrayList<String> sendList;
 
 	private JScrollPane leftScrollPane;
@@ -167,32 +170,9 @@ public class SendFileView extends JPanel {
 	 * The buildLeftPanel method list all user of system in a JList.
 	 */
 	public void buildLeftPanel() {
-		
-		
-		System.out.println("chegei em buildLeftPanel");
-		
-		data = new String[UserClient.getAllUsers().getBody().length];
-		
-		int i = 0;
-		for (User user : UserClient.getAllUsers().getBody()) {
-			
-			String salt = "";
-			try {
-				salt = Crypto.generateRandomSalt();
-			} catch (UnsupportedEncodingException e1) {
-				e1.printStackTrace();
-			}
-			String password = "";
-			try {
-				password = Crypto.encrypt(user.getPassword(), salt);
-			} catch (DataLengthException | IllegalStateException | InvalidCipherTextException e) {
-				e.printStackTrace();
-			}
-			data[i] = user.getName() + " " + salt + " " + password + "\n";
-			i++;
-		}
-
-		leftList = new JList<String>(data);
+		fillList();
+		leftList = new JList<String>();
+		leftList.setModel(listModel);
 		leftList.setVisibleRowCount(6);
 		leftList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);       
 		leftScrollPane = new JScrollPane(leftList);
@@ -225,6 +205,29 @@ public class SendFileView extends JPanel {
 //		JOptionPane.showMessageDialog(null, new JScrollPane(rightList));
 		rightScrollPane = new JScrollPane(rightList);
 		rightPanel.add(rightScrollPane);
+	}
+	public void fillList() {
+
+		listModel = new DefaultListModel<String>();
+		listModel.clear();
+		for (User user : UserClient.getAllUsers().getBody()) {
+			
+			String salt = "";
+			try {
+				salt = Crypto.generateRandomSalt();
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+			String password = "";
+			try {
+				password = Crypto.encrypt(user.getPassword(), salt);
+			} catch (DataLengthException | IllegalStateException | InvalidCipherTextException e) {
+				e.printStackTrace();
+			}
+			listModel.addElement(user.getName()+" "+user.getPassword());
+			
+		}
+		leftList.setModel(listModel);
 	}
 
 	/**
