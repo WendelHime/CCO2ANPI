@@ -7,12 +7,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
 
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
+
+import com.sun.corba.se.spi.oa.OADefault;
 
 import br.com.cco2anpi.tools.Crypto;
 import br.com.cco2anpi.tools.FileHandler;
@@ -29,6 +34,7 @@ public class SendFileController implements ActionListener{
 		this.sendFileView.gettoRightButton().addActionListener(this);
 		this.sendFileView.getconfirmButton().addActionListener(this);
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.sendFileView.getremoveAllButton()) {
@@ -39,25 +45,28 @@ public class SendFileController implements ActionListener{
 		}
 		
 		if (e.getSource() == this.sendFileView.getremoveSelectedButton()) {
-		
+				
+			@SuppressWarnings("deprecation")
+			Object[] listaDeSelecionados = this.sendFileView.getrightList().getSelectedValues();
+			Object[] lista = new Object[this.sendFileView.getlistModelRight().size()];
+			for (int i = 0; i < lista.length; i++){
+				lista[i] = this.sendFileView.getlistModelRight().getElementAt(i);
+			}
+			
+
+//			System.out.println(this.sendFileView.getlistModelRight().size());
+			
+			for (int j = 0; j < listaDeSelecionados.length; j++){
+				System.out.println(Searcher.binarySearch(lista, listaDeSelecionados[j].toString()));
+				System.out.println(lista[j].toString()+" "+ listaDeSelecionados[j].toString());
+
+				this.sendFileView.getlistModelRight().remove(Searcher.binarySearch(lista, listaDeSelecionados[j].toString()));
+			}
 			
 			
 			
 			
-			
-			
-//			@SuppressWarnings("deprecation")
-//			Object[] lista = rightList.getSelectedValues();
-//			String[] itens = new String[lista.length];
-//						
-//			for(int i = 0; i < sendList.size(); i++)
-//		    {
-//				itens[i] = (String) lista[i];					
-//				rightList.remove(i);
-//				sendList.remove(i);
-//		    }
-//
-//			System.out.println(Arrays.toString(itens)+"\nForam removidos");
+			this.sendFileView.fillListR();
 		}
 		
 		if (e.getSource() == this.sendFileView.getallToRightButton()) {

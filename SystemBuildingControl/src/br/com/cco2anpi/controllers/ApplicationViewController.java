@@ -30,7 +30,7 @@ public class ApplicationViewController {
 	private static SendFileView sendFileView;
 	private static ComplexView complexView;
 	private static ApplicationView applicationViewContentPanel;
-
+	private SendFileController sendFileController;
 	// para teste
 	private static CompanyPanel companyPanel;
 	private static EmployerPanel employerPanel;
@@ -46,6 +46,7 @@ public class ApplicationViewController {
 	 */
 	public ApplicationViewController() {
 		bn = ResourceBundle.getBundle("languages.language", new Locale("en", "US"));
+		
 		menu = new Menu();
 		this.bar = menu.getJMenuBar();
 		this.airConditionerView = new AirConditionerView(bn);
@@ -54,6 +55,7 @@ public class ApplicationViewController {
 		this.companyPanel = new CompanyPanel(bn);
 		this.employerPanel = new EmployerPanel(bn);
 		this.sendFileView = new SendFileView(bn);
+		sendFileController = new SendFileController(sendFileView);
 		this.complexView = new ComplexView(bn);
 		this.userPanel = new UserPanel(bn);
 		this.accessConsultPanel = new AccessConsultPanel(bn);

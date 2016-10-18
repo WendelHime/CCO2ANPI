@@ -52,6 +52,8 @@ public class SendFileView extends JPanel {
 	private JList leftList;
 	private JList rightList;
 	private DefaultListModel listModel;
+	private DefaultListModel listModelRight;
+
 	private ArrayList<String> sendList;
 
 	private JScrollPane leftScrollPane;
@@ -183,6 +185,24 @@ public class SendFileView extends JPanel {
 	 * This method make a panel to show all users that has access to building
 	 */
 	private void buildRightPanel() {	
+		fillListR();
+		rightList = new JList<String>();
+		rightList.setModel(listModelRight);
+	    rightList.setVisibleRowCount(6);
+		rightList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		rightScrollPane = new JScrollPane(rightList);
+		rightPanel.add(rightScrollPane);
+	}
+	public DefaultListModel getlistModelRight() {
+		return listModelRight;
+	}
+	public JList getrightList() {
+		return rightList;
+	}
+	public void fillListR() {
+
+		listModelRight = new DefaultListModel<String>();
+		listModelRight.clear();
 		String content = "";
 		Path currentRelativePath = Paths.get("");
 		String s = currentRelativePath.toAbsolutePath().toString();
@@ -193,18 +213,12 @@ public class SendFileView extends JPanel {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		String[] sub = content.split("\n");
 		
-		rightList = new JList<String>(sub);
-	    rightList.setVisibleRowCount(6);
-		rightList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-
-//		int[] select = { 19, 20, 22 };
-//		rightList.setSelectedIndices(select);
-//		JOptionPane.showMessageDialog(null, new JScrollPane(rightList));
-		rightScrollPane = new JScrollPane(rightList);
-		rightPanel.add(rightScrollPane);
+		String[] sub = content.split("\n");
+		for(int i = 0; i< sub.length;i++){
+			listModelRight.addElement(sub[i]);
+		}		
+		rightList.setModel(listModelRight);
 	}
 	public void fillList() {
 
