@@ -10,7 +10,8 @@ import java.util.Set;
 /**
  * @author wotan
  * 
- * Alteração dos atributos businessHours e airconditionerHours de Integer para String
+ *         AlteraÃ§Ã£o dos atributos businessHours e airconditionerHours de
+ *         Integer para String
  */
 public class Company implements ICompany {
     private Integer id;
@@ -33,7 +34,7 @@ public class Company implements ICompany {
 	businessHours = sourceObject.getBusinessHours();
 	maximumTemperature = sourceObject.getMaximumTemperature();
 	airconditionerHours = sourceObject.getAirConditionerHours();
-	complexBuilding = (ComplexBuilding) sourceObject.getComplexBuilding();
+	setComplexBuilding(sourceObject.getComplexBuilding());
 	setEmployers(sourceObject.getEmployers());
     }
 
@@ -126,11 +127,11 @@ public class Company implements ICompany {
     public void setAirConditionerHours(String airconditionerHours) {
 	this.airconditionerHours = airconditionerHours;
     }
-    
+
     /**
      * @return the complexBuilding
      */
-    public IComplexBuilding getComplexBuilding() {
+    public br.com.cco2anpi.models.ComplexBuilding getComplexBuilding() {
 	return complexBuilding;
     }
 
@@ -138,8 +139,8 @@ public class Company implements ICompany {
      * @param complexBuilding
      *            the complexBuilding to set
      */
-    public void setComplexBuilding(IComplexBuilding complexBuilding) {
-	this.complexBuilding = (ComplexBuilding) complexBuilding;
+    public void setComplexBuilding(br.com.cco2anpi.models.ComplexBuilding complexBuilding) {
+	this.complexBuilding = new ComplexBuilding(complexBuilding);
     }
 
     /**

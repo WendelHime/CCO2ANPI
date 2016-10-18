@@ -52,7 +52,7 @@ public class ComplexBuildingController extends BaseController {
     public @ResponseBody ResponseEntity<ComplexBuilding> getComplexBuilding(
 	    @RequestBody ComplexBuilding complexBuilding) {
 	ComplexBuilding result = new ComplexBuilding(
-		complexBuildingRepository.getComplexBuilding(complexBuilding.getId()));
+		complexBuildingRepository.getComplexBuilding(complexBuilding));
 	if (result.getId() != null) {
 	    return new ResponseEntity<ComplexBuilding>(result, HttpStatus.OK);
 	}

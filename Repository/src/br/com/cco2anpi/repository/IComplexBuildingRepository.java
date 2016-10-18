@@ -16,7 +16,7 @@ public interface IComplexBuildingRepository {
 
     boolean delete(IComplexBuilding complexBuilding);
 
-    IComplexBuilding getComplexBuilding(Integer id);
+    IComplexBuilding getComplexBuilding(IComplexBuilding id);
 
     IComplexBuilding[] getAllBuildingSets();
 }

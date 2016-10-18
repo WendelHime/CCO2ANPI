@@ -21,7 +21,21 @@ public class CompanyClient {
      *            company to be inserted
      * @return return company filled
      */
+//    @Test
     public static ResponseEntity<Company> insert(Company company) {
+//	Company company = new Company();
+//	company.setCnpj("000000");
+//	company.setSocialReason("teste");
+//	ComplexBuilding complexBuilding = new ComplexBuilding();
+//	complexBuilding.setNumber("1");
+//	company.setComplexBuilding(ComplexBuildingClient.getComplexBuilding(complexBuilding).getBody());
+//	company.setBusinessHours("" + "-" + "");
+//	company.setMaximumTemperature(20.05);
+//	company.setAirConditionerHours("" + "-" + "");
+//	company.setEmployers(new HashSet<>(0));
+//	assertEquals(Company.class, new RestTemplate()
+//		.postForEntity(REST_SERVICE_URI + "/Company/insert.json", company, Company.class).getBody().getClass());
+
 	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Company/insert.json", company, Company.class);
     }
 
@@ -55,6 +69,7 @@ public class CompanyClient {
     public static ResponseEntity<Company[]> getAllCompanies() {
 	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Company/getAllCompanies.json", Company[].class);
     }
+
     /**
      * Method used to get all companys
      * 

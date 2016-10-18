@@ -22,7 +22,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.cco2anpi.models.ICompany;
-import br.com.cco2anpi.models.IComplexBuilding;
 import br.com.cco2anpi.models.IEmployer;
 
 /**
@@ -66,7 +65,7 @@ public class Company implements Serializable, ICompany {
 	businessHours = sourceObject.getBusinessHours();
 	maximumTemperature = sourceObject.getMaximumTemperature();
 	airconditionerHours = sourceObject.getAirConditionerHours();
-	complexBuilding = (ComplexBuilding) sourceObject.getComplexBuilding();
+	setComplexBuilding(sourceObject.getComplexBuilding());
 	setEmployers(sourceObject.getEmployers());
     }
 
@@ -159,19 +158,20 @@ public class Company implements Serializable, ICompany {
     public void setAirConditionerHours(String airconditionerHours) {
 	this.airconditionerHours = airconditionerHours;
     }
+
     /**
      * @return the complexBuilding
      */
-    public IComplexBuilding getComplexBuilding() {
-	return complexBuilding;
+    public br.com.cco2anpi.models.ComplexBuilding getComplexBuilding() {
+	return new br.com.cco2anpi.models.ComplexBuilding(complexBuilding);
     }
 
     /**
      * @param complexBuilding
      *            the complexBuilding to set
      */
-    public void setComplexBuilding(IComplexBuilding complexBuilding) {
-	this.complexBuilding = (ComplexBuilding) complexBuilding;
+    public void setComplexBuilding(br.com.cco2anpi.models.ComplexBuilding complexBuilding) {
+	this.complexBuilding = new ComplexBuilding(complexBuilding);
     }
 
     /**
