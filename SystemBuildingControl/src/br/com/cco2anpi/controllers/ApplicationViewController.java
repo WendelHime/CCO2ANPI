@@ -9,10 +9,10 @@ import br.com.cco2anpi.views.AccessConsultPanel;
 import br.com.cco2anpi.views.AirConditionerView;
 import br.com.cco2anpi.views.ApplicationView;
 import br.com.cco2anpi.views.CompanyPanel;
-import br.com.cco2anpi.views.CompanyView;
+//import br.com.cco2anpi.views.CompanyView;
 import br.com.cco2anpi.views.ComplexView;
 //import br.com.cco2anpi.views.ConsultAccessBuildingView;
-import br.com.cco2anpi.views.EmployeeView;
+//import br.com.cco2anpi.views.EmployeeView;
 import br.com.cco2anpi.views.EmployerPanel;
 import br.com.cco2anpi.views.SendFileView;
 import br.com.cco2anpi.views.UserPanel;
@@ -24,8 +24,8 @@ import br.com.cco2anpi.views.shared.Menu;
 public class ApplicationViewController {
 
 	private static AirConditionerView airConditionerView;
-	private static CompanyView companyView;
-	private static EmployeeView employeeView;
+//	private static CompanyView companyView;
+//	private static EmployeeView employeeView;
 //	private static ConsultAccessBuildingView consultAccessBuildingView;
 	private static SendFileView sendFileView;
 	private static ComplexView complexView;
