@@ -1,4 +1,4 @@
-package sistemaexterno.catraca;
+package br.com.cco2anpi.catraca.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
 
+import br.com.cco2anpi.catraca.views.LoginView;
 import br.com.cco2anpi.tools.Crypto;
 import br.com.cco2anpi.tools.FileHandler;
 import br.com.cco2anpi.tools.Searcher;

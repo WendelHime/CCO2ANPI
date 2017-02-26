@@ -1,4 +1,4 @@
-package sistemaexterno.catraca;
+package br.com.cco2anpi.catraca.views;
 
 
 import java.awt.BorderLayout;

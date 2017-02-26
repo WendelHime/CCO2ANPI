@@ -429,7 +429,7 @@ public class CompanyPanel extends JPanel {
 				ComplexBuilding complexBuilding = new ComplexBuilding();
 				complexBuilding.setNumber(comlpexBuildingField.getText());
 				company.setComplexBuilding(
-						(IComplexBuilding) ComplexBuildingClient.getComplexBuilding(complexBuilding));
+						ComplexBuildingClient.getComplexBuilding(complexBuilding).getBody());
 				company.setBusinessHours(startHourField.getText() + "-" + endHourField.getText());
 				company.setMaximumTemperature(Double.parseDouble(temperatureField.getText()));
 				company.setAirConditionerHours(startAirField.getText() + "-" + endAirField.getText());
@@ -454,7 +454,7 @@ public class CompanyPanel extends JPanel {
 				ComplexBuilding complexBuilding = new ComplexBuilding();
 				complexBuilding.setNumber(comlpexBuildingField.getText());
 				companies[dataTable.getSelectedRow()].setComplexBuilding(
-						(IComplexBuilding) ComplexBuildingClient.getComplexBuilding(complexBuilding));
+						ComplexBuildingClient.getComplexBuilding(complexBuilding).getBody());
 				companies[dataTable.getSelectedRow()]
 						.setBusinessHours(startHourField.getText() + "-" + endHourField.getText());
 				companies[dataTable.getSelectedRow()]

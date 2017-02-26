@@ -1,6 +1,6 @@
-package sistemaexterno.catraca;
-import sistemaexterno.catraca.LoginController;
-import sistemaexterno.catraca.LoginView;
+package br.com.cco2anpi.catraca;
+import br.com.cco2anpi.catraca.controllers.LoginController;
+import br.com.cco2anpi.catraca.views.LoginView;
 /**
  * @author pitagoras
  * */
