@@ -120,7 +120,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testGetUser() {
 		try {
-			IUser user = userRepository.getUser(18);
+			IUser user = userRepository.getUser(1);
 			// The return of getUser() can be null, then if return is null, test
 			// is ok!
 			if (user != null) {
