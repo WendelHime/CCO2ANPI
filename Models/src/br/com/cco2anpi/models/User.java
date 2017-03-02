@@ -4,7 +4,6 @@
 package br.com.cco2anpi.models;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -12,14 +11,14 @@ import java.util.Set;
  */
 public class User implements IUser {
 
-	protected Integer id;
+	protected Integer userID;
 	protected String username;
 	protected String password;
 	protected String salt;
 	protected String name;
 	protected String cpf;
 	protected String officeHours;
-	protected Set<Access> access = new HashSet<>(0);
+	protected Set<IAccess> access = new HashSet<>(0);
 	protected Integer type;
 
 	public User() {
@@ -32,7 +31,7 @@ public class User implements IUser {
 	 * @param sourceObject
 	 */
 	public User(IUser sourceObject) {
-		id = sourceObject.getId();
+		userID = sourceObject.getUserId();
 		username = sourceObject.getUsername();
 		password = sourceObject.getPassword();
 		salt = sourceObject.getSalt();
@@ -46,16 +45,16 @@ public class User implements IUser {
 	/**
 	 * @return the id
 	 */
-	public Integer getId() {
-		return id;
+	public Integer getUserId() {
+		return userID;
 	}
 
 	/**
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setUserId(Integer id) {
+		this.userID = id;
 	}
 
 	/**
@@ -160,10 +159,11 @@ public class User implements IUser {
 	 *            the access to set
 	 */
 	public void setAccess(Set<IAccess> access) {
-		Iterator<IAccess> iterator = access.iterator();
-		while (iterator.hasNext()) {
-			this.access.add((Access) iterator.next());
-		}
+		// Iterator<IAccess> iterator = access.iterator();
+		// while (iterator.hasNext()) {
+		// this.access.add((Access) iterator.next());
+		// }
+		this.access = access;
 	}
 
 	/**

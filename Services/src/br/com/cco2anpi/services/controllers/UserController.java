@@ -52,7 +52,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "getUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<User> getUser(@RequestBody User user) {
 		if (userRepository.exists(user)) {
-			return new ResponseEntity<User>(new User(userRepository.getUser(user.getId())), HttpStatus.OK);
+			return new ResponseEntity<User>(new User(userRepository.getUser(user.getUserId())), HttpStatus.OK);
 		}
 		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 	}
@@ -65,7 +65,7 @@ public class UserController extends BaseController {
 	 * @return user filled
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<User> insert(@RequestBody User user) {
+	public @ResponseBody ResponseEntity<User> insert(@RequestBody User user) {		
 		if (userRepository.exists(user)) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}

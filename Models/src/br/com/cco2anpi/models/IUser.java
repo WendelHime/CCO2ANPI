@@ -10,7 +10,7 @@ import java.util.Set;
  *
  */
 public interface IUser {
-	void setId(Integer id);
+	void setUserId(Integer id);
 	void setUsername(String username);
 	void setPassword(String password);
 	void setSalt(String salt);
@@ -19,7 +19,7 @@ public interface IUser {
 	void setOfficeHours(String officeHours);
 	void setAccess(Set<IAccess> access);
 	void setType(Integer type);
-	Integer getId();
+	Integer getUserId();
 	String getUsername();
 	String getPassword();
 	String getSalt();

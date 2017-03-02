@@ -1,22 +1,26 @@
+package br.com.cco2anpi.repository.tests;
 /**
  * 
  */
-package br.com.cco2anpi.repository.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.PropertyValueException;
 import org.junit.Before;
 import org.junit.Test;
 
 import br.com.cco2anpi.models.Employer;
-import br.com.cco2anpi.models.IUser;
-import br.com.cco2anpi.models.User;
-import br.com.cco2anpi.repository.EmployersRepository;
+import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
-import br.com.cco2anpi.tools.Crypto;
+import br.com.cco2anpi.models.User;
+import br.com.cco2anpi.repository.CompanyRepository;
+import br.com.cco2anpi.repository.EmployersRepository;
+import br.com.cco2anpi.repository.UserRepository;
 
 /**
  * @author Giovanni Maciel
@@ -33,19 +37,30 @@ public class EmployersRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		this.employersRepository = new EmployersRepository("hibernate.cfg.xml");
-		this.employer = new Employer();
-		employer.setUsername("gvn");
-		employer.setSalt(Crypto.generateRandomSalt());
-		employer.setPassword(Crypto.encrypt("t", employer.getSalt()));
-		employer.setName("pal");
-		employer.setCpf("0");
-		employer.setAccessHour("0");
-		employer.setAccess(new HashSet(0));
-		employer.setType(0);
-		employer.setPermissionTemperature(true);
-		employer.setOfficeHours("10");
-		employer.setCompanies(new HashSet(0));
-
+		IEmployer[] employers = employersRepository.getAllEmployers();
+		if (employers.length > 0) {
+			this.employer = new Employer(employers[0]);
+		} else {
+			CompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
+			UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+			User user = new User(userRepository.getAllUsers()[0]);
+			this.employer = new Employer();
+			employer.setAccessHour("0");
+			employer.setPermissionTemperature(true);
+			Set<ICompany> companies = new HashSet<ICompany>();
+			companies.add(companyRepository.getAllCompanies()[0]);
+			employer.setCompanies(companies);
+			employer.setId(user.getUserId());
+			employer.setUserID(user.getUserId());
+			employer.setAccess(user.getAccess());
+			employer.setCpf(user.getCpf());
+			employer.setName(user.getName());
+			employer.setOfficeHours(user.getOfficeHours());
+			employer.setType(user.getType());
+			employer.setUsername(user.getUsername());
+			employer.setSalt(user.getSalt());
+			employer.setPassword(user.getPassword());
+		}
 	}
 
 	/**
@@ -58,17 +73,17 @@ public class EmployersRepositoryTest {
 	}
 
 	/**
-	 * Test method for 
+	 * Test method for
 	 * {@link br.com.cco2anpi.repository.EmployersRepository#insert(br.com.cco2anpi.models.IEmployer)}.
 	 */
 	@Test
 	public void testInsert() {
-		try{
+		try {
 			IEmployer employer = employersRepository.insert(this.employer);
 			assertEquals(employer.getClass(), Employer.class);
-		}catch(PropertyValueException pvex){
+		} catch (PropertyValueException pvex) {
 			fail("Property required not defined :" + pvex.getMessage());
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			fail("Error on execution: " + ex.getMessage());
 		}
 	}
@@ -114,7 +129,7 @@ public class EmployersRepositoryTest {
 	@Test
 	public void testGetEmployer() {
 		try {
-			IEmployer employer = employersRepository.getEmployer(20);
+			IEmployer employer = employersRepository.getEmployer(employersRepository.getAllEmployers()[0].getUserID());
 
 			if (employer != null) {
 				assertEquals(employer.getClass(), Employer.class);
@@ -134,7 +149,8 @@ public class EmployersRepositoryTest {
 	public void testGetAllEmployers() {
 		try {
 			IEmployer[] employers = employersRepository.getAllEmployers();
-			// The return of getAllEmployers() can be null, then if return is null,
+			// The return of getAllEmployers() can be null, then if return is
+			// null,
 			// test is ok!
 			if (employers != null) {
 				assertEquals(employers.getClass(), Employer[].class);

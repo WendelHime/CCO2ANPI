@@ -10,7 +10,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import br.com.cco2anpi.models.Company;
 import br.com.cco2anpi.models.Employer;
 import br.com.cco2anpi.models.IEmployer;
 

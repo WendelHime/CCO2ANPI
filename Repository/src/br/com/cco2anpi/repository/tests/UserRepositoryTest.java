@@ -1,7 +1,7 @@
+package br.com.cco2anpi.repository.tests;
 /**
  * 
  */
-package br.com.cco2anpi.repository.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,6 +12,7 @@ import java.util.HashSet;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.com.cco2anpi.models.IAccess;
 import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.User;
 import br.com.cco2anpi.repository.UserRepository;
@@ -23,12 +24,11 @@ import br.com.cco2anpi.tools.Crypto;
  */
 /**
  * Class for test UserRepository's methods
- * */
+ */
 public class UserRepositoryTest {
 
 	private UserRepository userRepository;
 	private User user;
-	private User user2;
 
 	/**
 	 * @throws java.lang.Exception
@@ -37,14 +37,13 @@ public class UserRepositoryTest {
 	public void setUp() throws Exception {
 		this.userRepository = new UserRepository("hibernate.cfg.xml");
 		this.user = new User();
-		this.user2 = new User();		
 		user.setUsername("ge");
 		user.setSalt(Crypto.generateRandomSalt());
 		user.setPassword(Crypto.encrypt("k", user.getSalt()));
 		user.setName("k");
 		user.setCpf("0");
 		user.setOfficeHours("0");
-		user.setAccess(new HashSet(0));
+		user.setAccess(new HashSet<IAccess>(0));
 		user.setType(0);
 	}
 
@@ -57,7 +56,7 @@ public class UserRepositoryTest {
 	public void testUserRepository() {
 		assertTrue(true);
 	}
-	
+
 	/**
 	 * Test method for
 	 * {@link br.com.cco2anpi.repository.UserRepository#insert(br.com.cco2anpi.models.IUser)}
@@ -66,7 +65,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testInsert() {
 		try {
-			
+
 			IUser user = userRepository.insert(this.user);
 			assertEquals(user.getClass(), User.class);
 		} catch (Exception ex) {
@@ -82,7 +81,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testUpdate() {
 		try {
-			this.user.setId(18);
+			this.user.setUserId(18);
 			this.user.setUsername("ge");
 			IUser user = userRepository.update(this.user);
 			// The return of getUser() can be null, then if return is null, test
@@ -120,7 +119,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testGetUser() {
 		try {
-			IUser user = userRepository.getUser(1);
+			IUser user = userRepository.getUser(userRepository.getAllUsers()[0].getUserId());
 			// The return of getUser() can be null, then if return is null, test
 			// is ok!
 			if (user != null) {

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,90 +31,114 @@ import br.com.cco2anpi.models.IEmployer;
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Employer extends User implements Serializable, IEmployer {
 
-    // @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
-    private Integer id;
-    @Column(name = "access_hour")
-    private String accessHour;
-    @Type(type = "org.hibernate.type.NumericBooleanType")
-    @Column(name = "permission_temperature", columnDefinition = "TINYINT")
-    private Boolean permissionTemperature;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "employers")
-    private Set<Company> companies = new HashSet<>(0);
+	// @Id
+	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private Integer id;
+	@Column(name = "access_hour")
+	private String accessHour;
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	@Column(name = "permission_temperature", columnDefinition = "TINYINT")
+	private Boolean permissionTemperature;
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "employers", cascade=CascadeType.ALL)
+	private Set<Company> companies = new HashSet<>(0);
 
-    public Employer() {
+	public Employer() {
 
-    }
-
-    public Employer(IEmployer sourceObject) {
-	this.id = sourceObject.getId();
-	this.accessHour = sourceObject.getAccessHour();
-	this.permissionTemperature = sourceObject.getPermissionTemperature();
-	setCompanies(sourceObject.getCompanies());
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-	return id;
-    }
-
-    /**
-     * @param id
-     *            the id to set
-     */
-    public void setId(Integer id) {
-	this.id = id;
-    }
-
-    /**
-     * @return the accessHour
-     */
-    public String getAccessHour() {
-	return accessHour;
-    }
-
-    /**
-     * @param accessHour
-     *            the accessHour to set
-     */
-    public void setAccessHour(String accessHour) {
-	this.accessHour = accessHour;
-    }
-
-    /**
-     * @return the permissionTemperature
-     */
-    public Boolean getPermissionTemperature() {
-	return permissionTemperature;
-    }
-
-    /**
-     * @param permissionTemperature
-     *            the permissionTemperature to set
-     */
-    public void setPermissionTemperature(Boolean permissionTemperature) {
-	this.permissionTemperature = permissionTemperature;
-    }
-
-    /**
-     * @return the companies
-     */
-    public Set<ICompany> getCompanies() {
-	return new HashSet<ICompany>(companies);
-    }
-
-    /**
-     * @param companies
-     *            the companies to set
-     */
-    public void setCompanies(Set<ICompany> companies) {
-	Iterator<ICompany> iterator = companies.iterator();
-	while (iterator.hasNext()) {
-	    this.companies.add((Company) iterator.next());
 	}
-    }
+
+	public Employer(IEmployer sourceObject) {
+		this.id = sourceObject.getId();
+		this.userID = sourceObject.getUserID();
+		this.accessHour = sourceObject.getAccessHour();
+		this.permissionTemperature = sourceObject.getPermissionTemperature();
+		this.setUsername(sourceObject.getUsername());
+		this.setPassword(sourceObject.getPassword());
+		this.setSalt(sourceObject.getSalt());
+		this.setName(sourceObject.getName());
+		this.setCpf(sourceObject.getCpf());
+		this.setOfficeHours(sourceObject.getOfficeHours());
+		this.setAccess(sourceObject.getAccess());
+		this.setType(sourceObject.getType());
+		this.setCompanies(sourceObject.getCompanies());
+	}
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the accessHour
+	 */
+	public String getAccessHour() {
+		return accessHour;
+	}
+
+	/**
+	 * @param accessHour
+	 *            the accessHour to set
+	 */
+	public void setAccessHour(String accessHour) {
+		this.accessHour = accessHour;
+	}
+
+	/**
+	 * @return the permissionTemperature
+	 */
+	public Boolean getPermissionTemperature() {
+		return permissionTemperature;
+	}
+
+	/**
+	 * @param permissionTemperature
+	 *            the permissionTemperature to set
+	 */
+	public void setPermissionTemperature(Boolean permissionTemperature) {
+		this.permissionTemperature = permissionTemperature;
+	}
+
+	/**
+	 * @return the companies
+	 */
+	public Set<ICompany> getCompanies() {
+		return new HashSet<ICompany>(companies);
+	}
+
+	/**
+	 * @param companies
+	 *            the companies to set
+	 */
+	public void setCompanies(Set<ICompany> companies) {
+		Iterator<ICompany> iterator = companies.iterator();
+		while (iterator.hasNext()) {
+			this.companies.add(new Company(iterator.next()));
+		}
+	}
+
+	/**
+	 * @return the user id
+	 */
+	public Integer getUserID() {
+		return super.getUserId();
+	}
+
+	/**
+	 * @param id
+	 *            id of the user
+	 */
+	public void setUserID(Integer id) {
+		super.setUserId(id);
+	}
 
 }
