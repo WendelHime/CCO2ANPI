@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Tools/target/classes/META-INF/maven/Tools/Tools/pom.xml" />
+        <option value="$PROJECT_DIR$/Tools/target/classes/META-INF/maven/Tools/Tools/pom.properties" />
+        <option value="$PROJECT_DIR$/Tools/pom.xml" />
+        <option value="$PROJECT_DIR$/Models/target/classes/META-INF/maven/Models/Models/pom.xml" />
+        <option value="$PROJECT_DIR$/Models/target/classes/META-INF/maven/Models/Models/pom.properties" />
+        <option value="$PROJECT_DIR$/Models/pom.xml" />
+        <option value="$PROJECT_DIR$/Catraca/target/classes/META-INF/maven/Catraca/Catraca/pom.properties" />
+        <option value="$PROJECT_DIR$/Catraca/pom.xml" />
+        <option value="$PROJECT_DIR$/Database/target/classes/META-INF/maven/Database/Database/pom.xml" />
+        <option value="$PROJECT_DIR$/Database/target/classes/META-INF/maven/Database/Database/pom.properties" />
+        <option value="$PROJECT_DIR$/Database/pom.xml" />
+        <option value="$PROJECT_DIR$/Services/target/m2e-wtp/web-resources/META-INF/maven/Services/Services/pom.properties" />
+        <option value="$PROJECT_DIR$/Services/pom.xml" />
+        <option value="$PROJECT_DIR$/Repository/target/classes/META-INF/maven/Repository/Repository/pom.xml" />
+        <option value="$PROJECT_DIR$/Repository/target/classes/META-INF/maven/Repository/Repository/pom.properties" />
+        <option value="$PROJECT_DIR$/Repository/pom.xml" />
+        <option value="$PROJECT_DIR$/Services.Client/target/classes/META-INF/maven/Services.Client/Services.Client/pom.properties" />
+        <option value="$PROJECT_DIR$/Services.Client/pom.xml" />
+        <option value="$PROJECT_DIR$/SystemBuildingControl/target/classes/META-INF/maven/SystemBuildingControl/SystemBuildingControl/pom.properties" />
+        <option value="$PROJECT_DIR$/SystemBuildingControl/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

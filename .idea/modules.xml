@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Catraca/target/classes/META-INF/maven/Catraca/Catraca/Catraca.iml" filepath="$PROJECT_DIR$/Catraca/target/classes/META-INF/maven/Catraca/Catraca/Catraca.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Catraca/Catraca (1).iml" filepath="$PROJECT_DIR$/Catraca/Catraca (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Database/Database (1).iml" filepath="$PROJECT_DIR$/Database/Database (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Models/Models (1).iml" filepath="$PROJECT_DIR$/Models/Models (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Repository/Repository (1).iml" filepath="$PROJECT_DIR$/Repository/Repository (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Services/target/m2e-wtp/web-resources/META-INF/maven/Services/Services/Services.iml" filepath="$PROJECT_DIR$/Services/target/m2e-wtp/web-resources/META-INF/maven/Services/Services/Services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Services/Services (1).iml" filepath="$PROJECT_DIR$/Services/Services (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Services.Client/target/classes/META-INF/maven/Services.Client/Services.Client/Services.Client.iml" filepath="$PROJECT_DIR$/Services.Client/target/classes/META-INF/maven/Services.Client/Services.Client/Services.Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Services.Client/Services.Client (1).iml" filepath="$PROJECT_DIR$/Services.Client/Services.Client (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/SystemBuildingControl/target/classes/META-INF/maven/SystemBuildingControl/SystemBuildingControl/SystemBuildingControl.iml" filepath="$PROJECT_DIR$/SystemBuildingControl/target/classes/META-INF/maven/SystemBuildingControl/SystemBuildingControl/SystemBuildingControl.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SystemBuildingControl/SystemBuildingControl (1).iml" filepath="$PROJECT_DIR$/SystemBuildingControl/SystemBuildingControl (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/Tools/Tools (1).iml" filepath="$PROJECT_DIR$/Tools/Tools (1).iml" />
+    </modules>
+  </component>
+</project>

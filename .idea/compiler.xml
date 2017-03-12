@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Catraca" />
+        <module name="Catraca (1)" />
+        <module name="Database (1)" />
+        <module name="Models (1)" />
+        <module name="Repository (1)" />
+        <module name="Services" />
+        <module name="Services (1)" />
+        <module name="Services.Client" />
+        <module name="Services.Client (1)" />
+        <module name="SystemBuildingControl" />
+        <module name="SystemBuildingControl (1)" />
+        <module name="Tools (1)" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Catraca" target="1.5" />
+      <module name="Catraca (1)" target="1.8" />
+      <module name="Catraca (2)" target="1.5" />
+      <module name="Catraca (3)" target="1.8" />
+      <module name="Database (1)" target="1.8" />
+      <module name="Database (2)" target="1.5" />
+      <module name="Database (3)" target="1.8" />
+      <module name="Models (1)" target="1.8" />
+      <module name="Models (2)" target="1.5" />
+      <module name="Models (3)" target="1.8" />
+      <module name="Repository (1)" target="1.8" />
+      <module name="Repository (2)" target="1.5" />
+      <module name="Repository (3)" target="1.8" />
+      <module name="Services" target="1.5" />
+      <module name="Services (1)" target="1.6" />
+      <module name="Services (2)" target="1.5" />
+      <module name="Services (3)" target="1.8" />
+      <module name="Services.Client" target="1.5" />
+      <module name="Services.Client (1)" target="1.8" />
+      <module name="Services.Client (2)" target="1.5" />
+      <module name="Services.Client (3)" target="1.8" />
+      <module name="SystemBuildingControl" target="1.5" />
+      <module name="SystemBuildingControl (1)" target="1.8" />
+      <module name="SystemBuildingControl (2)" target="1.5" />
+      <module name="SystemBuildingControl (3)" target="1.8" />
+      <module name="Tools (1)" target="1.8" />
+      <module name="Tools (2)" target="1.5" />
+      <module name="Tools (3)" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
