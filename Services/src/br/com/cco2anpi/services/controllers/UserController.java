@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.User;
+import br.com.cco2anpi.repository.UserRepository;
 
 /**
  * @author wotan
@@ -26,7 +27,7 @@ import br.com.cco2anpi.models.User;
 @EnableWebMvc
 @RequestMapping("User/*")
 public class UserController extends BaseController {
-
+	
 	/**
 	 * Method used to get all users
 	 * 
@@ -34,6 +35,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<BaseResponse<IUser[]>> getAllUsers() {
+		UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		IUser[] usersDB = userRepository.getAllUsers();
 		return okResponse(usersDB, "Ok", HttpStatus.OK.value());
@@ -48,6 +50,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "getUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<BaseResponse<IUser>> getUser(@RequestBody User user) {
+		UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		if (userRepository.exists(user)) {
 			return okResponse(userRepository.getUser(user.getUserId()), "Ok", HttpStatus.OK.value());
@@ -64,6 +67,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user) {
+		UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		if (userRepository.exists(user)) {
 			return okResponse(new User(), "Conflict", HttpStatus.CONFLICT.value());
@@ -80,6 +84,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<BaseResponse<IUser>> update(@RequestBody User user) {
+		UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		if (userRepository.exists(user)) {
 			return okResponse(userRepository.update(user), "Ok", HttpStatus.ACCEPTED.value());
@@ -96,6 +101,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody User user) {
+		UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		if (userRepository.exists(user)) {
 			return okResponse(userRepository.delete(user), "No content", HttpStatus.NO_CONTENT.value());
