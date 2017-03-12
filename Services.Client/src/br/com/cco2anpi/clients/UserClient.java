@@ -3,9 +3,13 @@
  */
 package br.com.cco2anpi.clients;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.User;
 
 /**
@@ -14,47 +18,6 @@ import br.com.cco2anpi.models.User;
 public class UserClient {
 
 	public static final String REST_SERVICE_URI = "http://localhost:8080/Services";
-
-	// /**
-	// * @param args
-	// */
-	// public static void main(String[] args) {
-	// System.out.println("Testing create User API----------");
-	// User user = new User();
-	// user.setCpf("442.022.408-80");
-	// user.setName("Wendel Hime Lino");
-	// user.setUsername("teste2");
-	// try {
-	// user.setSalt(Crypto.generateRandomSalt());
-	// } catch (UnsupportedEncodingException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// try {
-	// user.setPassword(Crypto.encrypt("teste", user.getSalt()));
-	// } catch (DataLengthException | IllegalStateException |
-	// InvalidCipherTextException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// user.setOfficeHours(8);
-	// user.setAccess(new HashSet<IAccess>(0));
-	// ResponseEntity<User> response = insert(user);
-	// user = response.getBody();
-	// System.out.println("name: " + user.getName());
-	// user.setName("Wendel Hime Lino Castro");
-	// response = update(user);
-	// user = response.getBody();
-	// System.out.println("name: " + user.getName());
-	//
-	// ResponseEntity<User[]> responseUsers = getAllUsers();
-	// for (User searchedUser : responseUsers.getBody()) {
-	// System.out.println("Username: " + searchedUser.getUsername());
-	// }
-	//
-	// ResponseEntity<Boolean> responseStatus = delete(user);
-	// System.out.println("Status: " + responseStatus.getBody());
-	// }
 
 	/**
 	 * Method used to send a post to insert user
@@ -96,6 +59,19 @@ public class UserClient {
 	 */
 	public static ResponseEntity<User[]> getAllUsers() {
 		return new RestTemplate().getForEntity(REST_SERVICE_URI + "/User/getAllUsers.json", User[].class);
+	}
+
+	/**
+	 * Method uset to get specific user
+	 * 
+	 * @param user
+	 *            object user to be searched
+	 * @return user filled
+	 */
+	public static ResponseEntity<BaseResponse<User>> getUser(User user) {
+		return new RestTemplate().exchange(REST_SERVICE_URI + "/User/getUser.json", HttpMethod.POST,
+				new HttpEntity<>(user), new ParameterizedTypeReference<BaseResponse<User>>() {
+				});
 	}
 
 }

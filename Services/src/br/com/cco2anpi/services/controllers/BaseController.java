@@ -19,19 +19,33 @@ import br.com.cco2anpi.repository.UserRepository;
  */
 public class BaseController {
 
-    public final int defaultPageSize = 50;
-    protected IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
-    protected IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
-    protected IComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
-    protected ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
-    protected IEmployerRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
-    // private StopWatch stopWatch;
+	public final int defaultPageSize = 50;
+	protected IAccessRepository accessRepository;
+	protected IUserRepository userRepository;
+	protected IComplexBuildingRepository complexBuildingRepository;
+	protected ICompanyRepository companyRepository;
+	protected IEmployerRepository employerRepository;
+	protected long startTime;
 
-    /**
-     * Constructor of the class base controller
-     */
-    // public BaseController() {
-    //// stopWatch = new StopWatch();
-    // userRepository = new UserRepository("hibernate.cfg.xml");
-    // }
+	/**
+	 * Constructor of the class base controller
+	 */
+	public BaseController() {
+		accessRepository = new AccessRepository("hibernate.cfg.xml");
+		userRepository = new UserRepository("hibernate.cfg.xml");
+		complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
+		companyRepository = new CompanyRepository("hibernate.cfg.xml");
+		employerRepository = new EmployersRepository("hibernate.cfg.xml");
+	}
+
+	/**
+	 * Method to calculate elapsed time
+	 * 
+	 * @param start
+	 *            when starts to count
+	 * @return in ms time used until this call
+	 */
+	protected long calculateElapsedTime(long start) {
+		return System.currentTimeMillis() - start;
+	}
 }

@@ -133,7 +133,13 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 		Session session = getSessionFactory().openSession();
 		boolean status = false;
 		if (user.getUserId() != null) {
-			status = true;
+			try {
+				User objectTest = new User(session.find(br.com.cco2anpi.database.User.class, user.getUserId()));
+				System.out.println("User id:\t" + objectTest.getUserId());
+				status = true;
+			} catch (Exception ex) {
+				status = false;
+			}
 		} else {
 			try {
 				session.createQuery("from User user where user.username = :username",

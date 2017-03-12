@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.User;
 
@@ -32,14 +33,16 @@ public class UserController extends BaseController {
 	 * 
 	 * @return array of users
 	 */
-	@RequestMapping(value = "getAllUsers", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<User[]> getAllUsers() {
+	@RequestMapping(value = "getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<BaseResponse<IUser[]>> getAllUsers() {
+		startTime = System.currentTimeMillis();
 		IUser[] usersDB = userRepository.getAllUsers();
-		User[] users = new User[usersDB.length];
-		for (int i = 0; i < users.length; i++) {
-			users[i] = new User(usersDB[i]);
-		}
-		return new ResponseEntity<User[]>(users, HttpStatus.OK);
+		BaseResponse<IUser[]> baseResponse = new BaseResponse<>();
+		baseResponse.setMessage("Ok");
+		baseResponse.setStatusCode(HttpStatus.OK.value());
+		baseResponse.setResponse(usersDB);
+		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+		return new ResponseEntity<BaseResponse<IUser[]>>(baseResponse, HttpStatus.OK);
 	}
 
 	/**
@@ -50,11 +53,21 @@ public class UserController extends BaseController {
 	 * @return user filled
 	 */
 	@RequestMapping(value = "getUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<User> getUser(@RequestBody User user) {
+	public @ResponseBody ResponseEntity<BaseResponse<IUser>> getUser(@RequestBody User user) {
+		startTime = System.currentTimeMillis();
+		BaseResponse<IUser> baseResponse = new BaseResponse<>();
 		if (userRepository.exists(user)) {
-			return new ResponseEntity<User>(new User(userRepository.getUser(user.getUserId())), HttpStatus.OK);
+			baseResponse.setResponse(userRepository.getUser(user.getUserId()));
+			baseResponse.setMessage("Ok");
+			baseResponse.setStatusCode(HttpStatus.OK.value());
+			baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+			return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.OK);
 		}
-		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+		baseResponse.setMessage("Not found");
+		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+		baseResponse.setResponse(new User());
+		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.NOT_FOUND);
 	}
 
 	/**
@@ -64,12 +77,22 @@ public class UserController extends BaseController {
 	 *            to be inserted
 	 * @return user filled
 	 */
-	@RequestMapping(value = "insert", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<User> insert(@RequestBody User user) {		
+	@RequestMapping(value = "insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user) {
+		startTime = System.currentTimeMillis();
+		BaseResponse<IUser> baseResponse = new BaseResponse<>();
 		if (userRepository.exists(user)) {
-			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+			baseResponse.setResponse(new User());
+			baseResponse.setMessage("Conflict");
+			baseResponse.setStatusCode(HttpStatus.CONFLICT.value());
+			baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+			return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.CONFLICT);
 		}
-		return new ResponseEntity<User>(new User(userRepository.insert(user)), new HttpHeaders(), HttpStatus.CREATED);
+		baseResponse.setMessage("Not found");
+		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+		baseResponse.setResponse(userRepository.insert(user));
+		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, new HttpHeaders(), HttpStatus.CREATED);
 	}
 
 	/**
@@ -79,12 +102,22 @@ public class UserController extends BaseController {
 	 *            to be updated
 	 * @return user updated
 	 */
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<User> update(@RequestBody User user) {
+	@RequestMapping(value = "update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<BaseResponse<IUser>> update(@RequestBody User user) {
+		startTime = System.currentTimeMillis();
+		BaseResponse<IUser> baseResponse = new BaseResponse<>();
 		if (userRepository.exists(user)) {
-			return new ResponseEntity<User>(new User(userRepository.update(user)), new HttpHeaders(), HttpStatus.OK);
+			baseResponse.setResponse(userRepository.update(user));
+			baseResponse.setMessage("Ok");
+			baseResponse.setStatusCode(HttpStatus.OK.value());
+			baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+			return new ResponseEntity<BaseResponse<IUser>>(baseResponse, new HttpHeaders(), HttpStatus.OK);
 		}
-		return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+		baseResponse.setMessage("Not found");
+		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+		baseResponse.setResponse(new User());
+		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.NOT_FOUND);
 	}
 
 	/**
@@ -94,11 +127,21 @@ public class UserController extends BaseController {
 	 *            to be deleted
 	 * @return status
 	 */
-	@RequestMapping(value = "delete", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<Boolean> delete(@RequestBody User user) {
+	@RequestMapping(value = "delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody User user) {
+		startTime = System.currentTimeMillis();
+		BaseResponse<Boolean> baseResponse = new BaseResponse<>();
 		if (userRepository.exists(user)) {
-			return new ResponseEntity<Boolean>(userRepository.delete(user), new HttpHeaders(), HttpStatus.NO_CONTENT);
+			baseResponse.setResponse(userRepository.delete(user));
+			baseResponse.setMessage("Ok");
+			baseResponse.setStatusCode(HttpStatus.OK.value());
+			baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+			return new ResponseEntity<BaseResponse<Boolean>>(baseResponse, new HttpHeaders(), HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<Boolean>(HttpStatus.NOT_FOUND);
+		baseResponse.setMessage("Not found");
+		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+		baseResponse.setResponse(false);
+		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
+		return new ResponseEntity<BaseResponse<Boolean>>(HttpStatus.NOT_FOUND);
 	}
 }
