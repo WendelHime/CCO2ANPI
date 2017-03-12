@@ -26,8 +26,10 @@ public class UserClient {
 	 *            user to be inserted
 	 * @return return user filled
 	 */
-	public static ResponseEntity<User> insert(User user) {
-		return new RestTemplate().postForEntity(REST_SERVICE_URI + "/User/insert.json", user, User.class);
+	public static ResponseEntity<BaseResponse<User>> insert(User user) {
+		return new RestTemplate().exchange(REST_SERVICE_URI + "/User/insert.json", HttpMethod.POST, new HttpEntity<>(user),
+				new ParameterizedTypeReference<BaseResponse<User>>() {
+				});
 	}
 
 	/**
@@ -37,8 +39,10 @@ public class UserClient {
 	 *            user to be updated
 	 * @return user updated
 	 */
-	public static ResponseEntity<User> update(User user) {
-		return new RestTemplate().postForEntity(REST_SERVICE_URI + "/User/update.json", user, User.class);
+	public static ResponseEntity<BaseResponse<User>> update(User user) {
+		return new RestTemplate().exchange(REST_SERVICE_URI + "/User/update.json", HttpMethod.POST, new HttpEntity<>(user),
+				new ParameterizedTypeReference<BaseResponse<User>>() {
+				});
 	}
 
 	/**
@@ -48,8 +52,10 @@ public class UserClient {
 	 *            user to be deleted
 	 * @return status
 	 */
-	public static ResponseEntity<Boolean> delete(User user) {
-		return new RestTemplate().postForEntity(REST_SERVICE_URI + "/User/delete.json", user, Boolean.class);
+	public static ResponseEntity<BaseResponse<Boolean>> delete(User user) {
+		return new RestTemplate().exchange(REST_SERVICE_URI + "/User/delete.json", HttpMethod.POST, new HttpEntity<>(user),
+				new ParameterizedTypeReference<BaseResponse<Boolean>>() {
+				});
 	}
 
 	/**
@@ -57,8 +63,10 @@ public class UserClient {
 	 * 
 	 * @return return all users
 	 */
-	public static ResponseEntity<User[]> getAllUsers() {
-		return new RestTemplate().getForEntity(REST_SERVICE_URI + "/User/getAllUsers.json", User[].class);
+	public static ResponseEntity<BaseResponse<User[]>> getAllUsers() {
+		return new RestTemplate().exchange(REST_SERVICE_URI + "/User/getAllUsers.json", HttpMethod.GET, null,
+				new ParameterizedTypeReference<BaseResponse<User[]>>() {
+				});
 	}
 
 	/**
