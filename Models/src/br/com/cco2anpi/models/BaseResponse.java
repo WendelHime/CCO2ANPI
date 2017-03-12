@@ -4,8 +4,8 @@
 package br.com.cco2anpi.models;
 
 /**
- * @author wotan
- * Class used to be the base of any response used to the return of services
+ * @author wotan Class used to be the base of any response used to the return of
+ *         services
  */
 public class BaseResponse<T> implements IBaseResponse<T> {
 
@@ -13,11 +13,18 @@ public class BaseResponse<T> implements IBaseResponse<T> {
 	private String message;
 	private int status_code;
 	private T response;
-	
+
 	public BaseResponse() {
 		
 	}
 	
+	public BaseResponse(T response) {
+		this.elapsed_ms = 0;
+		this.message = "OK";
+		this.status_code = 200;
+		this.response = response;
+	}
+
 	public BaseResponse(IBaseResponse<T> sourceObject) {
 		this.elapsed_ms = sourceObject.getElapsed_ms();
 		this.message = sourceObject.getMessage();
