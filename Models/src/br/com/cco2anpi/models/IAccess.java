@@ -13,13 +13,9 @@ public interface IAccess {
 
     void setDateOut(String date);
 
-    void setUser(User user);
-
     Integer getId();
 
     String getDateIn();
 
     String getDateOut();
-
-    User getUser();
 }

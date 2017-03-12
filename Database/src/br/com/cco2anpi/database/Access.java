@@ -46,7 +46,6 @@ public class Access implements Serializable, IAccess {
 		this.id = sourceObject.getId();
 		this.dateIn = sourceObject.getDateIn();
 		this.dateOut = sourceObject.getDateOut();
-		this.user = new User(sourceObject.getUser());
 	}
 
 	/**
@@ -92,13 +91,6 @@ public class Access implements Serializable, IAccess {
 	 */
 	public void setDateOut(String dateOut) {
 		this.dateOut = dateOut;
-	}
-
-	/**
-	 * @return the user
-	 */
-	public br.com.cco2anpi.models.User getUser() {
-		return new br.com.cco2anpi.models.User(user);
 	}
 
 	/**

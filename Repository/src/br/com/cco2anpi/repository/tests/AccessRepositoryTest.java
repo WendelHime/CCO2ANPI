@@ -12,9 +12,7 @@ import org.junit.Test;
 
 import br.com.cco2anpi.models.Access;
 import br.com.cco2anpi.models.IAccess;
-import br.com.cco2anpi.models.User;
 import br.com.cco2anpi.repository.AccessRepository;
-import br.com.cco2anpi.repository.UserRepository;
 
 /**
  * @author Giovanni Maciel
@@ -28,14 +26,15 @@ public class AccessRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		this.accessRepository = new AccessRepository("hibernate.cfg.xml");
-		UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+		// UserRepository userRepository = new
+		// UserRepository("hibernate.cfg.xml");
 		this.access = new Access();
 		this.access.setDateIn("20/02");
 		this.access.setDateOut("20/03");
 		this.access.setId(1);
 		// this.access.setUser(); <-------------------------- WARNING @PARAM
-		User user = new User(userRepository.getAllUsers()[0]);
-		this.access.setUser(user);
+		// User user = new User(userRepository.getAllUsers()[0]);
+		// this.access.setUser(user);
 	}
 
 	/**
