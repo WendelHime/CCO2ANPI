@@ -67,7 +67,7 @@ public class UserController extends BaseController {
 		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
 		baseResponse.setResponse(new User());
 		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
-		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.OK);
 	}
 
 	/**
@@ -88,11 +88,11 @@ public class UserController extends BaseController {
 			baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
 			return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.CONFLICT);
 		}
-		baseResponse.setMessage("Not found");
-		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+		baseResponse.setMessage("Created");
+		baseResponse.setStatusCode(HttpStatus.CREATED.value());
 		baseResponse.setResponse(userRepository.insert(user));
 		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
-		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, new HttpHeaders(), HttpStatus.CREATED);
+		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, new HttpHeaders(), HttpStatus.OK);
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class UserController extends BaseController {
 		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
 		baseResponse.setResponse(new User());
 		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
-		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<BaseResponse<IUser>>(baseResponse, HttpStatus.OK);
 	}
 
 	/**
@@ -142,6 +142,6 @@ public class UserController extends BaseController {
 		baseResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
 		baseResponse.setResponse(false);
 		baseResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
-		return new ResponseEntity<BaseResponse<Boolean>>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<BaseResponse<Boolean>>(HttpStatus.OK);
 	}
 }
