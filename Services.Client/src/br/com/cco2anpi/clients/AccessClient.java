@@ -95,7 +95,7 @@ public class AccessClient {
 	map.add("parameters", dateEnd);
 
 	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAccessByTypeAndDate.json", HttpMethod.POST, map,
-		new ParameterizedTypeReference<BaseResponse<User>>() {
+		new ParameterizedTypeReference<BaseResponse<Access>>() {
 		});
     }
 }
