@@ -60,8 +60,8 @@ public class AccessClient {
      * 
      * @return return all access
      */
-    public static ResponseEntity<BaseResponse<Access[]>> getAllUsers() {
-	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAllUsers.json", HttpMethod.GET, null,
+    public static ResponseEntity<BaseResponse<Access[]>> getAllAccess() {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAllAccess.json", HttpMethod.GET, null,
 		new ParameterizedTypeReference<BaseResponse<Access[]>>() {
 		});
     }
