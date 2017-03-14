@@ -3,6 +3,9 @@
  */
 package br.com.cco2anpi.clients;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,7 +25,7 @@ public class CompanyClient {
      * @return return company filled
      */
 //    @Test
-    public static ResponseEntity<Company> insert(Company company) {
+    public static ResponseEntity<BaseResponse<Company>> insert(Company company) {
 //	Company company = new Company();
 //	company.setCnpj("000000");
 //	company.setSocialReason("teste");
@@ -36,7 +39,9 @@ public class CompanyClient {
 //	assertEquals(Company.class, new RestTemplate()
 //		.postForEntity(REST_SERVICE_URI + "/Company/insert.json", company, Company.class).getBody().getClass());
 
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Company/insert.json", company, Company.class);
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/insert.json", HttpMethod.POST, new HttpEntity<>(company),
+		new ParameterizedTypeReference<BaseResponse<Company>>() {
+		});
     }
 
     /**
@@ -46,10 +51,11 @@ public class CompanyClient {
      *            company to be updated
      * @return company updated
      */
-    public static ResponseEntity<Company> update(Company company) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Company/update.json", company, Company.class);
+    public static ResponseEntity<BaseResponse<Company>> update(Company company) {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/update.json", HttpMethod.POST, new HttpEntity<>(company),
+			new ParameterizedTypeReference<BaseResponse<Company>>() {
+			});
     }
-
     /**
      * Method used to delete company
      * 
@@ -57,8 +63,10 @@ public class CompanyClient {
      *            company to be deleted
      * @return status
      */
-    public static ResponseEntity<Boolean> delete(Company company) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Company/delete.json", company, Boolean.class);
+    public static ResponseEntity<BaseResponse<Boolean>> delete(User user) {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/delete.json", HttpMethod.POST, new HttpEntity<>(company),
+			new ParameterizedTypeReference<BaseResponse<Boolean>>() {
+				});
     }
 
     /**
@@ -66,16 +74,19 @@ public class CompanyClient {
      * 
      * @return return all companys
      */
-    public static ResponseEntity<Company[]> getAllCompanies() {
-	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Company/getAllCompanies.json", Company[].class);
-    }
-
+    public static ResponseEntity<BaseResponse<Company[]>> getAllCompanies() {
+		return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/getAllUsers.json", HttpMethod.GET, null,
+				new ParameterizedTypeReference<BaseResponse<Company[]>>() {
+				});
+	}
     /**
      * Method used to get all companys
      * 
      * @return return all companys
      */
-    public static ResponseEntity<Company> getCompany(Company company) {
-	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Company/getCompany.json", Company.class);
+    public static ResponseEntity<BaseResponse<Company>> getUser(Company company) {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/getUser.json", HttpMethod.POST,
+		new HttpEntity<>(company), new ParameterizedTypeReference<BaseResponse<Company>>() {
+		});
     }
 }
