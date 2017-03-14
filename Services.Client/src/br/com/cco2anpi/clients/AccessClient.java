@@ -73,7 +73,7 @@ public class AccessClient {
      */
     public static ResponseEntity<BaseResponse<Access>> getAccess(Access access) {
 	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAccess.json", HttpMethod.GET, new HttpEntity<>(access),
-		new ParameterizedTypeReference<BaseResponse<User>>() {
+		new ParameterizedTypeReference<BaseResponse<Access>>() {
 		});
     }
 
