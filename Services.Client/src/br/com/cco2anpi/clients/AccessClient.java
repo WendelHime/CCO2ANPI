@@ -24,8 +24,10 @@ public class AccessClient {
      *            access to be inserted
      * @return return access filled
      */
-    public static ResponseEntity<Access> insert(Access access) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/insert.json", access, Access.class);
+    public static ResponseEntity<BaseResponse<UsAccesser>> insert(Access access) {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/insert.json", HttpMethod.POST, new HttpEntity<>(access),
+		new ParameterizedTypeReference<BaseResponse<Access>>() {
+		});
     }
 
     /**
@@ -35,10 +37,11 @@ public class AccessClient {
      *            access to be updated
      * @return access updated
      */
-    public static ResponseEntity<Access> update(Access access) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/update.json", access, Access.class);
+    public static ResponseEntity<BaseResponse<Access>> update(Access access) {
+ 	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/update.json", HttpMethod.POST, new HttpEntity<>(access),
+		new ParameterizedTypeReference<BaseResponse<Access>>() {
+		});
     }
-
     /**
      * Method used to delete access
      * 
@@ -46,8 +49,10 @@ public class AccessClient {
      *            access to be deleted
      * @return status
      */
-    public static ResponseEntity<Boolean> delete(Access access) {
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/delete.json", access, Boolean.class);
+    public static ResponseEntity<BaseResponse<Boolean>> delete(Access access) {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/delete.json", HttpMethod.POST, new HttpEntity<>(access),
+		new ParameterizedTypeReference<BaseResponse<Boolean>>() {
+		});
     }
 
     /**
@@ -55,8 +60,10 @@ public class AccessClient {
      * 
      * @return return all access
      */
-    public static ResponseEntity<Access[]> getAllAccess() {
-	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Access/getAllAccess.json", Access[].class);
+    public static ResponseEntity<BaseResponse<Access[]>> getAllUsers() {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAllUsers.json", HttpMethod.GET, null,
+		new ParameterizedTypeReference<BaseResponse<Access[]>>() {
+		});
     }
 
     /**
@@ -64,8 +71,10 @@ public class AccessClient {
      * 
      * @return return one access
      */
-    public static ResponseEntity<Access> getAccess(Access access) {
-	return new RestTemplate().getForEntity(REST_SERVICE_URI + "/Access/getAccess.json", Access.class);
+    public static ResponseEntity<BaseResponse<Access>> getAccess(Access access) {
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAccess.json", HttpMethod.GET, new HttpEntity<>(access),
+		new ParameterizedTypeReference<BaseResponse<User>>() {
+		});
     }
 
     /**
@@ -79,13 +88,14 @@ public class AccessClient {
      *            date end
      * @return access array
      */
-    public static ResponseEntity<Access[]> getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd) {
+    public static ResponseEntity<BaseResponse<Access[]>> getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd) {
 	MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
 	map.add("parameters", type.toString());
 	map.add("parameters", dateInit);
 	map.add("parameters", dateEnd);
 
-	return new RestTemplate().postForEntity(REST_SERVICE_URI + "/Access/getAccessByTypeAndDate.json", map,
-		Access[].class);
+	return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAccessByTypeAndDate.json", HttpMethod.POST, map,
+		new ParameterizedTypeReference<BaseResponse<User>>() {
+		});
     }
 }
