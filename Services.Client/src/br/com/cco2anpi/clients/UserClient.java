@@ -3,8 +3,6 @@
  */
 package br.com.cco2anpi.clients;
 
-import java.util.ArrayList;
-
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

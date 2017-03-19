@@ -17,7 +17,18 @@ import br.com.cco2anpi.models.ComplexBuilding;
  *
  */
 public class ComplexBuildingClient {
-	public static final String REST_SERVICE_URI = "http://localhost:8080/Services";
+
+	private String restURLEndpoint;
+
+	/**
+	 * Constructor client
+	 * 
+	 * @param restURLEndpoint
+	 *            URL of the service
+	 */
+	public ComplexBuildingClient(String restURLEndpoint) {
+		this.restURLEndpoint = restURLEndpoint;
+	}
 
 	/**
 	 * Method used to send a post to insert complexBuilding
@@ -26,8 +37,8 @@ public class ComplexBuildingClient {
 	 *            complexBuilding to be inserted
 	 * @return return complexBuilding filled
 	 */
-	public static ResponseEntity<BaseResponse<ComplexBuilding>> insert(ComplexBuilding complexBuilding) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/ComplexBuilding/insert.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<ComplexBuilding>> insert(ComplexBuilding complexBuilding) {
+		return new RestTemplate().exchange(restURLEndpoint + "/ComplexBuilding/insert.json", HttpMethod.POST,
 				new HttpEntity<>(complexBuilding), new ParameterizedTypeReference<BaseResponse<ComplexBuilding>>() {
 				});
 	}
@@ -39,8 +50,8 @@ public class ComplexBuildingClient {
 	 *            complexBuilding to be updated
 	 * @return complexBuilding updated
 	 */
-	public static ResponseEntity<BaseResponse<ComplexBuilding>> update(ComplexBuilding complexBuilding) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/ComplexBuilding/update.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<ComplexBuilding>> update(ComplexBuilding complexBuilding) {
+		return new RestTemplate().exchange(restURLEndpoint + "/ComplexBuilding/update.json", HttpMethod.POST,
 				new HttpEntity<>(complexBuilding), new ParameterizedTypeReference<BaseResponse<ComplexBuilding>>() {
 				});
 	}
@@ -52,8 +63,8 @@ public class ComplexBuildingClient {
 	 *            complexBuilding to be deleted
 	 * @return status
 	 */
-	public static ResponseEntity<BaseResponse<Boolean>> delete(ComplexBuilding complexBuilding) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/ComplexBuilding/delete.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Boolean>> delete(ComplexBuilding complexBuilding) {
+		return new RestTemplate().exchange(restURLEndpoint + "/ComplexBuilding/delete.json", HttpMethod.POST,
 				new HttpEntity<>(complexBuilding), new ParameterizedTypeReference<BaseResponse<Boolean>>() {
 				});
 	}
@@ -63,9 +74,9 @@ public class ComplexBuildingClient {
 	 * 
 	 * @return return all all building sets
 	 */
-	public static ResponseEntity<BaseResponse<ComplexBuilding[]>> getAllBuildingSets() {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/ComplexBuilding/getAllBuildingSets.json",
-				HttpMethod.GET, null, new ParameterizedTypeReference<BaseResponse<ComplexBuilding[]>>() {
+	public ResponseEntity<BaseResponse<ComplexBuilding[]>> getAllBuildingSets() {
+		return new RestTemplate().exchange(restURLEndpoint + "/ComplexBuilding/getAllBuildingSets.json", HttpMethod.GET,
+				null, new ParameterizedTypeReference<BaseResponse<ComplexBuilding[]>>() {
 				});
 	}
 
@@ -74,8 +85,8 @@ public class ComplexBuildingClient {
 	 * 
 	 * @return return one building set
 	 */
-	public static ResponseEntity<BaseResponse<ComplexBuilding>> getComplexBuilding(ComplexBuilding complexBuilding) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/ComplexBuilding/getComplexBuilding.json",
+	public ResponseEntity<BaseResponse<ComplexBuilding>> getComplexBuilding(ComplexBuilding complexBuilding) {
+		return new RestTemplate().exchange(restURLEndpoint + "/ComplexBuilding/getComplexBuilding.json",
 				HttpMethod.POST, new HttpEntity<>(complexBuilding),
 				new ParameterizedTypeReference<BaseResponse<ComplexBuilding>>() {
 				});

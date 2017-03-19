@@ -16,7 +16,18 @@ import br.com.cco2anpi.models.Company;
  * @author wotan Class used to make connection with company the services
  */
 public class CompanyClient {
-	public static final String REST_SERVICE_URI = "http://localhost:8080/Services";
+
+	private String restURLEndpoint;
+
+	/**
+	 * Constructor client
+	 * 
+	 * @param restURLEndpoint
+	 *            URL of the service
+	 */
+	public CompanyClient(String restURLEndpoint) {
+		this.restURLEndpoint = restURLEndpoint;
+	}
 
 	/**
 	 * Method used to send a post to insert company
@@ -26,22 +37,8 @@ public class CompanyClient {
 	 * @return return company filled
 	 */
 	// @Test
-	public static ResponseEntity<BaseResponse<Company>> insert(Company company) {
-		// Company company = new Company();
-		// company.setCnpj("000000");
-		// company.setSocialReason("teste");
-		// ComplexBuilding complexBuilding = new ComplexBuilding();
-		// complexBuilding.setNumber("1");
-		// company.setComplexBuilding(ComplexBuildingClient.getComplexBuilding(complexBuilding).getBody());
-		// company.setBusinessHours("" + "-" + "");
-		// company.setMaximumTemperature(20.05);
-		// company.setAirConditionerHours("" + "-" + "");
-		// company.setEmployers(new HashSet<>(0));
-		// assertEquals(Company.class, new RestTemplate()
-		// .postForEntity(REST_SERVICE_URI + "/Company/insert.json", company,
-		// Company.class).getBody().getClass());
-
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/insert.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Company>> insert(Company company) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Company/insert.json", HttpMethod.POST,
 				new HttpEntity<>(company), new ParameterizedTypeReference<BaseResponse<Company>>() {
 				});
 	}
@@ -53,8 +50,8 @@ public class CompanyClient {
 	 *            company to be updated
 	 * @return company updated
 	 */
-	public static ResponseEntity<BaseResponse<Company>> update(Company company) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/update.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Company>> update(Company company) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Company/update.json", HttpMethod.POST,
 				new HttpEntity<>(company), new ParameterizedTypeReference<BaseResponse<Company>>() {
 				});
 	}
@@ -66,8 +63,8 @@ public class CompanyClient {
 	 *            company to be deleted
 	 * @return status
 	 */
-	public static ResponseEntity<BaseResponse<Boolean>> delete(Company company) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/delete.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Boolean>> delete(Company company) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Company/delete.json", HttpMethod.POST,
 				new HttpEntity<>(company), new ParameterizedTypeReference<BaseResponse<Boolean>>() {
 				});
 	}
@@ -77,8 +74,8 @@ public class CompanyClient {
 	 * 
 	 * @return return all companys
 	 */
-	public static ResponseEntity<BaseResponse<Company[]>> getAllCompanies() {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/getAllUsers.json", HttpMethod.GET, null,
+	public ResponseEntity<BaseResponse<Company[]>> getAllCompanies() {
+		return new RestTemplate().exchange(restURLEndpoint + "/Company/getAllUsers.json", HttpMethod.GET, null,
 				new ParameterizedTypeReference<BaseResponse<Company[]>>() {
 				});
 	}
@@ -88,8 +85,8 @@ public class CompanyClient {
 	 * 
 	 * @return return all companys
 	 */
-	public static ResponseEntity<BaseResponse<Company>> getUser(Company company) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Company/getUser.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Company>> getUser(Company company) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Company/getUser.json", HttpMethod.POST,
 				new HttpEntity<>(company), new ParameterizedTypeReference<BaseResponse<Company>>() {
 				});
 	}

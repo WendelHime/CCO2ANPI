@@ -16,7 +16,18 @@ import br.com.cco2anpi.models.Employer;
  * @author wotan Class used to make connection with employer the services
  */
 public class EmployerClient {
-	public static final String REST_SERVICE_URI = "http://localhost:8080/Services";
+
+	private String restURLEndpoint;
+
+	/**
+	 * Constructor client
+	 * 
+	 * @param restURLEndpoint
+	 *            URL of the service
+	 */
+	public EmployerClient(String restURLEndpoint) {
+		this.restURLEndpoint = restURLEndpoint;
+	}
 
 	/**
 	 * Method used to send a post to insert employer
@@ -25,8 +36,8 @@ public class EmployerClient {
 	 *            employer to be inserted
 	 * @return return employer filled
 	 */
-	public static ResponseEntity<BaseResponse<Employer>> insert(Employer employer) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Employer/insert.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Employer>> insert(Employer employer) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Employer/insert.json", HttpMethod.POST,
 				new HttpEntity<>(employer), new ParameterizedTypeReference<BaseResponse<Employer>>() {
 				});
 	}
@@ -38,8 +49,8 @@ public class EmployerClient {
 	 *            employer to be updated
 	 * @return employer updated
 	 */
-	public static ResponseEntity<BaseResponse<Employer>> update(Employer employer) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Employer/update.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Employer>> update(Employer employer) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Employer/update.json", HttpMethod.POST,
 				new HttpEntity<>(employer), new ParameterizedTypeReference<BaseResponse<Employer>>() {
 				});
 	}
@@ -51,8 +62,8 @@ public class EmployerClient {
 	 *            employer to be deleted
 	 * @return status
 	 */
-	public static ResponseEntity<BaseResponse<Boolean>> delete(Employer employer) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Employer/delete.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Boolean>> delete(Employer employer) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Employer/delete.json", HttpMethod.POST,
 				new HttpEntity<>(employer), new ParameterizedTypeReference<BaseResponse<Boolean>>() {
 				});
 	}
@@ -62,8 +73,8 @@ public class EmployerClient {
 	 * 
 	 * @return return all employers
 	 */
-	public static ResponseEntity<BaseResponse<Employer[]>> getAllEmployers() {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/User/getAllEmployers.json", HttpMethod.GET, null,
+	public ResponseEntity<BaseResponse<Employer[]>> getAllEmployers() {
+		return new RestTemplate().exchange(restURLEndpoint + "/User/getAllEmployers.json", HttpMethod.GET, null,
 				new ParameterizedTypeReference<BaseResponse<Employer[]>>() {
 				});
 	}

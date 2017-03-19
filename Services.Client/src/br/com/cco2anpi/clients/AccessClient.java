@@ -19,7 +19,18 @@ import br.com.cco2anpi.models.BaseResponse;
  *
  */
 public class AccessClient {
-	public static final String REST_SERVICE_URI = "http://localhost:8080/Services";
+
+	private String restURLEndpoint;
+
+	/**
+	 * Constructor client
+	 * 
+	 * @param restURLEndpoint
+	 *            URL of the service
+	 */
+	public AccessClient(String restURLEndpoint) {
+		this.restURLEndpoint = restURLEndpoint;
+	}
 
 	/**
 	 * Method used to send a post to insert access
@@ -28,8 +39,8 @@ public class AccessClient {
 	 *            access to be inserted
 	 * @return return access filled
 	 */
-	public static ResponseEntity<BaseResponse<Access>> insert(Access access) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/insert.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Access>> insert(Access access) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Access/insert.json", HttpMethod.POST,
 				new HttpEntity<>(access), new ParameterizedTypeReference<BaseResponse<Access>>() {
 				});
 	}
@@ -41,8 +52,8 @@ public class AccessClient {
 	 *            access to be updated
 	 * @return access updated
 	 */
-	public static ResponseEntity<BaseResponse<Access>> update(Access access) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/update.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Access>> update(Access access) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Access/update.json", HttpMethod.POST,
 				new HttpEntity<>(access), new ParameterizedTypeReference<BaseResponse<Access>>() {
 				});
 	}
@@ -54,8 +65,8 @@ public class AccessClient {
 	 *            access to be deleted
 	 * @return status
 	 */
-	public static ResponseEntity<BaseResponse<Boolean>> delete(Access access) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/delete.json", HttpMethod.POST,
+	public ResponseEntity<BaseResponse<Boolean>> delete(Access access) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Access/delete.json", HttpMethod.POST,
 				new HttpEntity<>(access), new ParameterizedTypeReference<BaseResponse<Boolean>>() {
 				});
 	}
@@ -65,8 +76,8 @@ public class AccessClient {
 	 * 
 	 * @return return all access
 	 */
-	public static ResponseEntity<BaseResponse<Access[]>> getAllAccess() {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAllAccess.json", HttpMethod.GET, null,
+	public ResponseEntity<BaseResponse<Access[]>> getAllAccess() {
+		return new RestTemplate().exchange(restURLEndpoint + "/Access/getAllAccess.json", HttpMethod.GET, null,
 				new ParameterizedTypeReference<BaseResponse<Access[]>>() {
 				});
 	}
@@ -76,8 +87,8 @@ public class AccessClient {
 	 * 
 	 * @return return one access
 	 */
-	public static ResponseEntity<BaseResponse<Access>> getAccess(Access access) {
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAccess.json", HttpMethod.GET,
+	public ResponseEntity<BaseResponse<Access>> getAccess(Access access) {
+		return new RestTemplate().exchange(restURLEndpoint + "/Access/getAccess.json", HttpMethod.GET,
 				new HttpEntity<>(access), new ParameterizedTypeReference<BaseResponse<Access>>() {
 				});
 	}
@@ -93,14 +104,14 @@ public class AccessClient {
 	 *            date end
 	 * @return access array
 	 */
-	public static ResponseEntity<BaseResponse<Access[]>> getAccessByTypeAndDate(Integer type, String dateInit,
+	public ResponseEntity<BaseResponse<Access[]>> getAccessByTypeAndDate(Integer type, String dateInit,
 			String dateEnd) {
 		MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
 		map.add("parameters", type.toString());
 		map.add("parameters", dateInit);
 		map.add("parameters", dateEnd);
 
-		return new RestTemplate().exchange(REST_SERVICE_URI + "/Access/getAccessByTypeAndDate.json", HttpMethod.POST,
+		return new RestTemplate().exchange(restURLEndpoint + "/Access/getAccessByTypeAndDate.json", HttpMethod.POST,
 				new HttpEntity<>(map), new ParameterizedTypeReference<BaseResponse<Access[]>>() {
 				});
 	}
