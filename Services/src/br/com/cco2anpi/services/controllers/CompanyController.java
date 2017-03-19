@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -24,7 +25,6 @@ import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.repository.CompanyRepository;
 import br.com.cco2anpi.repository.EmployersRepository;
 import br.com.cco2anpi.repository.ICompanyRepository;
-import br.com.cco2anpi.repository.IEmployerRepository;
 
 /**
  * @author wotan
@@ -42,8 +42,8 @@ public class CompanyController extends BaseController
      * @return all companies
      */
     @RequestMapping(value = "getAllCompanies", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<PagedResponse<List<ICompany>>> getAllCompanies(@RequestBody int pageSize,
-	    @RequestBody int offset)
+    public @ResponseBody ResponseEntity<PagedResponse<List<ICompany>>> getAllCompanies(
+	    @RequestParam("pageSize") int pageSize, @RequestParam("offset") int offset)
     {
 	ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
 	HashMap<String, Object> response = companyRepository.getAllCompanies(pageSize, offset);
@@ -169,20 +169,5 @@ public class CompanyController extends BaseController
 	startTime = System.currentTimeMillis();
 	return okResponse(employerRepository.delete(employer), "No content", HttpStatus.NO_CONTENT.value());
     }
-    
-    /**
-     * Method used to get all employer
-     * 
-     * @return all employers
-     */
-    @RequestMapping(value = "getEmployees", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<PagedResponse<List<IEmployer>>> getEmployees(@RequestBody int companyID, @RequestBody int pageSize,
-	    @RequestBody int offset)
-    {
-	IEmployerRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
-	startTime = System.currentTimeMillis();
-	HashMap<String, Object> response = employerRepository.getEmployees(companyID, offset, pageSize);
-	return okResponse((List<IEmployer>) response.get("employees"), "Ok", HttpStatus.OK.value(),
-		(Integer) response.get("total"), pageSize, offset);
-    }
+
 }

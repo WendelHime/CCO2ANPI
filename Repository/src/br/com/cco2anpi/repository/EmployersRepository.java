@@ -142,32 +142,4 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
 	return returnedValues;
     }
 
-    /**
-     * Method used to get all employers
-     * 
-     * @param pageSize
-     *            quantity of objects
-     * @param offset
-     *            quantity offset
-     * @return return all employers
-     */
-    public HashMap<String, Object> getEmployees(int companyID, int pageSize, int offset)
-    {
-	HashMap<String, Object> returnedValues = new HashMap<>();
-	Session session = getSessionFactory().openSession();
-	Query<br.com.cco2anpi.database.Employer> query = session
-		.createQuery("from Employer employer where " + " employer.company.id = :companyID",
-			br.com.cco2anpi.database.Employer.class)
-		.setParameter("companyID", companyID);
-	returnedValues.put("total", new Integer(query.getResultList().size()));
-	List<br.com.cco2anpi.database.Employer> list = query.setMaxResults(pageSize).setFirstResult(offset)
-		.getResultList();
-	session.close();
-	close();
-	List<IEmployer> employers = new ArrayList<>(list);
-
-	returnedValues.put("employees", employers);
-	return returnedValues;
-    }
-
 }
