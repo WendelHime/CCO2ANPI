@@ -5,10 +5,12 @@ package br.com.cco2anpi.repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import br.com.cco2anpi.models.Company;
 import br.com.cco2anpi.models.ICompany;
@@ -106,21 +108,26 @@ public class CompanyRepository extends BaseRepository implements ICompanyReposit
 	/**
 	 * Method used to get all companies
 	 * 
+	 * @param pageSize
+	 *            quantity of objects
+	 * @param offset
+	 *            quantity offset
 	 * @return array of the companies
 	 */
-	public ICompany[] getAllCompanies() {
+	public HashMap<String, Object> getAllCompanies(int pageSize, int offset) {
+		HashMap<String, Object> returnedValues = new HashMap<>();
 		Session session = getSessionFactory().openSession();
-		List<br.com.cco2anpi.database.Company> companyList = session
-				.createQuery("from Company", br.com.cco2anpi.database.Company.class).getResultList();
-		List<Company> companiesTemp = new ArrayList<>();
-		for (br.com.cco2anpi.database.Company company : companyList) {
-			companiesTemp.add(new Company(company));
-		}
+		Query<br.com.cco2anpi.database.Company> query = session.createQuery("from Company",
+				br.com.cco2anpi.database.Company.class);
+		returnedValues.put("total", new Integer(query.getResultList().size()));
+		List<br.com.cco2anpi.database.Company> companyList = query.setMaxResults(pageSize).setFirstResult(offset)
+				.getResultList();
+		ArrayList<ICompany> companies = new ArrayList<>(companyList);
+
 		session.close();
 		close();
-		ICompany[] companies = new Company[companiesTemp.size()];
-		companiesTemp.toArray(companies);
-		return companies;
-	}
 
+		returnedValues.put("companies", companies);
+		return returnedValues;
+	}
 }

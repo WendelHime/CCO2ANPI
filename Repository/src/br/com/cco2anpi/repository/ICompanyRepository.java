@@ -3,6 +3,8 @@
  */
 package br.com.cco2anpi.repository;
 
+import java.util.HashMap;
+
 import br.com.cco2anpi.models.ICompany;
 
 /**
@@ -18,5 +20,5 @@ public interface ICompanyRepository {
 
     ICompany getCompany(Integer id);
 
-    ICompany[] getAllCompanies();
+    HashMap<String, Object> getAllCompanies(int pageSize, int offset);
 }

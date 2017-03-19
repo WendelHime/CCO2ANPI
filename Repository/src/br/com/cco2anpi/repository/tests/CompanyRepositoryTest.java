@@ -7,7 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import org.junit.Test;
 import br.com.cco2anpi.models.Company;
 import br.com.cco2anpi.models.ComplexBuilding;
 import br.com.cco2anpi.models.ICompany;
+import br.com.cco2anpi.models.IComplexBuilding;
 import br.com.cco2anpi.models.IEmployer;
 import br.com.cco2anpi.repository.CompanyRepository;
 import br.com.cco2anpi.repository.ComplexBuildingRepository;
@@ -39,7 +42,10 @@ public class CompanyRepositoryTest {
 		company.setAirConditionerHours("Samsung");
 		// company.setComplexBuilding(); <- solve the complexBuilding
 		ComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
-		company.setComplexBuilding(new ComplexBuilding(complexBuildingRepository.getAllBuildingSets()[0]));
+		company.setComplexBuilding(new ComplexBuilding(
+				((List<IComplexBuilding>) complexBuildingRepository.getAllBuildingSets(1, 0).get("buildingSets"))
+						.get(0)));
+
 		company.setEmployers(new HashSet<IEmployer>(0));
 
 	}
@@ -81,7 +87,9 @@ public class CompanyRepositoryTest {
 	@Test
 	public void testUpdate() {
 		try {
-			this.company.setId(companyRepository.getAllCompanies()[0].getId());
+			companyRepository.getAllCompanies(1, 0).get("companies");
+			this.company.setId(
+					((List<IComplexBuilding>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0).getId());
 			this.company.setSocialReason("Kraken");
 			this.company.setCnpj("2");
 			this.company.setMaximumTemperature(15.0);
@@ -114,7 +122,8 @@ public class CompanyRepositoryTest {
 	@Test
 	public void testGetCompany() {
 		try {
-			ICompany company = companyRepository.getCompany(companyRepository.getAllCompanies()[0].getId());
+			ICompany company = companyRepository.getCompany(
+					((List<IComplexBuilding>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0).getId());
 
 			if (company != null) {
 				assertEquals(company.getClass(), Company.class);
@@ -133,12 +142,13 @@ public class CompanyRepositoryTest {
 	@Test
 	public void testGetAllCompanies() {
 		try {
-			ICompany[] companies = companyRepository.getAllCompanies();
+			List<IComplexBuilding> companies = ((List<IComplexBuilding>) companyRepository.getAllCompanies(1, 0)
+					.get("companies"));
 			// The return of getAllCompanies() can be null, then if return is
 			// null,
 			// test is ok!
 			if (companies != null) {
-				assertEquals(companies.getClass(), Company[].class);
+				assertEquals(companies.getClass(), new ArrayList<IComplexBuilding>().getClass());
 			} else {
 				assertTrue(true);
 			}

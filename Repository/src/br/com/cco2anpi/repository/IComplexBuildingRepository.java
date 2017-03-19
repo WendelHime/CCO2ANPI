@@ -3,6 +3,8 @@
  */
 package br.com.cco2anpi.repository;
 
+import java.util.HashMap;
+
 import br.com.cco2anpi.models.IComplexBuilding;
 
 /**
@@ -18,5 +20,5 @@ public interface IComplexBuildingRepository {
 
     IComplexBuilding getComplexBuilding(IComplexBuilding id);
 
-    IComplexBuilding[] getAllBuildingSets();
+    HashMap<String, Object> getAllBuildingSets(int pageSize, int offset);
 }

@@ -1,5 +1,7 @@
 package br.com.cco2anpi.repository;
 
+import java.util.HashMap;
+
 import br.com.cco2anpi.models.IAccess;
 
 /**
@@ -16,7 +18,7 @@ public interface IAccessRepository {
 
     IAccess getAccess(Integer id);
 
-    IAccess[] getAllAccess();
+    HashMap<String, Object> getAllAccess(int pageSize, int offset);
     
-    IAccess[] getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd);
+    HashMap<String, Object> getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd, int pageSize, int offset);
 }

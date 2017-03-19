@@ -7,7 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +23,7 @@ import br.com.cco2anpi.repository.ComplexBuildingRepository;
  * @author Giovanni Maciel
  *
  */
-public class ComplexBiuldingRepositoryTest {
+public class ComplexBuildingRepositoryTest {
 
 	private ComplexBuildingRepository complexBuildingRepository;
 	private ComplexBuilding complexBuilding;
@@ -122,12 +124,13 @@ public class ComplexBiuldingRepositoryTest {
 	@Test
 	public void testGetAllBuildingSets() {
 		try {
-			IComplexBuilding[] complexes = complexBuildingRepository.getAllBuildingSets();
+			List<IComplexBuilding> complexes = (List<IComplexBuilding>) complexBuildingRepository
+					.getAllBuildingSets(1, 0).get("buildingSets");
 			// The return of getAllBuildingSets() can be null, then if return is
 			// null,
 			// test is ok!
 			if (complexes != null) {
-				assertEquals(complexes.getClass(), ComplexBuilding[].class);
+				assertEquals(complexes.getClass(), new ArrayList<IComplexBuilding>().getClass());
 			} else {
 				assertTrue(true);
 			}

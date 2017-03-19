@@ -7,7 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.PropertyValueException;
@@ -17,6 +19,7 @@ import org.junit.Test;
 import br.com.cco2anpi.models.Employer;
 import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
+import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.User;
 import br.com.cco2anpi.repository.CompanyRepository;
 import br.com.cco2anpi.repository.EmployersRepository;
@@ -37,18 +40,18 @@ public class EmployersRepositoryTest {
 	@Before
 	public void setUp() throws Exception {
 		this.employersRepository = new EmployersRepository("hibernate.cfg.xml");
-		IEmployer[] employers = employersRepository.getAllEmployers();
-		if (employers.length > 0) {
-			this.employer = new Employer(employers[0]);
+		List<IEmployer> employers = (List<IEmployer>) employersRepository.getAllEmployers(1, 0).get("employers");
+		if (employers.size() > 0) {
+			this.employer = new Employer(employers.get(0));
 		} else {
 			CompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
 			UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
-			User user = new User(userRepository.getAllUsers()[0]);
+			User user = new User(((List<IUser>) userRepository.getAllUsers(1, 0).get("users")).get(0));
 			this.employer = new Employer();
 			employer.setAccessHour("0");
 			employer.setPermissionTemperature(true);
 			Set<ICompany> companies = new HashSet<ICompany>();
-			companies.add(companyRepository.getAllCompanies()[0]);
+			companies.add(((List<ICompany>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0));
 			employer.setCompanies(companies);
 			employer.setId(user.getUserId());
 			employer.setUserID(user.getUserId());
@@ -129,7 +132,8 @@ public class EmployersRepositoryTest {
 	@Test
 	public void testGetEmployer() {
 		try {
-			IEmployer employer = employersRepository.getEmployer(employersRepository.getAllEmployers()[0].getUserID());
+			IEmployer employer = employersRepository.getEmployer(
+					((List<IEmployer>) employersRepository.getAllEmployers(1, 0).get("employers")).get(0).getUserID());
 
 			if (employer != null) {
 				assertEquals(employer.getClass(), Employer.class);
@@ -148,12 +152,12 @@ public class EmployersRepositoryTest {
 	@Test
 	public void testGetAllEmployers() {
 		try {
-			IEmployer[] employers = employersRepository.getAllEmployers();
+			List<IEmployer> employers = ((List<IEmployer>) employersRepository.getAllEmployers(1, 0).get("employers"));
 			// The return of getAllEmployers() can be null, then if return is
 			// null,
 			// test is ok!
 			if (employers != null) {
-				assertEquals(employers.getClass(), Employer[].class);
+				assertEquals(employers.getClass(), new ArrayList<IEmployer>().getClass());
 			} else {
 				assertTrue(true);
 			}
