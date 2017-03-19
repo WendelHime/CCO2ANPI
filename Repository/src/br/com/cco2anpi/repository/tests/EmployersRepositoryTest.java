@@ -8,9 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.PropertyValueException;
 import org.junit.Before;
@@ -50,15 +48,12 @@ public class EmployersRepositoryTest {
 			this.employer = new Employer();
 			employer.setAccessHour("0");
 			employer.setPermissionTemperature(true);
-			Set<ICompany> companies = new HashSet<ICompany>();
-			companies.add(((List<ICompany>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0));
-			employer.setCompanies(companies);
+			employer.setCompany(((List<ICompany>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0));
 			employer.setId(user.getUserId());
 			employer.setUserID(user.getUserId());
 			employer.setAccess(user.getAccess());
 			employer.setCpf(user.getCpf());
 			employer.setName(user.getName());
-			employer.setOfficeHours(user.getOfficeHours());
 			employer.setType(user.getType());
 			employer.setUsername(user.getUsername());
 			employer.setSalt(user.getSalt());

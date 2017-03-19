@@ -15,12 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.cco2anpi.models.Company;
-import br.com.cco2anpi.models.ComplexBuilding;
 import br.com.cco2anpi.models.ICompany;
-import br.com.cco2anpi.models.IComplexBuilding;
 import br.com.cco2anpi.models.IEmployer;
 import br.com.cco2anpi.repository.CompanyRepository;
-import br.com.cco2anpi.repository.ComplexBuildingRepository;
 
 /**
  * @author Giovanni Maciel
@@ -40,11 +37,7 @@ public class CompanyRepositoryTest {
 		company.setBusinessHours("0");
 		company.setMaximumTemperature(10.0);
 		company.setAirConditionerHours("Samsung");
-		// company.setComplexBuilding(); <- solve the complexBuilding
-		ComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
-		company.setComplexBuilding(new ComplexBuilding(
-				((List<IComplexBuilding>) complexBuildingRepository.getAllBuildingSets(1, 0).get("buildingSets"))
-						.get(0)));
+		company.setSet("teste");
 
 		company.setEmployers(new HashSet<IEmployer>(0));
 
@@ -88,8 +81,8 @@ public class CompanyRepositoryTest {
 	public void testUpdate() {
 		try {
 			companyRepository.getAllCompanies(1, 0).get("companies");
-			this.company.setId(
-					((List<IComplexBuilding>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0).getId());
+			this.company
+					.setId(((List<ICompany>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0).getId());
 			this.company.setSocialReason("Kraken");
 			this.company.setCnpj("2");
 			this.company.setMaximumTemperature(15.0);
@@ -123,7 +116,7 @@ public class CompanyRepositoryTest {
 	public void testGetCompany() {
 		try {
 			ICompany company = companyRepository.getCompany(
-					((List<IComplexBuilding>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0).getId());
+					((List<ICompany>) companyRepository.getAllCompanies(1, 0).get("companies")).get(0).getId());
 
 			if (company != null) {
 				assertEquals(company.getClass(), Company.class);
@@ -142,13 +135,12 @@ public class CompanyRepositoryTest {
 	@Test
 	public void testGetAllCompanies() {
 		try {
-			List<IComplexBuilding> companies = ((List<IComplexBuilding>) companyRepository.getAllCompanies(1, 0)
-					.get("companies"));
+			List<ICompany> companies = ((List<ICompany>) companyRepository.getAllCompanies(1, 0).get("companies"));
 			// The return of getAllCompanies() can be null, then if return is
 			// null,
 			// test is ok!
 			if (companies != null) {
-				assertEquals(companies.getClass(), new ArrayList<IComplexBuilding>().getClass());
+				assertEquals(companies.getClass(), new ArrayList<ICompany>().getClass());
 			} else {
 				assertTrue(true);
 			}

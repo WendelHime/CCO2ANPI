@@ -44,7 +44,6 @@ public class UserRepositoryTest {
 		user.setPassword(Crypto.encrypt("k", user.getSalt()));
 		user.setName("k");
 		user.setCpf("0");
-		user.setOfficeHours("0");
 		user.setAccess(new HashSet<IAccess>(0));
 		user.setType(0);
 	}
