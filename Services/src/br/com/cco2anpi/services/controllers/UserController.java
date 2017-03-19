@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,9 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import br.com.cco2anpi.models.BaseResponse;
+import br.com.cco2anpi.models.IAccess;
 import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.models.User;
+import br.com.cco2anpi.repository.AccessRepository;
+import br.com.cco2anpi.repository.IAccessRepository;
 import br.com.cco2anpi.repository.UserRepository;
 
 /**
@@ -39,7 +43,7 @@ public class UserController extends BaseController {
 	 * 
 	 * @return array of users
 	 */
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	@RequestMapping(value = "getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<PagedResponse<List<IUser>>> getAllUsers(@RequestParam("pageSize") int pageSize,
 			@RequestParam("offset") int offset) {
@@ -116,5 +120,29 @@ public class UserController extends BaseController {
 			return okResponse(userRepository.delete(user), "No content", HttpStatus.NO_CONTENT.value());
 		}
 		return okResponse(false, "Not found", HttpStatus.NOT_FOUND.value());
+	}
+
+	/**
+	 * Method used to get access filtred
+	 * 
+	 * @param type
+	 *            of the user
+	 * @param dateInit
+	 *            find access between date init and dateEnd
+	 * @param dateEnd
+	 *            find access between date init and dateEnd
+	 * @return access array
+	 */
+	@RequestMapping(value = "getAccessByTypeAndDate", method = RequestMethod.POST)
+	public @ResponseBody ResponseEntity<PagedResponse<List<IAccess>>> getAccessByTypeAndDate(
+			@RequestBody MultiValueMap<String, String> map) {
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		List<String> parameters = map.get("parameters");
+		HashMap<String, Object> response = accessRepository.getAccessByTypeAndDate(Integer.parseInt(parameters.get(0)),
+				parameters.get(1), parameters.get(2), Integer.parseInt(parameters.get(3)),
+				Integer.parseInt(parameters.get(4)));
+		List<IAccess> accessDB = (List<IAccess>) response.get("access");
+		return okResponse(accessDB, "Ok", HttpStatus.OK.value(), (int) response.get("total"),
+				Integer.parseInt(parameters.get(3)), Integer.parseInt(parameters.get(4)));
 	}
 }

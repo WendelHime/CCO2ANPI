@@ -8,6 +8,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -26,12 +28,12 @@ import br.com.cco2anpi.models.IEmployer;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "EMPLOYERS")
+@Table(name = "EMPLOYEES")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Employer extends User implements Serializable, IEmployer {
 
 	// @Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	@Column(name = "access_hour")
@@ -40,7 +42,7 @@ public class Employer extends User implements Serializable, IEmployer {
 	@Column(name = "permission_temperature", columnDefinition = "TINYINT")
 	private Boolean permissionTemperature;
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
+	@JoinColumn(name = "company_id", nullable = false)
 	@JsonBackReference
 	private Company company;
 

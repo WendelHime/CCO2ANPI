@@ -46,29 +46,6 @@ public class AccessController extends BaseController {
 				(int) returned.get("total"), pageSize, offset);
 	}
 
-	/**
-	 * Method used to get access filtred
-	 * 
-	 * @param type
-	 *            of the user
-	 * @param dateInit
-	 *            find access between date init and dateEnd
-	 * @param dateEnd
-	 *            find access between date init and dateEnd
-	 * @return access array
-	 */
-	@RequestMapping(value = "getAccessByTypeAndDate", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<PagedResponse<List<IAccess>>> getAccessByTypeAndDate(
-			@RequestBody MultiValueMap<String, String> map) {
-		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
-		List<String> parameters = map.get("parameters");
-		HashMap<String, Object> response = accessRepository.getAccessByTypeAndDate(Integer.parseInt(parameters.get(0)),
-				parameters.get(1), parameters.get(2), Integer.parseInt(parameters.get(3)),
-				Integer.parseInt(parameters.get(4)));
-		List<IAccess> accessDB = (List<IAccess>) response.get("access");
-		return okResponse(accessDB, "Ok", HttpStatus.OK.value(), (int) response.get("total"),
-				Integer.parseInt(parameters.get(3)), Integer.parseInt(parameters.get(4)));
-	}
 
 	/**
 	 * Method used to get access
