@@ -3,8 +3,6 @@
  */
 package br.com.cco2anpi.models;
 
-import java.util.Set;
-
 /**
  * @author wotan
  *
@@ -13,7 +11,7 @@ public class Employer extends User implements IEmployer {
 	private Integer id;
 	private String accessHour;
 	private Boolean permissionTemperature;
-	private Set<ICompany> companies;
+	private ICompany company;
 
 	public Employer() {
 
@@ -24,16 +22,15 @@ public class Employer extends User implements IEmployer {
 		this.userID = sourceObject.getUserID();
 		this.accessHour = sourceObject.getAccessHour();
 		this.permissionTemperature = sourceObject.getPermissionTemperature();
-		this.companies = sourceObject.getCompanies();
+		this.company = sourceObject.getCompany();
 		this.setUsername(sourceObject.getUsername());
 		this.setPassword(sourceObject.getPassword());
 		this.setSalt(sourceObject.getSalt());
 		this.setName(sourceObject.getName());
 		this.setCpf(sourceObject.getCpf());
-		this.setOfficeHours(sourceObject.getOfficeHours());
 		this.setAccess(sourceObject.getAccess());
 		this.setType(sourceObject.getType());
-		this.setCompanies(sourceObject.getCompanies());
+		this.setCompany(sourceObject.getCompany());
 	}
 
 	/**
@@ -84,16 +81,16 @@ public class Employer extends User implements IEmployer {
 	/**
 	 * @return the companys
 	 */
-	public Set<ICompany> getCompanies() {
-		return this.companies;
+	public ICompany getCompany() {
+		return this.company;
 	}
 
 	/**
 	 * @param companys
 	 *            the companies to set
 	 */
-	public void setCompanies(Set<ICompany> companies) {
-		this.companies = companies;
+	public void setCompany(ICompany company) {
+		this.company = company;
 	}
 
 	/**

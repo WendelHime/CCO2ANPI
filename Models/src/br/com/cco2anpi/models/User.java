@@ -20,10 +20,9 @@ public class User implements IUser {
 	protected String salt;
 	protected String name;
 	protected String cpf;
-	protected String officeHours;
+	protected Integer type;
 	@JsonDeserialize(as = HashSet.class, contentAs = Access.class)
 	protected Set<Access> access = new HashSet<>(0);
-	protected Integer type;
 
 	public User() {
 
@@ -41,7 +40,6 @@ public class User implements IUser {
 		salt = sourceObject.getSalt();
 		name = sourceObject.getName();
 		cpf = sourceObject.getCpf();
-		officeHours = sourceObject.getOfficeHours();
 		setAccess(sourceObject.getAccess());
 		type = sourceObject.getType();
 	}
@@ -134,21 +132,6 @@ public class User implements IUser {
 	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	/**
-	 * @return the officeHours
-	 */
-	public String getOfficeHours() {
-		return officeHours;
-	}
-
-	/**
-	 * @param officeHours
-	 *            the officeHours to set
-	 */
-	public void setOfficeHours(String officeHours) {
-		this.officeHours = officeHours;
 	}
 
 	/**

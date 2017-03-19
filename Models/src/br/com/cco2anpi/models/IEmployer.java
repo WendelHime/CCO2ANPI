@@ -3,30 +3,28 @@
  */
 package br.com.cco2anpi.models;
 
-import java.util.Set;
-
 /**
  * @author wotan
  *
  */
 public interface IEmployer extends IUser {
 	void setId(Integer id);
-	
-    void setAccessHour(String accessHour);
 
-    void setPermissionTemperature(Boolean permission);
+	void setAccessHour(String accessHour);
 
-    void setCompanies(Set<ICompany> companys);
-    
-    void setUserID(Integer id);
+	void setPermissionTemperature(Boolean permission);
 
-    Integer getId();
-    
-    String getAccessHour();
+	void setCompany(ICompany company);
 
-    Boolean getPermissionTemperature();
+	void setUserID(Integer id);
 
-    Set<ICompany> getCompanies();
-    
-    Integer getUserID();
+	Integer getId();
+
+	String getAccessHour();
+
+	Boolean getPermissionTemperature();
+
+	ICompany getCompany();
+
+	Integer getUserID();
 }
