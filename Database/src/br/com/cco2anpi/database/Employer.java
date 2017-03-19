@@ -4,19 +4,18 @@
 package br.com.cco2anpi.database;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
@@ -40,8 +39,10 @@ public class Employer extends User implements Serializable, IEmployer {
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	@Column(name = "permission_temperature", columnDefinition = "TINYINT")
 	private Boolean permissionTemperature;
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "employers", cascade=CascadeType.ALL)
-	private Set<Company> companies = new HashSet<>(0);
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
+	@JsonBackReference
+	private Company company;
 
 	public Employer() {
 
@@ -57,10 +58,9 @@ public class Employer extends User implements Serializable, IEmployer {
 		this.setSalt(sourceObject.getSalt());
 		this.setName(sourceObject.getName());
 		this.setCpf(sourceObject.getCpf());
-		this.setOfficeHours(sourceObject.getOfficeHours());
 		this.setAccess(sourceObject.getAccess());
 		this.setType(sourceObject.getType());
-		this.setCompanies(sourceObject.getCompanies());
+		this.setCompany(sourceObject.getCompany());
 	}
 
 	/**
@@ -111,19 +111,16 @@ public class Employer extends User implements Serializable, IEmployer {
 	/**
 	 * @return the companies
 	 */
-	public Set<ICompany> getCompanies() {
-		return new HashSet<ICompany>(companies);
+	public ICompany getCompany() {
+		return this.company;
 	}
 
 	/**
-	 * @param companies
+	 * @param company
 	 *            the companies to set
 	 */
-	public void setCompanies(Set<ICompany> companies) {
-		Iterator<ICompany> iterator = companies.iterator();
-		while (iterator.hasNext()) {
-			this.companies.add(new Company(iterator.next()));
-		}
+	public void setCompany(ICompany company) {
+		this.company = new Company(company);
 	}
 
 	/**

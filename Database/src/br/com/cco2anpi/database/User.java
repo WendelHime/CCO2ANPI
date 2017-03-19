@@ -44,12 +44,10 @@ public class User implements Serializable, IUser {
 	protected String salt;
 	protected String name;
 	protected String cpf;
-	@Column(name = "office_hours")
-	protected String officeHours;
+	protected Integer type;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonManagedReference
 	protected Set<Access> access = new HashSet<>(0);
-	protected Integer type;
 
 	public User() {
 
@@ -68,8 +66,6 @@ public class User implements Serializable, IUser {
 		salt = sourceObject.getSalt();
 		name = sourceObject.getName();
 		cpf = sourceObject.getCpf();
-		officeHours = sourceObject.getOfficeHours();
-		setAccess(sourceObject.getAccess());
 		type = sourceObject.getType();
 	}
 
@@ -161,21 +157,6 @@ public class User implements Serializable, IUser {
 	 */
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
-	}
-
-	/**
-	 * @return the officeHours
-	 */
-	public String getOfficeHours() {
-		return officeHours;
-	}
-
-	/**
-	 * @param officeHours
-	 *            the officeHours to set
-	 */
-	public void setOfficeHours(String officeHours) {
-		this.officeHours = officeHours;
 	}
 
 	/**

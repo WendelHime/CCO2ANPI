@@ -15,11 +15,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
@@ -43,15 +42,11 @@ public class Company implements Serializable, ICompany {
 	private String businessHours;
 	@Column(name = "maximum_temperature")
 	private Double maximumTemperature;
-	@Column(name = "airconditioner_hours")
+	@Column(name = "air_conditioner_hours")
 	private String airconditionerHours;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "building_complex_id", nullable = false)
-	private ComplexBuilding complexBuilding;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "EMPLOYERS_COMPANIES", joinColumns = {
-			@JoinColumn(name = "company_id", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "employer_id", nullable = false, updatable = false) })
+	private String set;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Set<Employer> employers = new HashSet<>(0);
 
 	public Company() {
@@ -65,7 +60,7 @@ public class Company implements Serializable, ICompany {
 		businessHours = sourceObject.getBusinessHours();
 		maximumTemperature = sourceObject.getMaximumTemperature();
 		airconditionerHours = sourceObject.getAirConditionerHours();
-		setComplexBuilding(sourceObject.getComplexBuilding());
+		set = sourceObject.getSet();
 		setEmployers(sourceObject.getEmployers());
 	}
 
@@ -162,16 +157,16 @@ public class Company implements Serializable, ICompany {
 	/**
 	 * @return the complexBuilding
 	 */
-	public br.com.cco2anpi.models.ComplexBuilding getComplexBuilding() {
-		return new br.com.cco2anpi.models.ComplexBuilding(complexBuilding);
+	public String getSet() {
+		return this.set;
 	}
 
 	/**
 	 * @param complexBuilding
 	 *            the complexBuilding to set
 	 */
-	public void setComplexBuilding(br.com.cco2anpi.models.ComplexBuilding complexBuilding) {
-		this.complexBuilding = new ComplexBuilding(complexBuilding);
+	public void setSet(String set) {
+		this.set = set;
 	}
 
 	/**
