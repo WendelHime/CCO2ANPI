@@ -15,7 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import br.com.cco2anpi.models.IAccess;
+import br.com.cco2anpi.models.IUser;
 
 /**
  * @author wotan
@@ -36,6 +39,7 @@ public class Access implements Serializable, IAccess {
 	private String dateOut;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
+	@JsonBackReference
 	private User user;
 
 	public Access() {
@@ -46,6 +50,7 @@ public class Access implements Serializable, IAccess {
 		this.id = sourceObject.getId();
 		this.dateIn = sourceObject.getDateIn();
 		this.dateOut = sourceObject.getDateOut();
+		this.setUser(sourceObject.getUser());
 	}
 
 	/**
@@ -98,6 +103,14 @@ public class Access implements Serializable, IAccess {
 	 *            the user to set
 	 */
 	public void setUser(br.com.cco2anpi.models.User user) {
+		this.user = new User(user);
+	}
+
+	public IUser getUser() {
+		return user;
+	}
+
+	public void setUser(IUser user) {
 		this.user = new User(user);
 	}
 

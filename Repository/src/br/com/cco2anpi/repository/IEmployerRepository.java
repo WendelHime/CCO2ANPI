@@ -20,5 +20,5 @@ public interface IEmployerRepository {
 
     IEmployer getEmployer(Integer id);
 
-    HashMap<String, Object> getAllEmployers(int offset, int pageSize);
+    HashMap<String, Object> getAllEmployers(int pageSize, int offset);
 }

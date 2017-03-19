@@ -11,6 +11,7 @@ public class Access implements IAccess {
 	private Integer id;
 	private String dateIn;
 	private String dateOut;
+	private IUser user;
 
 	public Access() {
 
@@ -20,6 +21,7 @@ public class Access implements IAccess {
 		id = sourceObject.getId();
 		dateIn = sourceObject.getDateIn();
 		dateOut = sourceObject.getDateOut();
+		user = sourceObject.getUser();
 	}
 
 	/**
@@ -65,6 +67,14 @@ public class Access implements IAccess {
 	 */
 	public void setDateOut(String dateOut) {
 		this.dateOut = dateOut;
+	}
+
+	public IUser getUser() {
+		return user;
+	}
+
+	public void setUser(IUser user) {
+		this.user = user;
 	}
 
 }

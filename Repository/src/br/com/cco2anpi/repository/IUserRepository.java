@@ -20,7 +20,7 @@ public interface IUserRepository {
 
     IUser getUser(Integer id);
 
-    HashMap<String, Object> getAllUsers(int offset, int pageSize);
+    HashMap<String, Object> getAllUsers(int pageSize, int offset);
 
     boolean exists(IUser user);
 }

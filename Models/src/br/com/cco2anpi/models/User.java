@@ -4,7 +4,10 @@
 package br.com.cco2anpi.models;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
  * @author wotan Class used to represent User
@@ -18,7 +21,8 @@ public class User implements IUser {
 	protected String name;
 	protected String cpf;
 	protected String officeHours;
-	protected Set<IAccess> access = new HashSet<>(0);
+	@JsonDeserialize(as = HashSet.class, contentAs = Access.class)
+	protected Set<Access> access = new HashSet<>(0);
 	protected Integer type;
 
 	public User() {
@@ -159,11 +163,11 @@ public class User implements IUser {
 	 *            the access to set
 	 */
 	public void setAccess(Set<IAccess> access) {
-		// Iterator<IAccess> iterator = access.iterator();
-		// while (iterator.hasNext()) {
-		// this.access.add((Access) iterator.next());
-		// }
-		this.access = access;
+		Iterator<IAccess> iterator = access.iterator();
+		while (iterator.hasNext()) {
+			this.access.add(new Access(iterator.next()));
+		}
+		// this.access = access;
 	}
 
 	/**

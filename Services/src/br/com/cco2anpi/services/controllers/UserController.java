@@ -3,18 +3,24 @@
  */
 package br.com.cco2anpi.services.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.IUser;
+import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.models.User;
 import br.com.cco2anpi.repository.UserRepository;
 
@@ -27,18 +33,21 @@ import br.com.cco2anpi.repository.UserRepository;
 @EnableWebMvc
 @RequestMapping("User/*")
 public class UserController extends BaseController {
-	
+
 	/**
 	 * Method used to get all users
 	 * 
 	 * @return array of users
 	 */
+	@Transactional(readOnly=true)
 	@RequestMapping(value = "getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<BaseResponse<IUser[]>> getAllUsers() {
+	public @ResponseBody ResponseEntity<PagedResponse<List<IUser>>> getAllUsers(@RequestParam("pageSize") int pageSize,
+			@RequestParam("offset") int offset) {
 		UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
-		IUser[] usersDB = userRepository.getAllUsers();
-		return okResponse(usersDB, "Ok", HttpStatus.OK.value());
+		HashMap<String, Object> response = userRepository.getAllUsers(offset, pageSize);
+		return okResponse((List<IUser>) response.get("users"), "Ok", HttpStatus.OK.value(),
+				(Integer) response.get("total"), pageSize, offset);
 	}
 
 	/**

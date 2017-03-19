@@ -1,4 +1,4 @@
-package br.com.cco2anpi.services.controller.tests;
+package br.com.cco2anpi.services.controllers.tests;
 
 //import static org.junit.Assert.assertEquals;
 

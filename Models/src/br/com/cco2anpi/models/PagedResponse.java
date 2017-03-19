@@ -3,8 +3,6 @@
  */
 package br.com.cco2anpi.models;
 
-import java.util.List;
-
 /**
  * @author wotan class used to be a paged response
  */
@@ -13,12 +11,16 @@ public class PagedResponse<T> implements IPagedResponse<T> {
 	private long elapsed_ms;
 	private String message;
 	private int status_code;
-	private List<T> response;
+	private T response;
 	private int total;
 	private int offset;
 	private int pageSize;
 
-	public PagedResponse(List<T> response, int total, int offset, int pageSize) {
+	public PagedResponse() {
+
+	}
+
+	public PagedResponse(T response, int total, int offset, int pageSize) {
 		this.elapsed_ms = 0;
 		this.message = "OK";
 		this.status_code = 200;
@@ -44,7 +46,7 @@ public class PagedResponse<T> implements IPagedResponse<T> {
 	}
 
 	@Override
-	public List<T> getResponse() {
+	public T getResponse() {
 		return this.response;
 	}
 
@@ -79,7 +81,7 @@ public class PagedResponse<T> implements IPagedResponse<T> {
 	}
 
 	@Override
-	public void setResponse(List<T> response) {
+	public void setResponse(T response) {
 		this.response = response;
 	}
 

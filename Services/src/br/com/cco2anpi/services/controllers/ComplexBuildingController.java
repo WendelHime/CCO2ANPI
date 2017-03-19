@@ -3,6 +3,9 @@
  */
 package br.com.cco2anpi.services.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +18,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.ComplexBuilding;
 import br.com.cco2anpi.models.IComplexBuilding;
+import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.repository.ComplexBuildingRepository;
+import br.com.cco2anpi.repository.IComplexBuildingRepository;
 
 /**
  * @author wotan
@@ -25,18 +30,20 @@ import br.com.cco2anpi.repository.ComplexBuildingRepository;
 @EnableWebMvc
 @RequestMapping("ComplexBuilding/*")
 public class ComplexBuildingController extends BaseController {
-	
+
 	/**
 	 * Method used to get all building sets
 	 * 
 	 * @return all building sets array
 	 */
 	@RequestMapping(value = "getAllBuildingSets", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<BaseResponse<IComplexBuilding[]>> getAllBuildingSets() {
-		ComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
+	public @ResponseBody ResponseEntity<PagedResponse<List<IComplexBuilding>>> getAllBuildingSets(
+			@RequestBody int pageSize, @RequestBody int offset) {
+		IComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
-		IComplexBuilding[] buildingSetsDB = complexBuildingRepository.getAllBuildingSets();
-		return okResponse(buildingSetsDB, "Ok", HttpStatus.OK.value());
+		HashMap<String, Object> response = complexBuildingRepository.getAllBuildingSets(pageSize, offset);
+		return okResponse((List<IComplexBuilding>) response.get("buildingSets"), "Ok", HttpStatus.OK.value(),
+				(Integer) response.get("total"), pageSize, offset);
 	}
 
 	/**
@@ -49,7 +56,7 @@ public class ComplexBuildingController extends BaseController {
 	@RequestMapping(value = "getComplexBuilding", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<ComplexBuilding>> getComplexBuilding(
 			@RequestBody ComplexBuilding complexBuilding) {
-		ComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
+		IComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		ComplexBuilding result = new ComplexBuilding(complexBuildingRepository.getComplexBuilding(complexBuilding));
 		if (result.getId() != null) {
@@ -68,7 +75,7 @@ public class ComplexBuildingController extends BaseController {
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<IComplexBuilding>> insert(
 			@RequestBody ComplexBuilding complexBuilding) {
-		ComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
+		IComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		try {
 			return okResponse(complexBuildingRepository.insert(complexBuilding), "Created", HttpStatus.CREATED.value());
@@ -88,7 +95,7 @@ public class ComplexBuildingController extends BaseController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<IComplexBuilding>> update(
 			@RequestBody ComplexBuilding complexBuilding) {
-		ComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
+		IComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		return okResponse(complexBuildingRepository.update(complexBuilding), "Ok", HttpStatus.OK.value());
 	}
@@ -102,7 +109,7 @@ public class ComplexBuildingController extends BaseController {
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody ComplexBuilding complexBuilding) {
-		ComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
+		IComplexBuildingRepository complexBuildingRepository = new ComplexBuildingRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
 		return okResponse(complexBuildingRepository.delete(complexBuilding), "No content",
 				HttpStatus.NO_CONTENT.value());

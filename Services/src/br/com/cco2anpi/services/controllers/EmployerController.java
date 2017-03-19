@@ -3,6 +3,9 @@
  */
 package br.com.cco2anpi.services.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +18,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.Employer;
 import br.com.cco2anpi.models.IEmployer;
+import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.repository.EmployersRepository;
+import br.com.cco2anpi.repository.IEmployerRepository;
 
 /**
  * @author wotan
@@ -25,18 +30,20 @@ import br.com.cco2anpi.repository.EmployersRepository;
 @EnableWebMvc
 @RequestMapping("Employer/*")
 public class EmployerController extends BaseController {
-	
+
 	/**
 	 * Method used to get all employer
 	 * 
 	 * @return all employers
 	 */
 	@RequestMapping(value = "getAllEmployers", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<BaseResponse<IEmployer[]>> getAllEmployers() {
-		EmployersRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
+	public @ResponseBody ResponseEntity<PagedResponse<List<IEmployer>>> getAllEmployers(@RequestBody int pageSize,
+			@RequestBody int offset) {
+		IEmployerRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
 		startTime = System.currentTimeMillis();
-		IEmployer[] employersDB = employerRepository.getAllEmployers();
-		return okResponse(employersDB, "Ok", HttpStatus.OK.value());
+		HashMap<String, Object> response = employerRepository.getAllEmployers(offset, pageSize);
+		return okResponse((List<IEmployer>) response.get("employers"), "Ok", HttpStatus.OK.value(),
+				(Integer) response.get("total"), pageSize, offset);
 	}
 
 	/**

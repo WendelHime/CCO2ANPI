@@ -3,6 +3,9 @@
  */
 package br.com.cco2anpi.services.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +18,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.Company;
 import br.com.cco2anpi.models.ICompany;
+import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.repository.CompanyRepository;
+import br.com.cco2anpi.repository.ICompanyRepository;
 
 /**
  * @author wotan
@@ -32,10 +37,12 @@ public class CompanyController extends BaseController {
 	 * @return all companies
 	 */
 	@RequestMapping(value = "getAllCompanies", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<BaseResponse<ICompany[]>> getAllCompanies() {
-		CompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
-		ICompany[] companiesDB = companyRepository.getAllCompanies();
-		return okResponse(companiesDB, "Ok", HttpStatus.OK.value());
+	public @ResponseBody ResponseEntity<PagedResponse<List<ICompany>>> getAllCompanies(@RequestBody int pageSize,
+			@RequestBody int offset) {
+		ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
+		HashMap<String, Object> response = companyRepository.getAllCompanies(pageSize, offset);
+		return okResponse((List<ICompany>) response.get("companies"), "Ok", HttpStatus.OK.value(),
+				(Integer) response.get("total"), pageSize, offset);
 	}
 
 	/**
@@ -47,7 +54,7 @@ public class CompanyController extends BaseController {
 	 */
 	@RequestMapping(value = "getCompany", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<Company>> getCompany(@RequestBody Company access) {
-		CompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
+		ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
 		Company result = new Company(companyRepository.getCompany(access.getId()));
 		if (result.getId() != null) {
 			return okResponse(result, "Ok", HttpStatus.OK.value());
@@ -64,7 +71,7 @@ public class CompanyController extends BaseController {
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<ICompany>> insert(@RequestBody Company company) {
-		CompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
+		ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
 		try {
 			return okResponse(companyRepository.insert(company), "Created", HttpStatus.CREATED.value());
 		} catch (Exception ex) {
@@ -82,7 +89,7 @@ public class CompanyController extends BaseController {
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<ICompany>> update(@RequestBody Company company) {
-		CompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
+		ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
 		return okResponse(companyRepository.update(company), "Ok", HttpStatus.OK.value());
 	}
 
@@ -95,7 +102,7 @@ public class CompanyController extends BaseController {
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody Company company) {
-		CompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
+		ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
 		return okResponse(companyRepository.delete(company), "No content", HttpStatus.NO_CONTENT.value());
 	}
 }

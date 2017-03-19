@@ -3,8 +3,6 @@
  */
 package br.com.cco2anpi.models;
 
-import java.util.List;
-
 /**
  * @author wotan
  *
@@ -16,7 +14,7 @@ public interface IPagedResponse<T> {
 
 	int getStatusCode();
 
-	List<T> getResponse();
+	T getResponse();
 
 	int getTotal();
 
@@ -30,7 +28,7 @@ public interface IPagedResponse<T> {
 
 	void setStatusCode(int status);
 
-	void setResponse(List<T> response);
+	void setResponse(T response);
 
 	void setTotal(int total);
 

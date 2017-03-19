@@ -20,6 +20,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import br.com.cco2anpi.models.IAccess;
 import br.com.cco2anpi.models.IUser;
 
@@ -44,7 +46,8 @@ public class User implements Serializable, IUser {
 	protected String cpf;
 	@Column(name = "office_hours")
 	protected String officeHours;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	protected Set<Access> access = new HashSet<>(0);
 	protected Integer type;
 

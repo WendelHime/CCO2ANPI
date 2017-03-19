@@ -12,10 +12,14 @@ public interface IAccess {
     void setDateIn(String date);
 
     void setDateOut(String date);
+    
+    void setUser(IUser user);
 
     Integer getId();
 
     String getDateIn();
 
     String getDateOut();
+    
+    IUser getUser();
 }

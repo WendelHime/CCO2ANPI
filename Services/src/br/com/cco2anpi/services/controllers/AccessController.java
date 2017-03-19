@@ -3,6 +3,7 @@
  */
 package br.com.cco2anpi.services.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import br.com.cco2anpi.models.Access;
 import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.IAccess;
+import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.repository.AccessRepository;
+import br.com.cco2anpi.repository.IAccessRepository;
 
 /**
  * @author wotan
@@ -35,10 +38,12 @@ public class AccessController extends BaseController {
 	 * @return all access
 	 */
 	@RequestMapping(value = "getAllAccess", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<BaseResponse<IAccess[]>> getAllAccess() {
-		AccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
-		IAccess[] accessDB = accessRepository.getAllAccess();
-		return okResponse(accessDB, "Ok", HttpStatus.OK.value());
+	public @ResponseBody ResponseEntity<PagedResponse<List<IAccess>>> getAllAccess(@RequestBody int pageSize,
+			@RequestBody int offset) {
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		HashMap<String, Object> returned = accessRepository.getAllAccess(pageSize, offset);
+		return okResponse((List<IAccess>) returned.get("access"), "Ok", HttpStatus.OK.value(),
+				(int) returned.get("total"), pageSize, offset);
 	}
 
 	/**
@@ -53,13 +58,16 @@ public class AccessController extends BaseController {
 	 * @return access array
 	 */
 	@RequestMapping(value = "getAccessByTypeAndDate", method = RequestMethod.POST)
-	public @ResponseBody ResponseEntity<BaseResponse<IAccess[]>> getAccessByTypeAndDate(
+	public @ResponseBody ResponseEntity<PagedResponse<List<IAccess>>> getAccessByTypeAndDate(
 			@RequestBody MultiValueMap<String, String> map) {
-		AccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
 		List<String> parameters = map.get("parameters");
-		IAccess[] accessDB = accessRepository.getAccessByTypeAndDate(Integer.parseInt(parameters.get(0)),
-				parameters.get(1), parameters.get(2));
-		return okResponse(accessDB, "Ok", HttpStatus.OK.value());
+		HashMap<String, Object> response = accessRepository.getAccessByTypeAndDate(Integer.parseInt(parameters.get(0)),
+				parameters.get(1), parameters.get(2), Integer.parseInt(parameters.get(3)),
+				Integer.parseInt(parameters.get(4)));
+		List<IAccess> accessDB = (List<IAccess>) response.get("access");
+		return okResponse(accessDB, "Ok", HttpStatus.OK.value(), (int) response.get("total"),
+				Integer.parseInt(parameters.get(3)), Integer.parseInt(parameters.get(4)));
 	}
 
 	/**
@@ -71,7 +79,7 @@ public class AccessController extends BaseController {
 	 */
 	@RequestMapping(value = "getAccess", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<Access>> getAccess(@RequestBody Access access) {
-		AccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
 		Access result = new Access(accessRepository.getAccess(access.getId()));
 		if (result.getId() != null) {
 			return okResponse(result, "Ok", HttpStatus.OK.value());
@@ -88,7 +96,7 @@ public class AccessController extends BaseController {
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<IAccess>> insert(@RequestBody Access access) {
-		AccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
 		try {
 			return okResponse(accessRepository.insert(access), "Created", HttpStatus.CREATED.value());
 		} catch (Exception ex) {
@@ -105,7 +113,7 @@ public class AccessController extends BaseController {
 	 */
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<IAccess>> update(@RequestBody Access access) {
-		AccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
 		return okResponse(accessRepository.update(access), "Accepted", HttpStatus.ACCEPTED.value());
 	}
 
@@ -118,7 +126,7 @@ public class AccessController extends BaseController {
 	 */
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody Access access) {
-		AccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
 		return okResponse(accessRepository.delete(access), "No content", HttpStatus.NO_CONTENT.value());
 	}
 

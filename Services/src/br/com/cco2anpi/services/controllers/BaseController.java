@@ -30,6 +30,17 @@ public class BaseController {
 		return System.currentTimeMillis() - start;
 	}
 
+	/**
+	 * Method used to return ok response personalized using BaseResponse
+	 * 
+	 * @param response
+	 *            response
+	 * @param message
+	 *            message
+	 * @param status
+	 *            status
+	 * @return request
+	 */
 	protected <T> ResponseEntity<BaseResponse<T>> okResponse(T response, String message, int status) {
 		BaseResponse<T> baseResponse = new BaseResponse<>(response);
 		baseResponse.setMessage(message);
@@ -38,13 +49,30 @@ public class BaseController {
 		return new ResponseEntity<BaseResponse<T>>(baseResponse, HttpStatus.OK);
 	}
 
-	protected <T> ResponseEntity<PagedResponse<T>> okResponse(List<T> response, String message, int status, int total,
-			int offset, int pageSize) {
-		PagedResponse<T> pagedResponse = new PagedResponse<>(response, total, offset, pageSize);
+	/**
+	 * Method used to return ok response personalized using PagedResponse
+	 * 
+	 * @param response
+	 *            response
+	 * @param message
+	 *            message
+	 * @param status
+	 *            status
+	 * @param total
+	 *            quantity total
+	 * @param pageSize
+	 *            page size
+	 * @param offset
+	 *            offset
+	 * @return request
+	 */
+	protected <T> ResponseEntity<PagedResponse<List<T>>> okResponse(List<T> response, String message, int status,
+			int total, int pageSize, int offset) {
+		PagedResponse<List<T>> pagedResponse = new PagedResponse<>(response, total, offset, pageSize);
 		pagedResponse.setMessage(message);
 		pagedResponse.setStatusCode(status);
 		pagedResponse.setElapsed_ms(this.calculateElapsedTime(startTime));
-		return new ResponseEntity<PagedResponse<T>>(pagedResponse, HttpStatus.OK);
+		return new ResponseEntity<PagedResponse<List<T>>>(pagedResponse, HttpStatus.OK);
 	}
 
 }
