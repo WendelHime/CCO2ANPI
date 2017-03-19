@@ -7,6 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,7 +36,8 @@ public class AccessRepositoryTest {
 		this.access.setDateOut("20/03");
 		this.access.setId(1);
 		// this.access.setUser(); <-------------------------- WARNING @PARAM
-		// User user = new User(userRepository.getAllUsers()[0]);
+		// User user = new User(((List<IUser>) userRepository.getAllUsers(1,
+		// 0)).get(0));
 		// this.access.setUser(user);
 	}
 
@@ -76,7 +80,7 @@ public class AccessRepositoryTest {
 		try {
 			this.access.setDateIn("30/05");
 			this.access.setDateOut("30/08");
-			this.access.setId(accessRepository.getAllAccess()[0].getId());
+			this.access.setId(((List<IAccess>) accessRepository.getAllAccess(1, 0).get("access")).get(0).getId());
 			IAccess access = accessRepository.update(this.access);
 			assertEquals(access.getClass(), Access.class);
 		} catch (Exception ex) {
@@ -106,7 +110,8 @@ public class AccessRepositoryTest {
 	@Test
 	public void testGetAccess() {
 		try {
-			IAccess access = accessRepository.getAccess(accessRepository.getAllAccess()[0].getId());
+			IAccess access = accessRepository
+					.getAccess(((List<IAccess>) accessRepository.getAllAccess(1, 0).get("access")).get(0).getId());
 
 			if (access != null) {
 				assertEquals(access.getClass(), Access.class);
@@ -125,12 +130,12 @@ public class AccessRepositoryTest {
 	@Test
 	public void testGetAllAccess() {
 		try {
-			IAccess[] access = accessRepository.getAllAccess();
+			List<IAccess> access = ((List<IAccess>) accessRepository.getAllAccess(1, 0).get("access"));
 
 			// The return of getAllAcess() can be null, then if return is null,
 			// test is ok!
 			if (access != null) {
-				assertEquals(access.getClass(), Access[].class);
+				assertEquals(access.getClass(), new ArrayList<IAccess>().getClass());
 			} else {
 				assertTrue(true);
 			}
@@ -146,13 +151,14 @@ public class AccessRepositoryTest {
 	@Test
 	public void testGetAccessByTypeAndDate() {
 		try {
-			IAccess[] access = accessRepository.getAccessByTypeAndDate(10, "20/02", "20/03");
+			List<IAccess> access = (List<IAccess>) accessRepository.getAccessByTypeAndDate(10, "20/02", "20/03", 1, 0)
+					.get("access");
 
 			// The return of getAllAccessByTypeAndDate() can be null, then if
 			// return is null,
 			// test is ok!
 			if (access != null) {
-				assertEquals(access.getClass(), Access[].class);
+				assertEquals(access.getClass(), new ArrayList<IAccess>().getClass());
 			} else {
 				assertTrue(true);
 			}

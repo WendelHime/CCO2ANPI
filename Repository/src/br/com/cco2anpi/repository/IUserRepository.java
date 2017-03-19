@@ -3,6 +3,8 @@
  */
 package br.com.cco2anpi.repository;
 
+import java.util.HashMap;
+
 import br.com.cco2anpi.models.IUser;
 
 /**
@@ -18,7 +20,7 @@ public interface IUserRepository {
 
     IUser getUser(Integer id);
 
-    IUser[] getAllUsers();
+    HashMap<String, Object> getAllUsers(int offset, int pageSize);
 
     boolean exists(IUser user);
 }

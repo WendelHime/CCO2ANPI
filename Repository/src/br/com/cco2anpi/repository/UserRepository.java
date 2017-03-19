@@ -5,12 +5,14 @@ package br.com.cco2anpi.repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.NoResultException;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.User;
@@ -107,21 +109,25 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 	/**
 	 * Method used to return all the users
 	 * 
+	 * @param pageSize
+	 *            quantity of objects
+	 * @param offset
+	 *            quantity offset
 	 * @return array of the users
 	 */
-	public IUser[] getAllUsers() {
+	public HashMap<String, Object> getAllUsers(int pageSize, int offset) {
+		HashMap<String, Object> returnedValues = new HashMap<>();
 		Session session = getSessionFactory().openSession();
-		List<br.com.cco2anpi.database.User> users = session
-				.createQuery("from User", br.com.cco2anpi.database.User.class).getResultList();
-		List<User> usersTemp = new ArrayList<>();
-		for (br.com.cco2anpi.database.User user : users) {
-			usersTemp.add(new User(user));
-		}
+		Query<br.com.cco2anpi.database.User> query = session.createQuery("from User",
+				br.com.cco2anpi.database.User.class);
+		returnedValues.put("total", new Integer(query.getResultList().size()));
+		List<br.com.cco2anpi.database.User> users = query.setMaxResults(pageSize).setFirstResult(offset)
+				.getResultList();
+		ArrayList<IUser> list = new ArrayList<>(users);
 		session.close();
 		close();
-		IUser[] usersArray = new User[usersTemp.size()];
-		usersTemp.toArray(usersArray);
-		return usersArray;
+		returnedValues.put("users", list);
+		return returnedValues;
 	}
 
 	/**

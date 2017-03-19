@@ -7,7 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -119,7 +121,8 @@ public class UserRepositoryTest {
 	@Test
 	public void testGetUser() {
 		try {
-			IUser user = userRepository.getUser(userRepository.getAllUsers()[0].getUserId());
+			IUser user = userRepository
+					.getUser(((List<IUser>) userRepository.getAllUsers(0, 11).get("users")).get(0).getUserId());
 			// The return of getUser() can be null, then if return is null, test
 			// is ok!
 			if (user != null) {
@@ -139,11 +142,11 @@ public class UserRepositoryTest {
 	@Test
 	public void testGetAllUsers() {
 		try {
-			IUser[] users = userRepository.getAllUsers();
+			List<IUser> users = (List<IUser>) userRepository.getAllUsers(0, 11).get("users");
 			// The return of getAllUsers() can be null, then if return is null,
 			// test is ok!
 			if (users != null) {
-				assertEquals(users.getClass(), User[].class);
+				assertEquals(users.getClass(), ArrayList.class);
 			} else {
 				assertTrue(true);
 			}

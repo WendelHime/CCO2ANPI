@@ -5,10 +5,12 @@ package br.com.cco2anpi.repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import br.com.cco2anpi.models.Access;
 import br.com.cco2anpi.models.IAccess;
@@ -104,21 +106,25 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
 	/**
 	 * Method used to get all access
 	 * 
+	 * @param pageSize
+	 *            quantity of objects
+	 * @param offset
+	 *            quantity offset
 	 * @return return all access in array;
 	 */
-	public IAccess[] getAllAccess() {
+	public HashMap<String, Object> getAllAccess(int pageSize, int offset) {
+		HashMap<String, Object> returnedValues = new HashMap<>();
 		Session session = getSessionFactory().openSession();
-		List<br.com.cco2anpi.database.Access> accessList = session
-				.createQuery("from Access", br.com.cco2anpi.database.Access.class).getResultList();
-		List<Access> accessTemp = new ArrayList<>();
-		for (br.com.cco2anpi.database.Access access1 : accessList) {
-			accessTemp.add(new Access(access1));
-		}
+		Query<br.com.cco2anpi.database.Access> query = session.createQuery("from Access",
+				br.com.cco2anpi.database.Access.class);
+		returnedValues.put("total", new Integer(query.getResultList().size()));
+		List<br.com.cco2anpi.database.Access> accessList = query.setMaxResults(pageSize).setFirstResult(offset)
+				.getResultList();
 		session.close();
 		close();
-		IAccess[] accessArray = new Access[accessTemp.size()];
-		accessTemp.toArray(accessArray);
-		return accessArray;
+		ArrayList<IAccess> list = new ArrayList<>(accessList);
+		returnedValues.put("access", list);
+		return returnedValues;
 	}
 
 	/**
@@ -128,23 +134,30 @@ public class AccessRepository extends BaseRepository implements IAccessRepositor
 	 *            is the type of the user
 	 * @param dateInit
 	 *            is the date to start the search
-	 * 
+	 * @param pageSize
+	 *            quantity of objects
+	 * @param offset
+	 *            quantity offset
+	 * @return return all access in array;
 	 */
-	public IAccess[] getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd) {
+	public HashMap<String, Object> getAccessByTypeAndDate(Integer type, String dateInit, String dateEnd, int pageSize,
+			int offset) {
+		HashMap<String, Object> returnedValues = new HashMap<>();
 		Session session = getSessionFactory().openSession();
-		List<br.com.cco2anpi.database.Access> accessList = session
+		Query<br.com.cco2anpi.database.Access> query = session
 				.createQuery(
 						"from Access access where " + "access.user.type = :type and "
 								+ "STR_TO_DATE(access.dateIn, '%d/%m/%Y') " + "between "
 								+ "STR_TO_DATE(:dateInit, '%d/%m/%Y') and " + "STR_TO_DATE(:dateEnd, '%d/%m/%Y')",
 						br.com.cco2anpi.database.Access.class)
-				.setParameter("dateInit", dateInit).setParameter("dateEnd", dateEnd).setParameter("type", type)
-				.getResultList();
+				.setParameter("dateInit", dateInit).setParameter("dateEnd", dateEnd).setParameter("type", type);
+		returnedValues.put("total", new Integer(query.getResultList().size()));
+		List<br.com.cco2anpi.database.Access> accessList = query.getResultList();
 		session.close();
 		close();
-		IAccess[] access = new Access[accessList.size()];
-		accessList.toArray(access);
-		return access;
+		ArrayList<IAccess> list = new ArrayList<>(accessList);
+		returnedValues.put("access", list);
+		return returnedValues;
 	}
 
 }

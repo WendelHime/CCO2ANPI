@@ -5,10 +5,12 @@ package br.com.cco2anpi.repository;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import br.com.cco2anpi.models.Employer;
 import br.com.cco2anpi.models.IEmployer;
@@ -105,21 +107,26 @@ public class EmployersRepository extends BaseRepository implements IEmployerRepo
 	/**
 	 * Method used to get all employers
 	 * 
+	 * @param pageSize
+	 *            quantity of objects
+	 * @param offset
+	 *            quantity offset
 	 * @return return all employers
 	 */
-	public IEmployer[] getAllEmployers() {
+	public HashMap<String, Object> getAllEmployers(int pageSize, int offset) {
+		HashMap<String, Object> returnedValues = new HashMap<>();
 		Session session = getSessionFactory().openSession();
-		List<br.com.cco2anpi.database.Employer> list = session
-				.createQuery("from Employer", br.com.cco2anpi.database.Employer.class).getResultList();
-		List<Employer> tempList = new ArrayList<>();
-		for (br.com.cco2anpi.database.Employer employer : list) {
-			tempList.add(new Employer(employer));
-		}
+		Query<br.com.cco2anpi.database.Employer> query = session.createQuery("from Employer",
+				br.com.cco2anpi.database.Employer.class);
+		returnedValues.put("total", new Integer(query.getResultList().size()));
+		List<br.com.cco2anpi.database.Employer> list = query.setMaxResults(pageSize).setFirstResult(offset)
+				.getResultList();
 		session.close();
 		close();
-		IEmployer[] employers = new Employer[tempList.size()];
-		tempList.toArray(employers);
-		return employers;
+		List<IEmployer> employers = new ArrayList<>(list);
+
+		returnedValues.put("employers", employers);
+		return returnedValues;
 	}
 
 }
