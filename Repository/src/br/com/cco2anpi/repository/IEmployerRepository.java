@@ -5,6 +5,7 @@ package br.com.cco2anpi.repository;
 
 import java.util.HashMap;
 
+import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
 
 /**
@@ -21,4 +22,6 @@ public interface IEmployerRepository {
     IEmployer getEmployer(Integer id);
 
     HashMap<String, Object> getAllEmployers(int pageSize, int offset);
+    
+    HashMap<String, Object> getEmployees(int companyId, int pageSize, int offset);
 }
