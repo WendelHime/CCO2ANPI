@@ -23,6 +23,7 @@ import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
 import br.com.cco2anpi.models.ISet;
 import br.com.cco2anpi.models.PagedResponse;
+import br.com.cco2anpi.models.TypeEnum;
 import br.com.cco2anpi.repository.CompanyRepository;
 import br.com.cco2anpi.repository.EmployersRepository;
 import br.com.cco2anpi.repository.ICompanyRepository;
@@ -80,18 +81,23 @@ public class CompanyController extends BaseController
      * @return company inserted
      */
     @RequestMapping(value = "insert", method = RequestMethod.POST)
-    public @ResponseBody ResponseEntity<BaseResponse<ICompany>> insert(@RequestBody Company company)
+    public @ResponseBody ResponseEntity<BaseResponse<ICompany>> insert(@RequestBody Company company,
+	    @RequestParam("typeUser") int typeUser)
     {
 	ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
 	try
 	{
-	    return okResponse(companyRepository.insert(company), "Created", HttpStatus.CREATED.value());
+	    TypeEnum typeUsr = TypeEnum.getValue(typeUser);
+	    if (typeUsr == TypeEnum.CLERK
+		    || typeUsr == TypeEnum.SYNDIC) { return okResponse(companyRepository.insert(company), "Created",
+			    HttpStatus.CREATED.value()); }
 	}
 	catch (Exception ex)
 	{
-	    return okResponse(companyRepository.insert(company), "Conflict or exception: " + ex.getMessage(),
-		    HttpStatus.CONFLICT.value());
+
 	}
+	return okResponse(new Company(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+		HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     /**
