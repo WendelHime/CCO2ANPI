@@ -23,6 +23,7 @@ import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.IAccess;
 import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.PagedResponse;
+import br.com.cco2anpi.models.TypeEnum;
 import br.com.cco2anpi.models.User;
 import br.com.cco2anpi.repository.AccessRepository;
 import br.com.cco2anpi.repository.IAccessRepository;
@@ -45,8 +46,8 @@ public class UserController extends BaseController
      * @return array of users
      */
     @Transactional(readOnly = true)
-    @RequestMapping(value = "getAllUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<PagedResponse<List<IUser>>> getAllUsers(@RequestParam("pageSize") int pageSize,
+    @RequestMapping(value = "getUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<PagedResponse<List<IUser>>> getUsers(@RequestParam("pageSize") int pageSize,
 	    @RequestParam("offset") int offset)
     {
 	UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
@@ -81,12 +82,32 @@ public class UserController extends BaseController
      * @return user filled
      */
     @RequestMapping(value = "insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user)
+    public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user, @RequestBody int typeUser)
     {
-	UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
-	startTime = System.currentTimeMillis();
-	if (userRepository.exists(user)) { return okResponse(new User(), "Conflict", HttpStatus.CONFLICT.value()); }
-	return okResponse(userRepository.insert(user), "Created", HttpStatus.CREATED.value());
+	try
+	{
+	    UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+	    startTime = System.currentTimeMillis();
+	    TypeEnum typeUsr = TypeEnum.getValue(typeUser);
+	    if (TypeEnum.getValue(user.getType()) == TypeEnum.CLERK && typeUsr == TypeEnum.SYNDIC)
+	    {
+		if (userRepository.exists(user)) return okResponse(new User(), "Conflict", HttpStatus.CONFLICT.value());
+		return okResponse(userRepository.insert(user), "Created", HttpStatus.CREATED.value());
+	    }
+	    else if (TypeEnum.getValue(user.getType()) == TypeEnum.COMPANY
+		    && (typeUsr == TypeEnum.SYNDIC || typeUsr == TypeEnum.CLERK))
+	    {
+		if (userRepository.exists(user)) return okResponse(new User(), "Conflict", HttpStatus.CONFLICT.value());
+		return okResponse(userRepository.insert(user), "Created", HttpStatus.CREATED.value());
+	    }
+	}
+	catch (Exception ex)
+	{
+
+	}
+	User usr = null;
+	return okResponse(usr, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+		HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
 
     /**
@@ -155,17 +176,36 @@ public class UserController extends BaseController
      *            find access between date init and dateEnd
      * @return access array
      */
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "getAccessByTypeAndDate", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<PagedResponse<List<IAccess>>> getAccessByTypeAndDate(
 	    @RequestParam("type") Integer type, @RequestParam("dateInit") String dateInit,
-	    @RequestParam("dateEnd") String dateEnd, @RequestParam("pageSize") int pageSize,
-	    @RequestParam("offset") int offset)
+	    @RequestParam("dateEnd") String dateEnd, @RequestParam("typeUser") int typeUser,
+	    @RequestParam("pageSize") int pageSize, @RequestParam("offset") int offset)
     {
-	IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
-	HashMap<String, Object> response = accessRepository.getAccessByTypeAndDate(type, dateInit, dateEnd, pageSize,
-		offset);
-	List<IAccess> accessDB = (List<IAccess>) response.get("access");
-	return okResponse(accessDB, "Ok", HttpStatus.OK.value(), (int) response.get("total"), pageSize, offset);
+	/**
+	 * This function don't need to be checked because the key value from the
+	 * access list is access
+	 */
+	try
+	{
+	    TypeEnum typeUsr = TypeEnum.getValue(typeUser);
+	    if (typeUsr == TypeEnum.SYNDIC || typeUsr == TypeEnum.CLERK)
+	    {
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		HashMap<String, Object> response = accessRepository.getAccessByTypeAndDate(type, dateInit, dateEnd,
+			pageSize, offset);
+		return okResponse((List<IAccess>) response.get("access"), "Ok", HttpStatus.OK.value(),
+			(int) response.get("total"), pageSize, offset);
+	    }
+	}
+	catch (Exception ex)
+	{
+
+	}
+	List<IAccess> access = null;
+	return okResponse(access, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+		HttpStatus.INTERNAL_SERVER_ERROR.value(), 0, pageSize, offset);
     }
 
     /**
@@ -173,14 +213,29 @@ public class UserController extends BaseController
      * 
      * @return all access
      */
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "getAccess", method = RequestMethod.GET)
-    public @ResponseBody ResponseEntity<PagedResponse<List<IAccess>>> getAccess(@RequestParam("pageSize") int pageSize,
-	    @RequestParam("offset") int offset)
+    public @ResponseBody ResponseEntity<PagedResponse<List<IAccess>>> getAccess(@RequestParam("typeUser") int typeUser,
+	    @RequestParam("pageSize") int pageSize, @RequestParam("offset") int offset)
     {
-	IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
-	HashMap<String, Object> returned = accessRepository.getAllAccess(pageSize, offset);
-	return okResponse((List<IAccess>) returned.get("access"), "Ok", HttpStatus.OK.value(),
-		(int) returned.get("total"), pageSize, offset);
+	try
+	{
+	    TypeEnum typeUsr = TypeEnum.getValue(typeUser);
+	    if (typeUsr == TypeEnum.SYNDIC || typeUsr == TypeEnum.CLERK)
+	    {
+		IAccessRepository accessRepository = new AccessRepository("hibernate.cfg.xml");
+		HashMap<String, Object> returned = accessRepository.getAllAccess(pageSize, offset);
+		return okResponse((List<IAccess>) returned.get("access"), "Ok", HttpStatus.OK.value(),
+			(int) returned.get("total"), pageSize, offset);
+	    }
+	}
+	catch (Exception ex)
+	{
+
+	}
+	List<IAccess> access = null;
+	return okResponse(access, HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+		HttpStatus.INTERNAL_SERVER_ERROR.value(), 0, pageSize, offset);
     }
 
 }

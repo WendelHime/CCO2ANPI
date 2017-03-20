@@ -35,7 +35,7 @@ public enum TypeEnum {
      * @param value value to be used
      * @return return type of the user by de value
      */
-    public TypeEnum getValue(int value) {
+    public static TypeEnum getValue(int value) {
 	for (TypeEnum type : TypeEnum.values()) {
 	    if (type.value == value) {
 		return type;
