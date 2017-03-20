@@ -44,9 +44,9 @@ public class UserClient
      *            user to be inserted
      * @return return user filled
      */
-    public ResponseEntity<BaseResponse<User>> insert(User user)
+    public ResponseEntity<BaseResponse<User>> insert(User user, int typeUser)
     {
-	return new RestTemplate().exchange(restURLEndpoint + "/User/insert.json", HttpMethod.POST,
+	return new RestTemplate().exchange(restURLEndpoint + "/User/insert.json?typeUser="+typeUser, HttpMethod.POST,
 		new HttpEntity<>(user), new ParameterizedTypeReference<BaseResponse<User>>()
 		{
 		});

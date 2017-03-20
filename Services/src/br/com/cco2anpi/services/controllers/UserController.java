@@ -82,7 +82,7 @@ public class UserController extends BaseController
      * @return user filled
      */
     @RequestMapping(value = "insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user, @RequestBody int typeUser)
+    public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user, @RequestParam("typeUser") int typeUser)
     {
 	try
 	{
