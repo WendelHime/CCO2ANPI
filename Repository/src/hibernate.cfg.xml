@@ -13,6 +13,7 @@
 		<mapping class="br.com.cco2anpi.database.Access" />
 		<mapping class="br.com.cco2anpi.database.User" />
 		<mapping class="br.com.cco2anpi.database.Company" />
+		<mapping class="br.com.cco2anpi.database.Set" />
 		<mapping class="br.com.cco2anpi.database.Employer" />
 
 

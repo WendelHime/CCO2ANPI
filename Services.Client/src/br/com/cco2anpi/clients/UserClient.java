@@ -46,7 +46,7 @@ public class UserClient
      */
     public ResponseEntity<BaseResponse<User>> insert(User user, int typeUser)
     {
-	return new RestTemplate().exchange(restURLEndpoint + "/User/insert.json?typeUser="+typeUser, HttpMethod.POST,
+	return new RestTemplate().exchange(restURLEndpoint + "/User/insert.json?typeUser=" + typeUser, HttpMethod.POST,
 		new HttpEntity<>(user), new ParameterizedTypeReference<BaseResponse<User>>()
 		{
 		});
@@ -167,12 +167,13 @@ public class UserClient
      * 
      * @return return all access
      */
-    public ResponseEntity<PagedResponse<Access[]>> getAccess(int pageSize, int offset)
+    public ResponseEntity<PagedResponse<Access[]>> getAccess(int typeUser, int pageSize, int offset)
     {
 
 	MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 	params.add("pageSize", "" + pageSize);
 	params.add("offset", "" + offset);
+	params.add("typeUser", "" + typeUser);
 	UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(restURLEndpoint + "/User/getAccess.json")
 		.queryParams(params).build();
 	return new RestTemplate().exchange(uriComponents.toUriString(), HttpMethod.GET, null,

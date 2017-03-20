@@ -45,6 +45,7 @@ public class UserController extends BaseController
      * 
      * @return array of users
      */
+    @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     @RequestMapping(value = "getUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<PagedResponse<List<IUser>>> getUsers(@RequestParam("pageSize") int pageSize,
@@ -82,7 +83,8 @@ public class UserController extends BaseController
      * @return user filled
      */
     @RequestMapping(value = "insert", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user, @RequestParam("typeUser") int typeUser)
+    public @ResponseBody ResponseEntity<BaseResponse<IUser>> insert(@RequestBody User user,
+	    @RequestParam("typeUser") int typeUser)
     {
 	try
 	{

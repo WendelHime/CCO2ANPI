@@ -21,10 +21,14 @@ import br.com.cco2anpi.models.Company;
 import br.com.cco2anpi.models.Employer;
 import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
+import br.com.cco2anpi.models.ISet;
 import br.com.cco2anpi.models.PagedResponse;
 import br.com.cco2anpi.repository.CompanyRepository;
 import br.com.cco2anpi.repository.EmployersRepository;
 import br.com.cco2anpi.repository.ICompanyRepository;
+import br.com.cco2anpi.repository.IEmployerRepository;
+import br.com.cco2anpi.repository.ISetRepository;
+import br.com.cco2anpi.repository.SetRepository;
 
 /**
  * @author wotan
@@ -41,6 +45,7 @@ public class CompanyController extends BaseController
      * 
      * @return all companies
      */
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "getAllCompanies", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<PagedResponse<List<ICompany>>> getAllCompanies(
 	    @RequestParam("pageSize") int pageSize, @RequestParam("offset") int offset)
@@ -127,7 +132,7 @@ public class CompanyController extends BaseController
     @RequestMapping(value = "insertEmployer", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<BaseResponse<IEmployer>> insert(@RequestBody Employer employer)
     {
-	EmployersRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
+	IEmployerRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
 	try
 	{
@@ -150,7 +155,7 @@ public class CompanyController extends BaseController
     @RequestMapping(value = "updateEmployer", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<BaseResponse<IEmployer>> update(@RequestBody Employer employer)
     {
-	EmployersRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
+	IEmployerRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
 	return okResponse(employerRepository.update(employer), "Accepted", HttpStatus.ACCEPTED.value());
     }
@@ -165,9 +170,62 @@ public class CompanyController extends BaseController
     @RequestMapping(value = "deleteEmployer", method = RequestMethod.POST)
     public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody Employer employer)
     {
-	EmployersRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
+	IEmployerRepository employerRepository = new EmployersRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
 	return okResponse(employerRepository.delete(employer), "No content", HttpStatus.NO_CONTENT.value());
+    }
+
+    /**
+     * Method used to insert Set
+     * 
+     * @param set
+     * @return inserted set
+     */
+    @RequestMapping(value = "insertSet", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity<BaseResponse<ISet>> insert(@RequestBody br.com.cco2anpi.models.Set set)
+    {
+	ISetRepository setRepository = new SetRepository("hibernate.cfg.xml");
+	startTime = System.currentTimeMillis();
+	try
+	{
+	    return okResponse(setRepository.insert(set), "Created", HttpStatus.CREATED.value());
+	}
+	catch (Exception ex)
+	{
+	    // TODO: Criar logger em Tools
+	    return okResponse(new br.com.cco2anpi.models.Set(), "Conflict or error: " + ex.getMessage(),
+		    HttpStatus.CONFLICT.value());
+	}
+    }
+
+    /**
+     * Method used to update employer
+     * 
+     * @param set
+     *            to be updated
+     * @return set updated
+     */
+    @RequestMapping(value = "updateSet", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity<BaseResponse<ISet>> update(@RequestBody br.com.cco2anpi.models.Set set)
+    {
+	ISetRepository setRepository = new SetRepository("hibernate.cfg.xml");
+	startTime = System.currentTimeMillis();
+	return okResponse(setRepository.update(set), "Accepted", HttpStatus.ACCEPTED.value());
+    }
+
+    /**
+     * Method used to delete employer
+     * 
+     * @param set
+     *            to be deleted
+     * @return status
+     */
+    @RequestMapping(value = "deleteSet", method = RequestMethod.POST)
+    public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody br.com.cco2anpi.models.Set set)
+    {
+	ISetRepository setRepository = new SetRepository("hibernate.cfg.xml");
+	startTime = System.currentTimeMillis();
+	return okResponse(setRepository.delete(set), "No content", HttpStatus.NO_CONTENT.value());
     }
 
 }

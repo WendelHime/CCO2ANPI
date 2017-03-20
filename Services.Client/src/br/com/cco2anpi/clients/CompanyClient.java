@@ -123,7 +123,7 @@ public class CompanyClient
      */
     public ResponseEntity<BaseResponse<Employer>> insertEmployer(Employer employer)
     {
-	return new RestTemplate().exchange(restURLEndpoint + "/Employer/insertEmployer.json", HttpMethod.POST,
+	return new RestTemplate().exchange(restURLEndpoint + "/Company/insertEmployer.json", HttpMethod.POST,
 		new HttpEntity<>(employer), new ParameterizedTypeReference<BaseResponse<Employer>>()
 		{
 		});
@@ -138,7 +138,7 @@ public class CompanyClient
      */
     public ResponseEntity<BaseResponse<Employer>> updateEmployer(Employer employer)
     {
-	return new RestTemplate().exchange(restURLEndpoint + "/Employer/updateEmployer.json", HttpMethod.POST,
+	return new RestTemplate().exchange(restURLEndpoint + "/Company/updateEmployer.json", HttpMethod.POST,
 		new HttpEntity<>(employer), new ParameterizedTypeReference<BaseResponse<Employer>>()
 		{
 		});
@@ -153,8 +153,53 @@ public class CompanyClient
      */
     public ResponseEntity<BaseResponse<Boolean>> deleteEmployer(Employer employer)
     {
-	return new RestTemplate().exchange(restURLEndpoint + "/Employer/deleteEmployer.json", HttpMethod.POST,
+	return new RestTemplate().exchange(restURLEndpoint + "/Company/deleteEmployer.json", HttpMethod.POST,
 		new HttpEntity<>(employer), new ParameterizedTypeReference<BaseResponse<Boolean>>()
+		{
+		});
+    }
+
+    /**
+     * Method used to insert set
+     * 
+     * @param set
+     *            to be inserted
+     * @return set inserted
+     */
+    public ResponseEntity<BaseResponse<br.com.cco2anpi.models.Set>> insertSet(br.com.cco2anpi.models.Set set)
+    {
+	return new RestTemplate().exchange(restURLEndpoint + "/Company/insertSet.json", HttpMethod.POST,
+		new HttpEntity<>(set), new ParameterizedTypeReference<BaseResponse<br.com.cco2anpi.models.Set>>()
+		{
+		});
+    }
+
+    /**
+     * Method used to update data
+     * 
+     * @param set
+     *            set to be updated
+     * @return set updated
+     */
+    public ResponseEntity<BaseResponse<br.com.cco2anpi.models.Set>> updateSet(br.com.cco2anpi.models.Set set)
+    {
+	return new RestTemplate().exchange(restURLEndpoint + "/Company/updateSet.json", HttpMethod.POST,
+		new HttpEntity<>(set), new ParameterizedTypeReference<BaseResponse<br.com.cco2anpi.models.Set>>()
+		{
+		});
+    }
+
+    /**
+     * Method used to delete employer
+     * 
+     * @param set
+     *            set to be deleted
+     * @return status
+     */
+    public ResponseEntity<BaseResponse<Boolean>> deleteSet(br.com.cco2anpi.models.Set set)
+    {
+	return new RestTemplate().exchange(restURLEndpoint + "/Company/deleteSet.json", HttpMethod.POST,
+		new HttpEntity<>(set), new ParameterizedTypeReference<BaseResponse<Boolean>>()
 		{
 		});
     }

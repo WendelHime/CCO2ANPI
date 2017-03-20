@@ -21,7 +21,7 @@ public interface ICompany {
     
     void setAirConditionerHours(String businessHours);
 
-    void setSet(String set);
+    void setSet(Set<ISet> set);
 
     void setEmployers(Set<IEmployer> employers);
 
@@ -37,7 +37,7 @@ public interface ICompany {
     
     String getAirConditionerHours();
     
-    String getSet();
+    Set<ISet> getSet();
 
     Set<IEmployer> getEmployers();
 }

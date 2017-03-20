@@ -11,7 +11,8 @@ import br.com.cco2anpi.models.IUser;
  * @author wotan
  *
  */
-public interface IUserRepository {
+public interface IUserRepository
+{
     IUser insert(IUser user);
 
     IUser update(IUser user);

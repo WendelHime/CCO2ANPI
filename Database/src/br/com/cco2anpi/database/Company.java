@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.IEmployer;
+import br.com.cco2anpi.models.ISet;
 
 /**
  * @author wotan
@@ -45,7 +46,9 @@ public class Company implements Serializable, ICompany
     private Double maximumTemperature;
     @Column(name = "air_conditioner_hours")
     private String airconditionerHours;
-    private String set;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<br.com.cco2anpi.models.Set> set;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Employer> employers = new HashSet<>(0);
@@ -63,7 +66,7 @@ public class Company implements Serializable, ICompany
 	businessHours = sourceObject.getBusinessHours();
 	maximumTemperature = sourceObject.getMaximumTemperature();
 	airconditionerHours = sourceObject.getAirConditionerHours();
-	set = sourceObject.getSet();
+	setSet(sourceObject.getSet());
 	setEmployers(sourceObject.getEmployers());
     }
 
@@ -172,18 +175,22 @@ public class Company implements Serializable, ICompany
     /**
      * @return the complexBuilding
      */
-    public String getSet()
+    public Set<ISet> getSet()
     {
-	return this.set;
+	return new HashSet<ISet>(this.set);
     }
 
     /**
      * @param complexBuilding
      *            the complexBuilding to set
      */
-    public void setSet(String set)
+    public void setSet(Set<ISet> set)
     {
-	this.set = set;
+	Iterator<ISet> iterator = set.iterator();
+	while (iterator.hasNext())
+	{
+	    this.set.add((br.com.cco2anpi.models.Set) iterator.next());
+	}
     }
 
     /**
