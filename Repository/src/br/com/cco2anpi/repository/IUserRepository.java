@@ -24,4 +24,6 @@ public interface IUserRepository
     HashMap<String, Object> getAllUsers(int pageSize, int offset);
 
     boolean exists(IUser user);
+    
+    IUser authentication(IUser user);
 }

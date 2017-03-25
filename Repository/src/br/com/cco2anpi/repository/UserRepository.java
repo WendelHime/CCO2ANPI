@@ -16,6 +16,7 @@ import org.hibernate.query.Query;
 
 import br.com.cco2anpi.models.IUser;
 import br.com.cco2anpi.models.User;
+import br.com.cco2anpi.tools.Crypto;
 
 /**
  * @author wotan Class used to be the repository of the user
@@ -186,6 +187,28 @@ public class UserRepository extends BaseRepository implements IUserRepository
 	session.close();
 	close();
 	return status;
+    }
+
+    public IUser authentication(IUser user)
+    {
+	Session session = getSessionFactory().openSession();
+	try
+	{
+	    IUser testUser = new User(session
+		    .createQuery("from User user where user.username = :username ", br.com.cco2anpi.database.User.class)
+		    .setParameter("username", user.getUsername()).getSingleResult());
+	    if (Crypto.decrypt(testUser.getPassword(), testUser.getSalt()) == Crypto.decrypt(user.getPassword(),
+		    testUser.getSalt()))
+		return testUser;
+
+	}
+	catch (Exception ex)
+	{
+
+	}
+	session.close();
+	close();
+	return null;
     }
 
 }

@@ -27,6 +27,7 @@ import br.com.cco2anpi.models.TypeEnum;
 import br.com.cco2anpi.models.User;
 import br.com.cco2anpi.repository.AccessRepository;
 import br.com.cco2anpi.repository.IAccessRepository;
+import br.com.cco2anpi.repository.IUserRepository;
 import br.com.cco2anpi.repository.UserRepository;
 
 /**
@@ -51,7 +52,7 @@ public class UserController extends BaseController
     public @ResponseBody ResponseEntity<PagedResponse<List<IUser>>> getUsers(@RequestParam("pageSize") int pageSize,
 	    @RequestParam("offset") int offset)
     {
-	UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+	IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
 	HashMap<String, Object> response = userRepository.getAllUsers(offset, pageSize);
 	return okResponse((List<IUser>) response.get("users"), "Ok", HttpStatus.OK.value(),
@@ -68,11 +69,27 @@ public class UserController extends BaseController
     @RequestMapping(value = "getUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BaseResponse<IUser>> getUser(@RequestBody User user)
     {
-	UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+	IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
-	if (userRepository.exists(
-		user)) { return okResponse(userRepository.getUser(user.getUserId()), "Ok", HttpStatus.OK.value()); }
+	if (userRepository.exists(user))
+	    return okResponse(userRepository.getUser(user.getUserId()), "Ok", HttpStatus.OK.value());
 	return okResponse(new User(), "Not found", HttpStatus.NOT_FOUND.value());
+    }
+
+    @RequestMapping(value = "authentication", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<BaseResponse<IUser>> authentication(@RequestBody User user)
+    {
+	IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+	startTime = System.currentTimeMillis();
+	IUser response = userRepository.authentication(user);
+	if (response != null)
+	{
+	    return okResponse(response, "Ok", HttpStatus.OK.value());
+	}
+	else
+	{
+	    return okResponse(new User(), "Not found", HttpStatus.NOT_FOUND.value());
+	}
     }
 
     /**
@@ -88,7 +105,7 @@ public class UserController extends BaseController
     {
 	try
 	{
-	    UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+	    IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	    startTime = System.currentTimeMillis();
 	    TypeEnum typeUsr = TypeEnum.getValue(typeUser);
 	    if (TypeEnum.getValue(user.getType()) == TypeEnum.CLERK && typeUsr == TypeEnum.SYNDIC)
@@ -122,7 +139,7 @@ public class UserController extends BaseController
     @RequestMapping(value = "update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BaseResponse<IUser>> update(@RequestBody User user)
     {
-	UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+	IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
 	if (userRepository
 		.exists(user)) { return okResponse(userRepository.update(user), "Ok", HttpStatus.ACCEPTED.value()); }
@@ -139,7 +156,7 @@ public class UserController extends BaseController
     @RequestMapping(value = "delete", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BaseResponse<Boolean>> delete(@RequestBody User user)
     {
-	UserRepository userRepository = new UserRepository("hibernate.cfg.xml");
+	IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
 	if (userRepository.exists(
 		user)) { return okResponse(userRepository.delete(user), "No content", HttpStatus.NO_CONTENT.value()); }

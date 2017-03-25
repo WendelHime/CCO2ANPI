@@ -105,7 +105,7 @@ public class UserClient
     }
 
     /**
-     * Method uset to get specific user
+     * Method user to get specific user
      * 
      * @param user
      *            object user to be searched
@@ -114,6 +114,21 @@ public class UserClient
     public ResponseEntity<BaseResponse<User>> getUser(User user)
     {
 	return new RestTemplate().exchange(restURLEndpoint + "/User/getUser.json", HttpMethod.POST,
+		new HttpEntity<>(user), new ParameterizedTypeReference<BaseResponse<User>>()
+		{
+		});
+    }
+
+    /**
+     * Method to authenticate user
+     * 
+     * @param user
+     *            to be authenticated
+     * @return user filled
+     */
+    public ResponseEntity<BaseResponse<User>> authentication(User user)
+    {
+	return new RestTemplate().exchange(restURLEndpoint + "/User/authentication.json", HttpMethod.POST,
 		new HttpEntity<>(user), new ParameterizedTypeReference<BaseResponse<User>>()
 		{
 		});
