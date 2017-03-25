@@ -17,6 +17,6 @@
 			<option value="3">Employee</option>
 		</select>
 		<input type="submit" value="Inserir" />
-	</form>
+	</form>  
 </body>
 </html>

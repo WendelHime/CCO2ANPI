@@ -14,7 +14,7 @@ import br.com.cco2anpi.models.BaseResponse;
 import br.com.cco2anpi.models.PagedResponse;
 
 /**
- * @author wotan Class used to be de base of all controllers
+ * @author wotan Class used to be de base of all controller
  *
  */
 public class BaseController
