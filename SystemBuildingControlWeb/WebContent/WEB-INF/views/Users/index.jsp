@@ -5,10 +5,7 @@
 </head>
 <body>
 	<%@ include file="../Shared/menu.jsp"%>
-	<%
-	    String filepath = (String) request.getAttribute("data");
-	%>
-	<c:import url=filepath></c:import>
+	<c:import url="${filepath}"></c:import>
 	<%@ include file="../Shared/footer.jsp"%>
 </body>
 </html>

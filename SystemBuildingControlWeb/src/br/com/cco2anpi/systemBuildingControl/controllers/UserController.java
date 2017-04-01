@@ -6,7 +6,9 @@ package br.com.cco2anpi.systemBuildingControl.controllers;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
@@ -46,7 +48,7 @@ public class UserController extends BaseController
     @RequestMapping("index")
     public ModelAndView index()
     {
-	return new ModelAndView("/Users/index");
+	return new ModelAndView("/Users/index", "filepath", "form.jsp");
     }
 
     /**
