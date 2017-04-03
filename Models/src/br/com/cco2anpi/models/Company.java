@@ -21,7 +21,7 @@ public class Company implements ICompany
     private String businessHours;
     private Double maximumTemperature;
     private String airconditionerHours;
-    private Set<ISet> set;
+    private Set<ISet> set = new HashSet<>(0);
     private Set<IEmployer> employers = new HashSet<>(0);
 
     public Company()
