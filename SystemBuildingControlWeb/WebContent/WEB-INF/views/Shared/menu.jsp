@@ -12,8 +12,8 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a class="navbar-brand" href="users.html">Usuários</a></li>
-				<li><a class="navbar-brand" href="employer.html">Empresas</a></li>
+				<li><a class="navbar-brand" href="<c:url value="/User/index" />">Usuários</a></li>
+				<li><a class="navbar-brand" href="<c:url value="/Company/index" />">Empresas</a></li>
 			</ul>
 		</div>
 	</div>
