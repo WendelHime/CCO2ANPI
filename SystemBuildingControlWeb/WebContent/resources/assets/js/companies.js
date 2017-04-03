@@ -18,9 +18,11 @@ $("#btnInsertCompany").click(function() {
 });
 
 $("#btnUpdateCompany").click(function() {
-	var objectCompany = $("#formCompany").serializeArray()
+	var object = $("#formCompany").serializeArray()
     .reduce(function(a, x) { a[x.name] = x.value; return a; }, {});
-	updateCompany(JSON.stringify(objectCompany)).done(function(data) {
+	object.employers = JSON.parse(object.employers);
+	object.sets = JSON.parse(object.sets);
+	updateCompany(JSON.stringify(object)).done(function(data) {
 		if(data.statusCode == 202) {
 			$("#status").text("empresa alterada!");
 			updateTable();
@@ -34,6 +36,8 @@ $("#btnUpdateCompany").click(function() {
 $("#btnDeleteCompany").click(function() {
 	var object = $("#formCompany").serializeArray()
     .reduce(function(a, x) { a[x.name] = x.value; return a; }, {});
+	object.employers = JSON.parse(object.employers);
+	object.sets = JSON.parse(object.sets);
 	deleteCompany(JSON.stringify(object)).done(function(data) {
 		if(data.statusCode == 204) {
 			$("#status").text("empresa deletado!");

@@ -2,6 +2,8 @@
 
 <form id="formCompany">
 	<input type="hidden" name="companyId" id="companyId" />
+	<input type="hidden" name="employers" id="employers" />
+	<input type="hidden" name="sets" id="sets" />
 	<div class="row">
 		<div class="form-group col-md-12">
 			<label for="socialReason">Razão Social</label> <input
