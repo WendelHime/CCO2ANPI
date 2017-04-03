@@ -44,7 +44,7 @@ public class UserController extends BaseController
      * 
      * @return view index
      */
-    @RequestMapping("index")
+    @RequestMapping("/")
     public ModelAndView index()
     {
 	return new ModelAndView("/Users/index");

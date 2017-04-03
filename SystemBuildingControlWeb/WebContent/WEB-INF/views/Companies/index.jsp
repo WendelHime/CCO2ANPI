@@ -6,8 +6,8 @@
 <body>
 	<div id="main" class="container">
 		<%@ include file="../Shared/menu.jsp"%>
-		<%@ include file="../Users/form.jsp"%>
-		<%@ include file="../Users/table.jsp"%>
+		<%@ include file="../Companies/form.jsp"%>
+		<%@ include file="../Companies/table.jsp"%>
 	</div>
 	<%@ include file="../Shared/footer.jsp"%>
 	<script src="<c:url value="/resources/assets/js/site-clients.js" />"></script>
