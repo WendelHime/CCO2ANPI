@@ -96,7 +96,7 @@ public class UserClient
 	MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 	params.add("pageSize", "" + pageSize);
 	params.add("offset", "" + offset);
-	UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(restURLEndpoint + "/User/getAllUsers.json")
+	UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl(restURLEndpoint + "/User/getUsers.json")
 		.queryParams(params).build();
 	return new RestTemplate().exchange(uriComponents.toUriString(), HttpMethod.GET, null,
 		new ParameterizedTypeReference<PagedResponse<User[]>>()

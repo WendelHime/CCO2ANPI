@@ -48,7 +48,7 @@ public class Company implements Serializable, ICompany
     private String airconditionerHours;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<br.com.cco2anpi.models.Set> set;
+    private Set<br.com.cco2anpi.database.Set> set = new HashSet<>(0);
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "company", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Employer> employers = new HashSet<>(0);
@@ -189,7 +189,7 @@ public class Company implements Serializable, ICompany
 	Iterator<ISet> iterator = set.iterator();
 	while (iterator.hasNext())
 	{
-	    this.set.add((br.com.cco2anpi.models.Set) iterator.next());
+	    this.set.add((br.com.cco2anpi.database.Set) iterator.next());
 	}
     }
 

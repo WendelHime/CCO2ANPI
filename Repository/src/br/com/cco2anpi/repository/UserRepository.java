@@ -64,6 +64,10 @@ public class UserRepository extends BaseRepository implements IUserRepository
 	Transaction transaction = session.beginTransaction();
 	try
 	{
+	    if (!transaction.isActive())
+	    {
+		transaction.begin();
+	    }
 	    session.update(new br.com.cco2anpi.database.User(user));
 	    transaction.commit();
 	}
@@ -132,10 +136,11 @@ public class UserRepository extends BaseRepository implements IUserRepository
     {
 	HashMap<String, Object> returnedValues = new HashMap<>();
 	Session session = getSessionFactory().openSession();
+
 	Query<br.com.cco2anpi.database.User> query = session.createQuery("from User",
 		br.com.cco2anpi.database.User.class);
 	returnedValues.put("total", new Integer(query.getResultList().size()));
-	List<br.com.cco2anpi.database.User> users = query.setMaxResults(pageSize).setFirstResult(offset)
+	List<br.com.cco2anpi.database.User> users = query.setFirstResult(offset).setMaxResults(pageSize)
 		.getResultList();
 	ArrayList<IUser> list = new ArrayList<>(users);
 	session.close();
@@ -197,17 +202,20 @@ public class UserRepository extends BaseRepository implements IUserRepository
 	    IUser testUser = new User(session
 		    .createQuery("from User user where user.username = :username ", br.com.cco2anpi.database.User.class)
 		    .setParameter("username", user.getUsername()).getSingleResult());
-	    if (Crypto.decrypt(testUser.getPassword(), testUser.getSalt()) == Crypto.decrypt(user.getPassword(),
-		    testUser.getSalt()))
-		return testUser;
+	    String decriptedTest = Crypto.decrypt(testUser.getPassword(), testUser.getSalt());
+	    String decriptedUser = Crypto.decrypt(user.getPassword(), user.getSalt());
+	    if (decriptedTest.equals(decriptedUser)) return testUser;
 
 	}
 	catch (Exception ex)
 	{
 
 	}
-	session.close();
-	close();
+	finally
+	{
+	    session.close();
+	    close();
+	}
 	return null;
     }
 

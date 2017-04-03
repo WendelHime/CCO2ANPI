@@ -13,7 +13,7 @@ function insertUser(serializedForm) {
 	return $.ajax({
 		type : "POST",
 		dataType : "json",
-		url : "/User/insert",
+		url : "/SystemBuildingControlWeb/User/insert",
 		data : serializedForm,
 		cache : false
 	});
@@ -29,8 +29,9 @@ function insertUser(serializedForm) {
 function updateUser(serializedForm) {
 	return $.ajax({
 		type : "POST",
+		contentType : "application/json",
 		dataType : "json",
-		url : "/User/update",
+		url : "/SystemBuildingControlWeb/User/update",
 		data : serializedForm,
 		cache : false
 	});
@@ -46,8 +47,9 @@ function updateUser(serializedForm) {
 function deleteUser(serializedForm) {
 	return $.ajax({
 		type : "POST",
+		contentType : "application/json",
 		dataType : "json",
-		url : "/User/delete",
+		url : "/SystemBuildingControlWeb/User/delete",
 		data : serializedForm,
 		cache : false
 	});
@@ -66,7 +68,18 @@ function getUsers(pageSize, offset) {
 	return $.ajax({
 		type : "GET",
 		dataType : "json",
-		url : "/User/getUsers?pageSize=" + pageSize + "&offset=" + offset,
+		url : "/SystemBuildingControlWeb/User/getUsers?pageSize=" + pageSize
+				+ "&offset=" + offset,
 		cache : false
+	});
+}
+
+function getUser(id) {
+	return $.ajax({
+		type : "GET",
+		dataType : "json",
+		url : "/SystemBuildingControlWeb/User/getUser?id=" + id,
+		cache : false,
+		async : false
 	});
 }

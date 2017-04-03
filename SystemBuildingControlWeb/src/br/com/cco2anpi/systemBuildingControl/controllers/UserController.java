@@ -6,9 +6,7 @@ package br.com.cco2anpi.systemBuildingControl.controllers;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.bouncycastle.crypto.DataLengthException;
 import org.bouncycastle.crypto.InvalidCipherTextException;
@@ -16,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +47,7 @@ public class UserController extends BaseController
     @RequestMapping("index")
     public ModelAndView index()
     {
-	return new ModelAndView("/Users/index", "filepath", "form.jsp");
+	return new ModelAndView("/Users/index");
     }
 
     /**
@@ -87,7 +86,8 @@ public class UserController extends BaseController
 	user.setName(name);
 	user.setCpf(cpf);
 	user.setType(type);
-	return okResponse(userClient.insert(user, 1).getBody().getResponse(), "Ok", HttpStatus.OK.value());
+	BaseResponse<User> response = userClient.insert(user, 1).getBody();
+	return okResponse(response.getResponse(), response.getMessage(), response.getStatusCode());
     }
 
     /**
@@ -112,10 +112,12 @@ public class UserController extends BaseController
 	    }
 	    else
 	    {
+		String oldPassword = Crypto.decrypt(authentication.getPassword(), authentication.getSalt());
 		user.setSalt(Crypto.generateRandomSalt());
-		user.setPassword(Crypto.encrypt(authentication.getPassword(), user.getSalt()));
+		user.setPassword(Crypto.encrypt(oldPassword, user.getSalt()));
 	    }
-	    return okResponse(userClient.update(user).getBody().getResponse(), "Ok", HttpStatus.OK.value());
+	    BaseResponse<User> response = userClient.update(user).getBody();
+	    return okResponse(response.getResponse(), response.getMessage(), response.getStatusCode());
 	}
 	catch (UnsupportedEncodingException | DataLengthException | IllegalStateException | InvalidCipherTextException
 		| NullPointerException e)
@@ -138,7 +140,8 @@ public class UserController extends BaseController
     {
 	try
 	{
-	    return okResponse(userClient.delete(user).getBody().getResponse(), "Ok", HttpStatus.OK.value());
+	    BaseResponse<Boolean> response = userClient.delete(user).getBody();
+	    return okResponse(response.getResponse(), response.getMessage(), response.getStatusCode());
 	}
 	catch (Exception ex)
 	{
@@ -157,6 +160,7 @@ public class UserController extends BaseController
      *            offset of the query
      * @return list of users
      */
+    @Transactional(readOnly = true)
     @RequestMapping(value = "getUsers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<PagedResponse<List<User>>> getUsers(@RequestParam("pageSize") int pageSize,
 	    @RequestParam("offset") int offset)
@@ -164,8 +168,8 @@ public class UserController extends BaseController
 	try
 	{
 	    PagedResponse<User[]> response = userClient.getAllUsers(pageSize, offset).getBody();
-	    return okResponse(Arrays.asList(response.getResponse()), "Ok", HttpStatus.OK.value(), response.getTotal(),
-		    response.getPageSize(), response.getOffset());
+	    return okResponse(Arrays.asList(response.getResponse()), response.getMessage(), response.getStatusCode(),
+		    response.getTotal(), response.getPageSize(), response.getOffset());
 	}
 	catch (Exception ex)
 	{
@@ -175,4 +179,22 @@ public class UserController extends BaseController
 	return okResponse(new ArrayList<User>(), "Not found", HttpStatus.NOT_FOUND.value(), 0, 0, 0);
     }
 
+    @Transactional(readOnly = true)
+    @RequestMapping(value = "getUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<BaseResponse<User>> getUser(@RequestParam("id") int id)
+    {
+	try
+	{
+	    User user = new User();
+	    user.setUserId(id);
+	    BaseResponse<User> response = userClient.getUser(user).getBody();
+	    return okResponse(response.getResponse(), response.getMessage(), response.getStatusCode());
+	}
+	catch (Exception ex)
+	{
+	    // TODO Auto-generated catch block
+	    ex.printStackTrace();
+	}
+	return okResponse(new User(), "Not found", HttpStatus.NOT_FOUND.value());
+    }
 }

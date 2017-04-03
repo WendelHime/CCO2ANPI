@@ -54,7 +54,7 @@ public class UserController extends BaseController
     {
 	IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
-	HashMap<String, Object> response = userRepository.getAllUsers(offset, pageSize);
+	HashMap<String, Object> response = userRepository.getAllUsers(pageSize, offset);
 	return okResponse((List<IUser>) response.get("users"), "Ok", HttpStatus.OK.value(),
 		(Integer) response.get("total"), pageSize, offset);
     }
@@ -108,7 +108,8 @@ public class UserController extends BaseController
 	    IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	    startTime = System.currentTimeMillis();
 	    TypeEnum typeUsr = TypeEnum.getValue(typeUser);
-	    if (TypeEnum.getValue(user.getType()) == TypeEnum.CLERK && typeUsr == TypeEnum.SYNDIC)
+	    if ((TypeEnum.getValue(user.getType()) == TypeEnum.CLERK
+		    || TypeEnum.getValue(user.getType()) == TypeEnum.SYNDIC) && typeUsr == TypeEnum.SYNDIC)
 	    {
 		if (userRepository.exists(user)) return okResponse(new User(), "Conflict", HttpStatus.CONFLICT.value());
 		return okResponse(userRepository.insert(user), "Created", HttpStatus.CREATED.value());
@@ -142,7 +143,7 @@ public class UserController extends BaseController
 	IUserRepository userRepository = new UserRepository("hibernate.cfg.xml");
 	startTime = System.currentTimeMillis();
 	if (userRepository
-		.exists(user)) { return okResponse(userRepository.update(user), "Ok", HttpStatus.ACCEPTED.value()); }
+		.exists(user)) { return okResponse(userRepository.update(user), "Accepted", HttpStatus.ACCEPTED.value()); }
 	return okResponse(new User(), "Not found", HttpStatus.NOT_FOUND.value());
     }
 

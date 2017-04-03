@@ -34,8 +34,8 @@ public class Employer extends User implements Serializable, IEmployer
 {
 
     // @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false, insertable = false, updatable = false)
     private Integer id;
     @Column(name = "access_hour")
     private String accessHour;

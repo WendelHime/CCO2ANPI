@@ -3,15 +3,20 @@
  */
 package br.com.cco2anpi.database;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import br.com.cco2anpi.models.Company;
 import br.com.cco2anpi.models.ICompany;
 import br.com.cco2anpi.models.ISet;
 
@@ -19,11 +24,14 @@ import br.com.cco2anpi.models.ISet;
  * @author wotan
  *
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "SETS")
-public class Set implements ISet
+public class Set implements Serializable, ISet
 {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
     private String number;
     @ManyToOne(fetch = FetchType.LAZY)
