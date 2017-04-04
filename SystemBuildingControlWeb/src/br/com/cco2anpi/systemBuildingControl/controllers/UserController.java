@@ -179,6 +179,13 @@ public class UserController extends BaseController
 	return okResponse(new ArrayList<User>(), "Not found", HttpStatus.NOT_FOUND.value(), 0, 0, 0);
     }
 
+    /**
+     * Method used to get user
+     * 
+     * @param id
+     *            id of the user
+     * @return object user if exists
+     */
     @Transactional(readOnly = true)
     @RequestMapping(value = "getUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BaseResponse<User>> getUser(@RequestParam("id") int id)

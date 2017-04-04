@@ -45,10 +45,10 @@ public class CompanyClient
      * @return return company filled
      */
     // @Test
-    public ResponseEntity<BaseResponse<Company>> insert(Company company)
+    public ResponseEntity<BaseResponse<Company>> insert(Company company, int typeUser)
     {
-	return new RestTemplate().exchange(restURLEndpoint + "/Company/insert.json", HttpMethod.POST,
-		new HttpEntity<>(company), new ParameterizedTypeReference<BaseResponse<Company>>()
+	return new RestTemplate().exchange(restURLEndpoint + "/Company/insert.json?typeUser=" + typeUser,
+		HttpMethod.POST, new HttpEntity<>(company), new ParameterizedTypeReference<BaseResponse<Company>>()
 		{
 		});
     }
