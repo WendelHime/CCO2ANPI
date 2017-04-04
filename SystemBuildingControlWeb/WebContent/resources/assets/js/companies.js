@@ -59,27 +59,28 @@ function updateTable() {
 				total = data.total;
 				var html = "";
 				for (var i = 0; i < companies.length; i++) {
-					html += "<tr id='row-user-"+companies[i].userId+"'>"
-					html += "<td><button id='selectCompany-"+companies[i].userId+"' class='btn btn-default'>"+companies[i].userId+"</button></td>"+"<td>" + companies[i].name + "</td>" + "<td>"
-							+ companies[i].username + "</td>" + "<td>"
-							+ companies[i].cpf + "</td>"+"<td>"+companies[i].type+"</td>";
+					html += "<tr id='row-company-"+companies[i].userId+"'>"
+					html += "<td><button id='selectCompany-"+companies[i].id+"' class='btn btn-default'>"+companies[i].id+"</button></td>"
+					+ "<td>" + companies[i].socialReason + "</td>" 
+					+ "<td>" + companies[i].cnpj + "</td>" 
+					+ "<td>" + companies[i].businessHours + "</td>";
 					html += "</tr>";
 				}
 				$("#tableCompanies").append(html);
 				for (var i = 0; i < companies.length; i++) {
 					$("#selectCompany-"+companies[i].userId).on("click", function() {
 						$("#status").empty();
-						var columns = $("#row-user-"+this.textContent).children();
+						var columns = $("#row-company-"+this.textContent).children();
 						var response = getUser(this.textContent).responseJSON;
 						var company = response.response;
-						$("#id").val(company.companyId);
-						$("#salt").val(company.salt);
-						$("#name").val(company.name);
-						$("#companyname").val(company.companyname);
-						$("#cpf").val(company.cpf);
-						$("#type").val(company.type);
-						$("#password").val(company.password);
-						$("#access").val(JSON.stringify(company.access));
+						$("#id").val(company.id);
+						$("#socialReason").val(company.socialReason);
+						$("#cnpj").val(company.cnpj);
+						$("#businessHours").val(company.businessHours);
+						$("#maximumTemperature").val(company.maximumTemperature);
+						$("#airconditionerHours").val(company.airconditionerHours);
+						$("#employers").val(JSON.stringify(company.employers));
+						$("#set").val(JSON.stringify(company.set));
 						return false;
 					});
 				}

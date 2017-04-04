@@ -140,7 +140,7 @@ public class CompanyController extends BaseController
      * @return object user if exists
      */
     @Transactional(readOnly = true)
-    @RequestMapping(value = "getUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "getCompany", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<BaseResponse<Company>> getUser(@RequestParam("id") int id)
     {
 	try

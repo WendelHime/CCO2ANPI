@@ -1,9 +1,9 @@
 <h3 class="page-header text-center">Empresas</h3>
 
 <form id="formCompany">
-	<input type="hidden" name="companyId" id="companyId" />
+	<input type="hidden" name="id" id="id" />
 	<input type="hidden" name="employers" id="employers" />
-	<input type="hidden" name="sets" id="sets" />
+	<input type="hidden" name="set" id="set" />
 	<div class="row">
 		<div class="form-group col-md-12">
 			<label for="socialReason">Razão Social</label> <input
