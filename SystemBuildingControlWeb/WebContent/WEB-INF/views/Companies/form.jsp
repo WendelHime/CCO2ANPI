@@ -55,7 +55,7 @@
 			<!--Verificar método (read ou consult)-->
 			<button class="btn btn-primary" name="delete" type="submit"
 				value="Excluir" id="btnDeleteCompany">Excluir</button>
-			<button class="btn btn-default" onclick="this.form.reset();">Cancelar</button>
+			<button class="btn btn-default" onclick="this.form.reset();return false;">Cancelar</button>
 		</div>
 	</div>
 </form>

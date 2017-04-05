@@ -133,7 +133,7 @@ public class CompanyController extends BaseController
     }
 
     /**
-     * Method used to get user
+     * Method used to get company
      * 
      * @param id
      *            id of the user

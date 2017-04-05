@@ -111,7 +111,7 @@ public class CompanyController extends BaseController
     public @ResponseBody ResponseEntity<BaseResponse<ICompany>> update(@RequestBody Company company)
     {
 	ICompanyRepository companyRepository = new CompanyRepository("hibernate.cfg.xml");
-	return okResponse(companyRepository.update(company), "Ok", HttpStatus.OK.value());
+	return okResponse(companyRepository.update(company), HttpStatus.ACCEPTED.getReasonPhrase(), HttpStatus.ACCEPTED.value());
     }
 
     /**

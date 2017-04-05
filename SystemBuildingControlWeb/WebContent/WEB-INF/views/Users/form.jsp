@@ -51,7 +51,7 @@
 				value="Alterar">Alterar</button>
 			<button id="btnDeleteUser" type="button" class="btn btn-primary" name="delete"
 				value="Excluir">Excluir</button>
-			<button class="btn btn-default" onclick="this.form.reset();">Cancelar</button>
+			<button class="btn btn-default" onclick="this.form.reset();return false;">Cancelar</button>
 		</div>
 	</div>
 </form>

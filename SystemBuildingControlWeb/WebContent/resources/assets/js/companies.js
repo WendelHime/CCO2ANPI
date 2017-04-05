@@ -21,7 +21,7 @@ $("#btnUpdateCompany").click(function() {
 	var object = $("#formCompany").serializeArray()
     .reduce(function(a, x) { a[x.name] = x.value; return a; }, {});
 	object.employers = JSON.parse(object.employers);
-	object.sets = JSON.parse(object.sets);
+	object.set = JSON.parse(object.set);
 	updateCompany(JSON.stringify(object)).done(function(data) {
 		if(data.statusCode == 202) {
 			$("#status").text("empresa alterada!");
@@ -37,7 +37,7 @@ $("#btnDeleteCompany").click(function() {
 	var object = $("#formCompany").serializeArray()
     .reduce(function(a, x) { a[x.name] = x.value; return a; }, {});
 	object.employers = JSON.parse(object.employers);
-	object.sets = JSON.parse(object.sets);
+	object.set = JSON.parse(object.set);
 	deleteCompany(JSON.stringify(object)).done(function(data) {
 		if(data.statusCode == 204) {
 			$("#status").text("empresa deletado!");
@@ -59,7 +59,7 @@ function updateTable() {
 				total = data.total;
 				var html = "";
 				for (var i = 0; i < companies.length; i++) {
-					html += "<tr id='row-company-"+companies[i].userId+"'>"
+					html += "<tr id='row-company-"+companies[i].id+"'>"
 					html += "<td><button id='selectCompany-"+companies[i].id+"' class='btn btn-default'>"+companies[i].id+"</button></td>"
 					+ "<td>" + companies[i].socialReason + "</td>" 
 					+ "<td>" + companies[i].cnpj + "</td>" 
@@ -68,17 +68,17 @@ function updateTable() {
 				}
 				$("#tableCompanies").append(html);
 				for (var i = 0; i < companies.length; i++) {
-					$("#selectCompany-"+companies[i].userId).on("click", function() {
+					$("#selectCompany-"+companies[i].id).on("click", function() {
 						$("#status").empty();
 						var columns = $("#row-company-"+this.textContent).children();
-						var response = getUser(this.textContent).responseJSON;
+						var response = getCompany(this.textContent).responseJSON;
 						var company = response.response;
 						$("#id").val(company.id);
 						$("#socialReason").val(company.socialReason);
 						$("#cnpj").val(company.cnpj);
 						$("#businessHours").val(company.businessHours);
 						$("#maximumTemperature").val(company.maximumTemperature);
-						$("#airconditionerHours").val(company.airconditionerHours);
+						$("#airconditionerHours").val(company.airConditionerHours);
 						$("#employers").val(JSON.stringify(company.employers));
 						$("#set").val(JSON.stringify(company.set));
 						return false;

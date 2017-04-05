@@ -12,6 +12,6 @@
 	<%@ include file="../Shared/footer.jsp"%>
 	<script src="<c:url value="/resources/assets/js/site-clients.js" />"></script>
 	<script src="<c:url value="/resources/assets/js/pagination.js" />"></script>
-	<script src="<c:url value="/resources/assets/js/users.js" />"></script>
+	<script src="<c:url value="/resources/assets/js/companies.js" />"></script>
 </body>
 </html>
