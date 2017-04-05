@@ -8,6 +8,7 @@
 		<%@ include file="../Shared/menu.jsp"%>
 		<%@ include file="../Companies/form.jsp"%>
 		<%@ include file="../Companies/table.jsp"%>
+		<%@ include file="../Shared/pagination.jsp"%>
 	</div>
 	<%@ include file="../Shared/footer.jsp"%>
 	<script src="<c:url value="/resources/assets/js/site-clients.js" />"></script>

@@ -38,8 +38,8 @@ function verifyPagedResponse(acientID, actualID, values) {
 			$("#more").removeAttr("disabled");
 			$("#last").removeAttr("disabled");
 		}
-		if (offset <= 1) {
-			offset = 1;
+		if (offset <= 0) {
+			offset = 0;
 			$("#less").attr("disabled", "disabled");
 			$("#begin").attr("disabled", "disabled");
 		} else {
@@ -48,7 +48,7 @@ function verifyPagedResponse(acientID, actualID, values) {
 		}
 		status = true;
 	} else {
-		offset = 1;
+		offset = 0;
 		if ((totalValues - offset) < pageSize) {
 			$("#more").attr("disabled", "disabled");
 			$("#last").attr("disabled", "disabled");
@@ -66,8 +66,7 @@ function verifyPagedResponse(acientID, actualID, values) {
 $("#begin").click(function() {
 	offset = 1;
 	$("#numberPage").val("1");
-	$(".result").remove();
-	$(idForm).submit();
+	updateTable();
 });
 
 $("#more").click(function() {
@@ -77,8 +76,7 @@ $("#more").click(function() {
 		offset += 10;
 	}
 	$("#numberPage").val(parseInt($("#numberPage").val()) + 1);
-	$(".result").remove();
-	$(idForm).submit();
+	updateTable();
 });
 
 $("#less").click(function() {
@@ -88,15 +86,13 @@ $("#less").click(function() {
 	}
 
 	$("#numberPage").val(parseInt($("#numberPage").val()) - 1);
-	$(".result").remove();
-	$(idForm).submit();
+	updateTable();
 });
 
 $("#last").click(function() {
 	offset = parseInt(totalValues / pageSize) * 10;
 	$("#numberPage").val($("#totalNumberPages").text());
-	$(".result").remove();
-	$(idForm).submit();
+	updateTable();
 });
 
 $(function() {
@@ -106,8 +102,7 @@ $(function() {
 			offset = 1;
 		else
 			offset = parseInt("" + (numberPage - 1) * 10);
-		$(".result").remove();
-		$(idForm).submit();
+		updateTable();
 		return false;
 	});
 });
