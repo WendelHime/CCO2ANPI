@@ -18,7 +18,7 @@
 				placeholder="Insira apenas números">
 		</div>
 		<div class="form-group col-md-3">
-			<label for="username">Username</label> <input type="username"
+			<label for="username">Username</label> <input type="text"
 				class="form-control" name="username" id="username"
 				placeholder="Insira seu nome de usuario">
 		</div>
