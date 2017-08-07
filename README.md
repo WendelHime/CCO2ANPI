@@ -5,6 +5,8 @@ Integrated project developed for the award note to the CS course of USJT.
 - Wendel Hime Lino Castro - 201515250
 - Giovanni Maciel Canuto de Souza - 201405854
 
+This is a branch dedicated to tests with gradle
+
 TODO
 -
 - Realizar tratamento de erros das aplicaçes utilizando Log4J
