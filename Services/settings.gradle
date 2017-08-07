@@ -1,0 +1,6 @@
+rootProject.name = 'Services'
+include ":Models", ":Database", ":Repository", ":Tools"
+project(':Models').projectDir = new File(settingsDir, "../Models")
+project(':Database').projectDir = new File(settingsDir, "../Database")
+project(':Repository').projectDir = new File(settingsDir, "../Repository")
+project(':Tools').projectDir = new File(settingsDir, "../Tools")

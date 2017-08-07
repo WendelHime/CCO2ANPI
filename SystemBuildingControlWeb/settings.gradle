@@ -1,0 +1,5 @@
+rootProject.name = 'SystemBuildingControlWeb'
+include ':Models', ':Tools', ':Services.Client'
+project(':Models').projectDir = new File(settingsDir, "../Models")
+project(':Tools').projectDir = new File(settingsDir, "../Tools")
+project(':Services.Client').projectDir = new File(settingsDir, "../Services.Client")

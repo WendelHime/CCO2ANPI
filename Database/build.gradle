@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'eclipse'
+
+group = 'Database'
+
+version = '0.0.1-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+repositories {
+     
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version:'5.2.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-osgi', version:'5.2.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-envers', version:'5.2.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-c3p0', version:'5.2.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-proxool', version:'5.2.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-infinispan', version:'5.2.2.Final'
+    compile group: 'org.hibernate', name: 'hibernate-ehcache', version:'5.2.2.Final'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.7.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.7.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version:'2.7.3'
+    compile project(":Models")
+}

@@ -1,0 +1,4 @@
+06:21:28:13 [DEBUG] net.certiv.dsl.core.DslCore                                  : 173  - DslCore start
+06:21:28:13 [DEBUG] net.certiv.dsl.internal.core.model.DslModelManager           : 107  - ModelManager startup
+06:21:28:29 [DEBUG] net.certiv.dsl.internal.core.model.DslModelManager           : 615  - Revising child infos
+06:21:28:29 [DEBUG] net.certiv.dsl.internal.core.model.DslModelManager           : 627  - Adding infos [count=1]

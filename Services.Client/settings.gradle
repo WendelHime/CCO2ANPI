@@ -1,0 +1,4 @@
+rootProject.name = 'Services.Client'
+include ':Models', ':Tools'
+project(':Models').projectDir = new File(settingsDir, "../Models")
+project(':Tools').projectDir = new File(settingsDir, "../Tools")
