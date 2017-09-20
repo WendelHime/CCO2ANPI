@@ -1,2 +1,2 @@
 include "Models", "Database", "Tools", "Repository", "Services",
-        "Services.Client", "SystemBuildingControlWeb"
+        "Services.Client"//, "SystemBuildingControlWeb"

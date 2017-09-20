@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Catraca" />
-        <module name="Catraca (1)" />
         <module name="Database (1)" />
         <module name="Models (1)" />
         <module name="Repository (1)" />
@@ -16,7 +15,6 @@
         <module name="Services.Client" />
         <module name="Services.Client (1)" />
         <module name="SystemBuildingControl" />
-        <module name="SystemBuildingControl (1)" />
         <module name="Tools (1)" />
       </profile>
     </annotationProcessing>

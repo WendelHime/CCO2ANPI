@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Services" external.linked.project.path="$MODULE_DIR$/../../../Services" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="Services" external.system.module.version="0.0.1-SNAPSHOT" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":Services" />
+      </configuration>
+    </facet>
+    <facet type="java-gradle" name="Java-Gradle">
+      <configuration>
+        <option name="BUILD_FOLDER_PATH" value="$MODULE_DIR$/../../../Services/build" />
+        <option name="BUILDABLE" value="true" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/../../../Services/build/classes/java/main" />
+    <output-test url="file://$MODULE_DIR$/../../../Services/build/classes/java/test" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../Services">
+      <sourceFolder url="file://$MODULE_DIR$/../../../Services/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../Services/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../Services/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../Services/src/test/resources" type="java-test-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../Services/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../Services/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Models" scope="PROVIDED" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.ow2.asm:asm:5.0.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jboss.marshalling:jboss-marshalling-osgi:1.4.10.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jgroups:jgroups:3.6.7.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.mchange:mchange-commons-java:0.2.3.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: javax.annotation:jsr250-api:1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.1_spec:1.0.0.Beta1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: javax.el:el-api:2.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: net.minidev:accessors-smart:1.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: proxool:proxool:0.8.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.mchange:c3p0:0.9.2.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.osgi:org.osgi.compendium:4.3.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.osgi:org.osgi.core:4.3.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: javax.enterprise:cdi-api:1.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.fasterxml:classmate:1.3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jboss:jandex:2.0.0.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: antlr:antlr:2.7.7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.javassist:javassist:3.20.0-GA" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.infinispan:infinispan-commons:8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.infinispan:infinispan-core:8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.0.1.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: net.minidev:json-smart:2.2.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-core:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-infinispan:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-proxool:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-c3p0:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-envers:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-osgi:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: mysql:mysql-connector-java:6.0.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.skyscreamer:jsonassert:1.4.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-library:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.assertj:assertj-core:2.6.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.objenesis:objenesis:2.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.mockito:mockito-core:1.10.19" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.aspectj:aspectjrt:1.6.8" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.slf4j:slf4j-api:1.7.16" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: net.sf.ehcache:ehcache:2.10.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-ehcache:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.jayway.jsonpath:json-path:2.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.slf4j:jcl-over-slf4j:1.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-core:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-expression:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-test:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-beans:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-aop:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: commons-digester:commons-digester:2.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.bouncycastle:bcprov-jdk15on:1.56" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.easymock:easymock:3.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.7.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-context:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.boot:spring-boot:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.boot:spring-boot-test:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.boot:spring-boot-test-autoconfigure:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.boot:spring-boot-starter-test:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-tx:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-jdbc:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-orm:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.data:spring-data-commons-core:1.1.0.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.data:spring-data-jpa:1.0.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-web:4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.springframework:spring-webmvc:4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.ow2.asm:asm:5.0.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.marshalling:jboss-marshalling-osgi:1.4.10.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jgroups:jgroups:3.6.7.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.mchange:mchange-commons-java:0.2.3.4" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: javax.annotation:jsr250-api:1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.1_spec:1.0.0.Beta1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: javax.el:el-api:2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.minidev:accessors-smart:1.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: proxool:proxool:0.8.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.mchange:c3p0:0.9.2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.osgi:org.osgi.compendium:4.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.osgi:org.osgi.core:4.3.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: javax.enterprise:cdi-api:1.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml:classmate:1.3.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss:jandex:2.0.0.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: antlr:antlr:2.7.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.javassist:javassist:3.20.0-GA" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.infinispan:infinispan-commons:8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.infinispan:infinispan-core:8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.0.1.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.minidev:json-smart:2.2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-core:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-infinispan:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-proxool:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-c3p0:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-envers:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-osgi:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: mysql:mysql-connector-java:6.0.4" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.skyscreamer:jsonassert:1.4.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hamcrest:hamcrest-library:1.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.assertj:assertj-core:2.6.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.objenesis:objenesis:2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.mockito:mockito-core:1.10.19" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.aspectj:aspectjrt:1.6.8" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.slf4j:slf4j-api:1.7.16" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.sf.ehcache:ehcache:2.10.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-ehcache:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.jayway.jsonpath:json-path:2.2.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.slf4j:jcl-over-slf4j:1.6.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-core:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-expression:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-test:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-beans:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-aop:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-digester:commons-digester:2.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.bouncycastle:bcprov-jdk15on:1.56" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.easymock:easymock:3.4" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.7.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-context:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-test:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-test-autoconfigure:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-starter-test:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-tx:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-jdbc:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-orm:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.data:spring-data-commons-core:1.1.0.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.data:spring-data-jpa:1.0.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-web:4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework:spring-webmvc:4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.ow2.asm:asm:5.0.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jboss.marshalling:jboss-marshalling-osgi:1.4.10.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jboss.spec.javax.transaction:jboss-transaction-api_1.1_spec:1.0.1.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jgroups:jgroups:3.6.7.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.mchange:mchange-commons-java:0.2.3.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.annotation:jsr250-api:1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.1_spec:1.0.0.Beta1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.el:el-api:2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.minidev:accessors-smart:1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: log4j:log4j:1.2.17" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: proxool:proxool:0.8.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.mchange:c3p0:0.9.2.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.osgi:org.osgi.compendium:4.3.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.osgi:org.osgi.core:4.3.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.enterprise:cdi-api:1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml:classmate:1.3.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jboss:jandex:2.0.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: antlr:antlr:2.7.7" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.javassist:javassist:3.20.0-GA" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jboss.logging:jboss-logging:3.3.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.infinispan:infinispan-commons:8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.infinispan:infinispan-core:8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate.common:hibernate-commons-annotations:5.0.1.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.minidev:json-smart:2.2.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-core:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-infinispan:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-proxool:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-c3p0:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-envers:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-osgi:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: mysql:mysql-connector-java:6.0.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-beanutils:commons-beanutils:1.8.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.skyscreamer:jsonassert:1.4.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hamcrest:hamcrest-library:1.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.assertj:assertj-core:2.6.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.objenesis:objenesis:2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.mockito:mockito-core:1.10.19" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.aspectj:aspectjrt:1.6.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.slf4j:slf4j-api:1.7.16" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: net.sf.ehcache:ehcache:2.10.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-ehcache:5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.slf4j:slf4j-log4j12:1.7.5" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.jayway.jsonpath:json-path:2.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.slf4j:jcl-over-slf4j:1.6.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-core:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-expression:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-test:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-beans:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-aop:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet:javax.servlet-api:3.1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: commons-digester:commons-digester:2.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.bouncycastle:bcprov-jdk15on:1.56" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.easymock:easymock:3.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.google.code.gson:gson:2.7" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.7.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.7.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-context:4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-autoconfigure:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-test:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-test-autoconfigure:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-starter-test:1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-tx:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-jdbc:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-orm:3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.data:spring-data-commons-core:1.1.0.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.data:spring-data-jpa:1.0.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-web:4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework:spring-webmvc:4.3.1.RELEASE" level="project" />
+    <orderEntry type="module" module-name="Tools" scope="TEST" />
+    <orderEntry type="module" module-name="Database" scope="TEST" />
+    <orderEntry type="module" module-name="Repository" scope="TEST" />
+    <orderEntry type="module" module-name="Models" scope="TEST" />
+    <orderEntry type="module" module-name="Tools" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Database" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Repository" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Models" scope="RUNTIME" />
+    <orderEntry type="module" module-name="Tools" scope="PROVIDED" />
+    <orderEntry type="module" module-name="Database" scope="PROVIDED" />
+    <orderEntry type="module" module-name="Repository" scope="PROVIDED" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="module" module-name="Models" />
+    <orderEntry type="module" module-name="Repository" />
+    <orderEntry type="module" module-name="Database" />
+    <orderEntry type="module" module-name="Tools" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-webmvc-4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-web-4.3.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-data-jpa-1.0.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-data-commons-core-1.1.0.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-orm-3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-jdbc-3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-tx-3.0.5.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-boot-starter-test-1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-boot-test-autoconfigure-1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-boot-test-1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-boot-autoconfigure-1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-boot-1.5.1.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-context-4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jstl-1.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jackson-databind-2.7.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jackson-core-2.7.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jackson-annotations-2.7.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="gson-2.7" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="easymock-3.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="bcprov-jdk15on-1.56" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="commons-digester-2.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="javax.servlet-api-3.1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-aop-4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-beans-4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-test-4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-expression-4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="spring-core-4.3.6.RELEASE" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jcl-over-slf4j-1.6.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="json-path-2.2.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="slf4j-log4j12-1.7.5" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-ehcache-5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="ehcache-2.10.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="slf4j-api-1.7.16" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="aspectjrt-1.6.8" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="mockito-core-1.10.19" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="objenesis-2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="junit-4.12" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="assertj-core-2.6.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hamcrest-library-1.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hamcrest-core-1.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jsonassert-1.4.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="commons-beanutils-1.8.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="commons-logging-1.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="mysql-connector-java-6.0.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-osgi-5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-envers-5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-c3p0-5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-proxool-5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-infinispan-5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-core-5.2.2.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="json-smart-2.2.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="android-json-0.0.20131108.vaadin1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-commons-annotations-5.0.1.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="infinispan-core-8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="infinispan-commons-8.2.3.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jboss-logging-3.3.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="hibernate-jpa-2.1-api-1.0.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="javassist-3.20.0-GA" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="antlr-2.7.7" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="geronimo-jta_1.1_spec-1.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jandex-2.0.0.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="classmate-1.3.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="dom4j-1.6.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="cdi-api-1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="org.osgi.core-4.3.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="org.osgi.compendium-4.3.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="c3p0-0.9.2.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="proxool-0.8.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="log4j-1.2.17" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="aopalliance-1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="accessors-smart-1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="el-api-2.2" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jboss-interceptors-api_1.1_spec-1.0.0.Beta1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jsr250-api-1.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="javax.inject-1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="mchange-commons-java-0.2.3.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jgroups-3.6.7.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jboss-transaction-api_1.1_spec-1.0.1.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="jboss-marshalling-osgi-1.4.10.Final" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="asm-5.0.3" level="project" />
+  </component>
+</module>

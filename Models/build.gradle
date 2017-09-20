@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'maven'
 apply plugin: 'eclipse'
 
@@ -11,6 +12,13 @@ description = """"""
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src"]
+        }
+    }
+}
 
 repositories {
         
@@ -28,4 +36,12 @@ uploadArchives {
 			dirs 'repos'
 		}
 	}
+}
+
+jar {
+    from sourceSets.main.allSource
+    manifest {
+        attributes('Implementation-Title': project.name,
+                    'Implementation-Version': project.version)
+    }
 }

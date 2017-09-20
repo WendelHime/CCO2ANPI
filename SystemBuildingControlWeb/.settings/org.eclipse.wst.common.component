@@ -6,6 +6,7 @@
 		<wb-resource deploy-path="/" source-path="/WebContent"/>
 		<wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
 		<property name="java-output-path" value="/SystemBuildingControlWeb/build/classes"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="src"/>
 		<dependent-module deploy-path="/WEB-INF/lib" handle="module:/resource/Models/Models">
 			<dependency-type>uses</dependency-type>
 		</dependent-module>

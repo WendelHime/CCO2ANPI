@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Catraca/target/classes/META-INF/maven/Catraca/Catraca/Catraca.iml" filepath="$PROJECT_DIR$/Catraca/target/classes/META-INF/maven/Catraca/Catraca/Catraca.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Catraca/Catraca (1).iml" filepath="$PROJECT_DIR$/Catraca/Catraca (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/Database/Database (1).iml" filepath="$PROJECT_DIR$/Database/Database (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/Models/Models (1).iml" filepath="$PROJECT_DIR$/Models/Models (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/Repository/Repository (1).iml" filepath="$PROJECT_DIR$/Repository/Repository (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/Services/target/m2e-wtp/web-resources/META-INF/maven/Services/Services/Services.iml" filepath="$PROJECT_DIR$/Services/target/m2e-wtp/web-resources/META-INF/maven/Services/Services/Services.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Services/Services (1).iml" filepath="$PROJECT_DIR$/Services/Services (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/Services.Client/target/classes/META-INF/maven/Services.Client/Services.Client/Services.Client.iml" filepath="$PROJECT_DIR$/Services.Client/target/classes/META-INF/maven/Services.Client/Services.Client/Services.Client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Services.Client/Services.Client (1).iml" filepath="$PROJECT_DIR$/Services.Client/Services.Client (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/SystemBuildingControl/target/classes/META-INF/maven/SystemBuildingControl/SystemBuildingControl/SystemBuildingControl.iml" filepath="$PROJECT_DIR$/SystemBuildingControl/target/classes/META-INF/maven/SystemBuildingControl/SystemBuildingControl/SystemBuildingControl.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SystemBuildingControl/SystemBuildingControl (1).iml" filepath="$PROJECT_DIR$/SystemBuildingControl/SystemBuildingControl (1).iml" />
-      <module fileurl="file://$PROJECT_DIR$/Tools/Tools (1).iml" filepath="$PROJECT_DIR$/Tools/Tools (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CCO2ANPI.iml" filepath="$PROJECT_DIR$/.idea/modules/CCO2ANPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Database/Database.iml" filepath="$PROJECT_DIR$/.idea/modules/Database/Database.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Models/Models.iml" filepath="$PROJECT_DIR$/.idea/modules/Models/Models.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Repository/Repository.iml" filepath="$PROJECT_DIR$/.idea/modules/Repository/Repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Services/Services.iml" filepath="$PROJECT_DIR$/.idea/modules/Services/Services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Services.Client/Services.Client.iml" filepath="$PROJECT_DIR$/.idea/modules/Services.Client/Services.Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SystemBuildingControlWeb/SystemBuildingControlWeb.iml" filepath="$PROJECT_DIR$/.idea/modules/SystemBuildingControlWeb/SystemBuildingControlWeb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Tools/Tools.iml" filepath="$PROJECT_DIR$/.idea/modules/Tools/Tools.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" />
     </modules>
   </component>
 </project>
